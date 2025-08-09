@@ -1,0 +1,6 @@
+{
+  "name": "Miranda Noor",
+  "description": "An application to generate song lyrics with instrument suggestions for Suno using Gemini and create album cover art using Imagen. Users must provide their own Google AI API Key.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}

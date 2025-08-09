@@ -1,0 +1,35 @@
+The TOS dialog needs to be 90vw and 90vh. The Markdown file needs to be rendered to html. The CSS for all Markdown styling needs to be part of the index.html file, not a separate CSS file.
+
+All dialogs need to be 90vw and 90vh. 
+
+The "Save key" button needs to close the dialog and the API Key settings page needs to have a "Cancel" button.. 
+
+Put all given instructions in the public folder in a file "instructions.txt". This file needs to be remembered when I add new functionality.
+
+The area between the header and footer needs to be divided into three sections. A left sidebar at 25vw, a right sidebar at 25vw and the main center. The right sidebar is to provide all kinds of information. The left sidebar is for the menu option. Each option will have it's own main page. 
+
+The main page will be disabled if there's no API key.
+
+Menu options would be "Topic", "Style", "Instruments", "Lyrics" and "Cover image".
+
+In Topic, the user provides the topic that the song will be about. An "Expand" button on that page will allow the AI to rewrite it into a topic of 500 words, so the user can just provide keywords. A "Next" button moves to the Style page.
+
+The Style page allows the user to select a specific music style. This could be Pop, classic, rock, metal, Celtic, Viking and whatever else. Each style will have a specific set of instruments. A Previous button goes back to Topic and a Next button to Instruments.
+
+The Instruments page shows all the musical instruments that will match the selected style. Each instrument is a checkbox. The most generic instruments are selected by default. Each instrument can have a short description as a hover text in a separate panel. A "Copy" button copies the style name plus all the selected instruments as a single CSV linne to the clipboard. This is only the names, nothing else. No more than 80 tokens! Previous goes to Style, Next goes to Lyrics.
+
+The Lyrics page will generate the lyrics that would fit best with the selected topic, the style and the selected instruments. Keep in mind that the song will be sung by two women! Add support for the Suno specifications for the inclusion of tempo, sound effects and whatever else. For example:
+* [Spoken word] makes part of the song spoken words.
+* *gunshots* generates sound effects as the asterix surrounds the effect name.
+* [Flute solo intro], [Increase intensity], [Crescendo], [Starts out quietly], [Whispering vocals], [Screaming vocals] and other [] bracket texts add structure to the song.
+
+The lyrics page will also generate a title.
+
+On the lyrics page, a Copy button next to the title will copy the title to the clipboard. A "Redo" button generates a new title. A copy button will also be with the lyrics, copying the lyrics (without title!) to the clipboads. A "Redo" button will rewrite the lyrics. Previous will go back to Instruments and Next will go to "Cover Image".
+
+If there are no lyrics and/or title, generate them when the user gets to the lyrics page. (Even if there's no topic.)
+
+The "Cover Image" page will generate a cover image for the song using Imagen. This must be a photo-realistic image of the young women performing the song. Make it themed so it matches the topic. Use the AI to generate a good prompt, then use this prompt with Imagen.
+
+The purpose is to generate instructions for Suno, meaning that I need the style/instruments in the clipboard to paste to Suno. Same for the title and the lyrics.
+Never modify the Markdown files in the /public folder unless they are explicitly mentioned by name in the prompt.

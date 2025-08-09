@@ -1,0 +1,1114 @@
+
+[
+    {
+        "name": "Afro-Caribbean & Latin",
+        "description": "Rhythmically rich and diverse music from Africa, Latin America, and the Caribbean islands. These styles are often designed for dancing and feature complex percussion.",
+        "styles": {
+            "Afrobeats": {
+                "description": "A modern umbrella term for popular music from West Africa. Characterized by syncopated rhythms, percussive loops, and a blend of local and global sounds.",
+                "instruments": [
+                    { "name": "Female Vocals (Pidgin/Yoruba/English)", "description": "Smooth, melodic vocals with a relaxed, rhythmic flow.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Syncopated Drum Pattern", "description": "A distinct, complex, and danceable drum loop.", "default": true },
+                    { "name": "Log Drum", "description": "A pitched bass instrument from South African amapiano, often used in Afrobeats.", "default": true },
+                    { "name": "Shaker (Shekere)", "description": "Provides a constant, high-frequency rhythmic texture.", "default": true },
+                    { "name": "Clean Electric Guitar", "description": "Plays repetitive, melodic licks inspired by highlife music." }
+                ]
+            },
+            "Bossa Nova": {
+                "description": "A style of Brazilian music derived from samba but with a softer feel and greater harmonic complexity. Known for its gentle, intimate mood.",
+                "instruments": [
+                    { "name": "Female Vocals (Understated)", "description": "Soft, often whispered, and rhythmically precise vocals.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Nylon-String Guitar", "description": "Plays complex chords and a syncopated rhythm.", "default": true },
+                    { "name": "Light Percussion", "description": "Subtle brushes on a snare and gentle rimshots.", "default": true },
+                    { "name": "Acoustic Bass", "description": "A simple, melodic bassline.", "default": true },
+                    { "name": "Flute", "description": "Often plays the main melody in instrumental sections." }
+                ]
+            },
+            "Dancehall": {
+                "description": "A genre of Jamaican popular music that originated in the late 1970s. It's a more sparse and electronic version of reggae, focused on rhythm (riddim).",
+                "instruments": [
+                    { "name": "Female Deejay (Toasting)", "description": "Rhythmic, chanted vocals over a riddim.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Synthesizer", "description": "Provides basslines and simple melodic hooks.", "default": true },
+                    { "name": "Drum Machine", "description": "The driving force of the track, with a hard, digital sound.", "default": true },
+                    { "name": "Air Horn sample", "description": "An iconic sound effect in dancehall.", "default": false }
+                ]
+            },
+            "Reggae": {
+                "description": "A music genre that originated in Jamaica in the late 1960s. Characterized by a distinctive offbeat rhythm known as the 'skank'.",
+                "instruments": [
+                    { "name": "Female Vocals", "description": "Melodic lead and harmony vocals.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Bass Guitar (Heavy)", "description": "The deep, heavy bassline is crucial.", "default": true },
+                    { "name": "Drums (One Drop)", "description": "The 'one drop' rhythm is a signature of reggae.", "default": true },
+                    { "name": "Electric Guitar (Skank)", "description": "Playing chords on the offbeats.", "default": true },
+                    { "name": "Organ Bubble", "description": "A rhythmic organ pattern.", "default": true },
+                    { "name": "Horn Section", "description": "Adds melodic lines and fanfares." }
+                ]
+            },
+            "Reggaeton": {
+                "description": "A music style from Puerto Rico in the late 1990s. It blends hip hop, Latin American, and Caribbean music with a characteristic 'dembow' rhythm.",
+                "instruments": [
+                    { "name": "Female Rapper/Singer", "description": "A mix of rapped verses and sung choruses, often in Spanish.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Dembow Riddim", "description": "The iconic, infectious 3+3+2 drum machine pattern.", "default": true },
+                    { "name": "Synth Melody", "description": "Simple, catchy, and often dramatic synth lines.", "default": true },
+                    { "name": "Heavy Sub Bass", "description": "A deep, simple bassline that follows the kick drum.", "default": true }
+                ]
+            },
+            "Salsa": {
+                "description": "A vibrant, rhythmically complex genre of music from Cuba and Puerto Rico. It's characterized by its clave rhythm, horn sections, and is made for dancing.",
+                "instruments": [
+                    { "name": "Female Vocals (Soneo)", "description": "Passionate lead vocals with improvisational call-and-response sections.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Piano Montuno", "description": "A syncopated, endlessly repeating piano pattern.", "default": true },
+                    { "name": "Congas and Timbales", "description": "The core percussion, providing complex, interlocking rhythms.", "default": true },
+                    { "name": "Bass Guitar (Tumbao)", "description": "A syncopated bass pattern that locks in with the percussion.", "default": true },
+                    { "name": "Powerful Horn Section", "description": "Trumpets and trombones playing tight, stabbing lines.", "default": true }
+                ]
+            },
+            "Ska": {
+                "description": "A precursor to reggae, originating in Jamaica in the late 1950s. It's characterized by a walking bass line accented with rhythms on the off-beat.",
+                "instruments": [
+                    { "name": "Female Vocals (Energetic)", "description": "Upbeat and catchy vocals.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Upbeat Horn Section", "description": "A powerful and melodic section of saxophones, trumpets, and trombones.", "default": true },
+                    { "name": "Guitar Skank", "description": "Crisp, rhythmic chords on the offbeat.", "default": true },
+                    { "name": "Walking Bassline", "description": "A continuous, driving bassline.", "default": true },
+                    { "name": "Drums", "description": "A steady, danceable beat.", "default": true }
+                ]
+            }
+        }
+    },
+    {
+        "name": "American Folk & Country",
+        "description": "Genres rooted in the traditional music of North America. Country music originates from the Southern US, while Folk music emphasizes acoustic instruments and storytelling.",
+        "styles": {
+            "Americana": {
+                "description": "An amalgam of American roots music, incorporating elements of folk, country, blues, R&B, and rock and roll. The focus is on songwriting and authenticity.",
+                "instruments": [
+                    { "name": "Female Vocals (Authentic)", "description": "Honest, unpolished storytelling vocals.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Acoustic Guitar", "description": "The central instrument.", "default": true },
+                    { "name": "Mandolin", "description": "Adds a folksy texture.", "default": true },
+                    { "name": "Dobro/Resonator Guitar", "description": "Adds a rootsy slide guitar sound." },
+                    { "name": "Upright Bass", "description": "Warm, acoustic low end.", "default": true },
+                    { "name": "Hammond Organ", "description": "Brings in a touch of soul and gospel." }
+                ]
+            },
+            "Bluegrass": {
+                "description": "A form of American roots music. It’s characterized by virtuosic playing on acoustic stringed instruments and high-pitched, 'high lonesome' vocal harmonies.",
+                "instruments": [
+                    { "name": "Female Vocals (High Lonesome)", "description": "Close, tight harmonies with a high, mournful quality.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Banjo (Scruggs style)", "description": "The fast, three-finger picking style is a hallmark of bluegrass.", "default": true },
+                    { "name": "Fiddle", "description": "Plays fast-paced melodies and improvisational solos.", "default": true },
+                    { "name": "Mandolin", "description": "Provides a percussive \"chop\" on the backbeat and fast solos.", "default": true },
+                    { "name": "Acoustic Guitar (Flatpicking)", "description": "Drives the rhythm and takes lead breaks with intricate flatpicking.", "default": true },
+                    { "name": "Upright Bass", "description": "Holds down the low end with a steady \"two-beat\" feel.", "default": true }
+                ]
+            },
+            "Country": {
+                "description": "A broad genre of popular music originating in the Southern United States. It often consists of ballads and dance tunes with generally simple forms, and lyrics about everyday life.",
+                "instruments": [
+                    { "name": "Female Vocals (with Twang)", "description": "Clear, storytelling vocals often with a characteristic country accent.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Acoustic Guitar", "description": "The rhythmic backbone of most country music.", "default": true },
+                    { "name": "Pedal Steel Guitar", "description": "Provides the iconic, crying slide guitar sound.", "default": true },
+                    { "name": "Fiddle", "description": "A violin played in a country style, for solos and melodies.", "default": true },
+                    { "name": "Bass Guitar", "description": "Simple, solid basslines.", "default": true },
+                    { "name": "Drums", "description": "A steady, straightforward beat." }
+                ]
+            },
+            "Folk": {
+                "description": "Acoustic-based music that tells a story. It's known for its simple, memorable melodies and lyrical depth, often focusing on social or personal themes.",
+                "instruments": [
+                    { "name": "Female Vocals", "description": "Clear, narrative-driven lead vocals.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Acoustic Guitar", "description": "The primary instrument for chords and rhythm.", "default": true },
+                    { "name": "Harmonica", "description": "Adds a plaintive, rustic quality.", "default": true },
+                    { "name": "Banjo", "description": "Provides a bright, rolling texture." },
+                    { "name": "Mandolin", "description": "A high-pitched string instrument used for melodies and tremolo chords." },
+                    { "name": "Upright Bass", "description": "Provides a warm, woody low end.", "default": true }
+                ]
+            }
+        }
+    },
+    {
+        "name": "Anthem",
+        "description": "Powerful, evocative songs designed to unite people around a specific purpose, idea, or identity. Anthems are often characterized by strong, memorable melodies and emotionally resonant lyrics.",
+        "styles": {
+            "Charity Anthem": {
+                "description": "An emotional and hopeful song, typically a ballad, designed to raise awareness and inspire action for a cause.",
+                "instruments": [
+                    { "name": "Female Vocals (Sincere)", "description": "Clear, heartfelt vocals that convey emotion.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Piano", "description": "The primary instrument, providing a gentle and emotive foundation.", "default": true },
+                    { "name": "String Section", "description": "Lush strings that build to an emotional crescendo.", "default": true },
+                    { "name": "Acoustic Guitar", "description": "Adds a layer of warmth and intimacy.", "default": true },
+                    { "name": "Group Vocals", "description": "A choir or group of singers joining for a powerful final chorus." }
+                ]
+            },
+            "Corporate Anthem": {
+                "description": "An uplifting and polished pop-rock song with motivational lyrics about teamwork, innovation, and success.",
+                "instruments": [
+                    { "name": "Female Vocals (Polished)", "description": "Clean, confident, and professional-sounding vocals.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Piano", "description": "Provides bright, optimistic chords.", "default": true },
+                    { "name": "Clean Electric Guitar", "description": "Crisp guitar riffs and simple, melodic solos.", "default": true },
+                    { "name": "Bass Guitar", "description": "A solid, dependable bassline.", "default": true },
+                    { "name": "Drums", "description": "A straightforward, driving beat.", "default": true },
+                    { "name": "Light Synthesizers", "description": "Adds a modern, shimmering texture." }
+                ]
+            },
+            "Festival Anthem": {
+                "description": "A high-energy, euphoric electronic or pop-rock song designed for large crowds to sing along to at a music festival.",
+                "instruments": [
+                    { "name": "Female Vocals (Soaring)", "description": "Big, powerful vocals that can carry across a large space.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Synthesizer Lead", "description": "An infectious, memorable synth hook.", "default": true },
+                    { "name": "Pounding Drums", "description": "A heavy, four-on-the-floor beat, often electronic.", "default": true },
+                    { "name": "Electric Guitar", "description": "Plays powerful, anthemic riffs.", "default": true },
+                    { "name": "Gang Vocals / Chants", "description": "A large group shouting hooks or 'whoa-ohs'.", "default": true }
+                ]
+            },
+            "National Anthem": {
+                "description": "A majestic and patriotic song, typically in a classical or marching band style, meant to evoke feelings of national pride and history.",
+                "instruments": [
+                    { "name": "Female Vocals (Operatic)", "description": "A powerful, trained voice capable of conveying grandeur.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Symphony Orchestra", "description": "The full power of a classical orchestra.", "default": true },
+                    { "name": "Brass Section", "description": "Fanfares from trumpets, trombones, and horns are key.", "default": true },
+                    { "name": "Timpani & Snare Drum", "description": "Provides a martial, stately rhythm.", "default": true },
+                    { "name": "Choir", "description": "A full choir adds to the majestic feel.", "default": true }
+                ]
+            },
+            "Personal Anthem": {
+                "description": "An empowering pop, rock, or R&B song with lyrics about self-belief, overcoming adversity, and personal strength.",
+                "instruments": [
+                    { "name": "Female Vocals (Strong & Confident)", "description": "Assertive and passionate vocal delivery.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Driving Drums", "description": "A powerful, determined beat.", "default": true },
+                    { "name": "Bass Guitar", "description": "A strong, foundational bassline.", "default": true },
+                    { "name": "Electric Guitar", "description": "Empowering riffs and soaring solos.", "default": true },
+                    { "name": "Synthesizer", "description": "Adds modern textures and layers." }
+                ]
+            },
+            "Protest Anthem": {
+                "description": "A raw and passionate folk or rock song with powerful lyrics about social change, injustice, or political issues.",
+                "instruments": [
+                    { "name": "Female Vocals (Raw & Urgent)", "description": "Singing that conveys conviction and passion.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Acoustic Guitar", "description": "Strummed with force and determination.", "default": true },
+                    { "name": "Harmonica", "description": "Adds a classic, plaintive folk sound.", "default": true },
+                    { "name": "Stomping & Clapping", "description": "Provides a raw, percussive, and participatory feel.", "default": true },
+                    { "name": "Group Vocals", "description": "A chorus of voices singing in unison to show solidarity.", "default": true }
+                ]
+            },
+            "School Anthem": {
+                "description": "A simple, traditional, and uplifting song expressing pride and loyalty to a school. Often has a hymn-like or march-like quality.",
+                "instruments": [
+                    { "name": "School Choir", "description": "A choir of young voices singing in harmony.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Piano", "description": "Provides a clear and simple accompaniment.", "default": true },
+                    { "name": "String Ensemble", "description": "Adds a sense of tradition and formality.", "default": true },
+                    { "name": "Snare Drum", "description": "Can provide a gentle marching rhythm." }
+                ]
+            },
+            "Sports Anthem": {
+                "description": "A high-energy rock or pop song with a simple, driving beat and a catchy, chant-along chorus. Think Queen's 'We Will Rock You'.",
+                "instruments": [
+                    { "name": "Female Vocals (Powerful & Gritty)", "description": "A strong, commanding vocal performance.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Stomping Beat", "description": "A heavy, simple, and infectious drum pattern.", "default": true },
+                    { "name": "Electric Guitar Riff", "description": "A memorable and powerful guitar hook.", "default": true },
+                    { "name": "Group Chants", "description": "The entire stadium shouting a simple hook or 'Hey!'.", "default": true },
+                    { "name": "Stadium Organ", "description": "The classic sound of a sports arena organ.", "default": true }
+                ]
+            },
+            "Unity Anthem": {
+                "description": "A hopeful and inclusive song with a global feel, often blending different musical styles and featuring simple, universal lyrics about togetherness.",
+                "instruments": [
+                    { "name": "Female Vocals (Warm & Inviting)", "description": "Gentle, sincere lead vocals.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Acoustic Guitar", "description": "Provides a simple, unifying rhythmic base.", "default": true },
+                    { "name": "World Percussion", "description": "Instruments like djembe, congas, and shakers to create a global feel.", "default": true },
+                    { "name": "Piano", "description": "Adds a hopeful, melodic layer.", "default": true },
+                    { "name": "Multilingual Choir", "description": "A diverse choir singing simple phrases in different languages.", "default": true }
+                ]
+            },
+            "Victory Anthem": {
+                "description": "A triumphant and epic song celebrating a great achievement or win. Often orchestral and bombastic.",
+                "instruments": [
+                    { "name": "Female Vocals (Soaring)", "description": "Powerful, soaring vocals that express triumph.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Symphony Orchestra", "description": "The full force of an orchestra to create an epic sound.", "default": true },
+                    { "name": "Fanfare Trumpets", "description": "Announces the victory with powerful brass melodies.", "default": true },
+                    { "name": "Epic Drums", "description": "Large, booming percussion like timpani and taiko drums.", "default": true },
+                    { "name": "Choir", "description": "A large choir adds to the grand, celebratory atmosphere.", "default": true }
+                ]
+            }
+        }
+    },
+    {
+        "name": "Asian Folk",
+        "description": "A vast array of musical traditions from the continent of Asia. This category explores the rich sounds of specific cultures, from the intricate percussion of Indonesia to the storytelling traditions of the Silk Road.",
+        "styles": {
+            "Gamelan": {
+                "description": "The traditional ensemble music of Java and Bali in Indonesia, made up predominantly of percussive instruments. The music is typically cyclical and features complex, interlocking rhythmic patterns.",
+                "instruments": [
+                    { "name": "Female Vocals (Pesindhèn)", "description": "A solo female singer who sings with the Gamelan, often in a high, intricate style.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Bonang", "description": "A collection of small, kettle-like gongs laid out in a row.", "default": true },
+                    { "name": "Saron", "description": "A metallophone instrument with thick bronze bars, playing the core melody.", "default": true },
+                    { "name": "Gong Ageng", "description": "The largest, most resonant gong, used to mark major sections of the music.", "default": true },
+                    { "name": "Kendhang", "description": "A two-headed drum that acts as the conductor of the ensemble.", "default": true }
+                ]
+            }
+        }
+    },
+    {
+        "name": "Children's Music",
+        "description": "Songs created specifically for children and young people. This music is characterized by simple melodies, clear vocals, playful instrumentation, and often educational or narrative themes.",
+        "styles": {
+            "Campfire Song": {
+                "description": "A simple, acoustic song designed for group sing-alongs, often with repetitive and easy-to-learn lyrics.",
+                "instruments": [
+                    { "name": "Female Vocals (Friendly)", "description": "A clear, inviting lead vocal.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Acoustic Guitar", "description": "The primary instrument, playing simple chords.", "default": true },
+                    { "name": "Group Sing-along Vocals", "description": "Encourages participation from everyone.", "default": true },
+                    { "name": "Clapping and Stomping", "description": "Simple, natural percussion that anyone can join in with.", "default": true },
+                    { "name": "Harmonica", "description": "Adds a folksy, outdoor feel." }
+                ]
+            },
+            "Educational Song": {
+                "description": "A catchy and repetitive song designed to teach a concept, like the alphabet, numbers, or a scientific fact.",
+                "instruments": [
+                    { "name": "Female Vocals (Clear & Articulate)", "description": "Vocals that are easy to understand and follow.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Piano", "description": "Provides a bright, simple melody and chord structure.", "default": true },
+                    { "name": "Simple Drum Beat", "description": "A steady, basic rhythm that's easy to clap along to.", "default": true },
+                    { "name": "Bass Guitar", "description": "A simple bassline that supports the chords.", "default": true },
+                    { "name": "Sound Effects", "description": "Fun sounds related to the song's topic (e.g., animal noises)." }
+                ]
+            },
+            "Lullaby": {
+                "description": "A quiet, gentle song to soothe a child to sleep. Features a soft melody, slow tempo, and calming instrumentation.",
+                "instruments": [
+                    { "name": "Female Vocals (Soft & Gentle)", "description": "A quiet, soothing vocal performance.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Music Box", "description": "The classic, delicate sound of a wind-up music box.", "default": true },
+                    { "name": "Celesta", "description": "A keyboard instrument with a soft, bell-like tone.", "default": true },
+                    { "name": "Soft Piano", "description": "Gentle piano playing with the soft pedal engaged.", "default": true },
+                    { "name": "Acoustic Guitar (Fingerpicked)", "description": "Delicate, fingerpicked patterns." }
+                ]
+            },
+            "Nursery Rhyme": {
+                "description": "A playful and memorable song based on a traditional rhyme. Features a simple, catchy melody and light, cheerful instrumentation.",
+                "instruments": [
+                    { "name": "Female Vocals (Cheerful & Bright)", "description": "Energetic and fun vocals.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Ukulele", "description": "Provides a happy, strummed accompaniment.", "default": true },
+                    { "name": "Glockenspiel / Xylophone", "description": "Plays the main melody with a bright, percussive tone.", "default": true },
+                    { "name": "Light Percussion (Shakers, Triangle)", "description": "Adds a gentle rhythmic sparkle.", "default": true },
+                    { "name": "Recorder", "description": "A simple woodwind instrument often associated with early music education." }
+                ]
+            }
+        }
+    },
+    {
+        "name": "Classical & Cinematic",
+        "description": "Music rooted in the traditions of Western art music, including orchestral and operatic works, as well as music composed for film and video games.",
+        "styles": {
+            "Cinematic Score": {
+                "description": "Music written specifically to accompany a film. It's designed to enhance the narrative, create atmosphere, and cue emotional responses from the audience.",
+                "instruments": [
+                    { "name": "Symphony Orchestra", "description": "A full symphony orchestra is often the foundation.", "default": true },
+                    { "name": "Epic Drums", "description": "Large, powerful percussion like taikos and timpani.", "default": true },
+                    { "name": "Synthesizers", "description": "Used for modern textures, drones, and pulses.", "default": true },
+                    { "name": "Choir", "description": "Adds an epic, human element.", "default": true },
+                    { "name": "Female Vocals (Ethereal)", "description": "Wordless, soaring vocals for emotional moments.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Piano", "description": "Used for delicate, emotional themes." }
+                ]
+            },
+            "Classical (Baroque)": {
+                "description": "Western art music from the period of 1600-1750. Characterized by counterpoint, ornamentation, and the use of the harpsichord.",
+                "instruments": [
+                    { "name": "Soprano (Miranda)", "description": "Clear, often ornate vocal lines.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Harpsichord", "description": "The primary keyboard instrument, providing rhythmic and harmonic structure.", "default": true },
+                    { "name": "String Ensemble", "description": "Violins, violas, and cellos playing complex, interweaving lines (counterpoint).", "default": true },
+                    { "name": "Lute", "description": "A plucked string instrument used for accompaniment." },
+                    { "name": "Flute/Recorder", "description": "Often carries the main melodic theme." }
+                ]
+            },
+            "Classical (Romantic)": {
+                "description": "Music from the Romantic era (roughly 1830-1900). Emphasizes emotion, individualism, and drama, with larger orchestras and dynamic range.",
+                "instruments": [
+                    { "name": "Dramatic Soprano (Miranda)", "description": "A powerful voice capable of conveying intense emotion.", "default": true },
+                    { "name": "Mezzo-Soprano (Annelies)", "description": "A rich, lower female voice.", "default": true },
+                    { "name": "Grand Piano", "description": "Used for powerful concertos and intimate solo pieces.", "default": true },
+                    { "name": "Large Symphony Orchestra", "description": "Expanded string, brass, woodwind, and percussion sections.", "default": true },
+                    { "name": "French Horn", "description": "Often used for heroic, noble melodies." },
+                    { "name": "Harp", "description": "Adds a magical, flowing texture to the orchestra." }
+                ]
+            },
+            "Opera": {
+                "description": "An art form in which singers and musicians perform a dramatic work combining text (libretto) and musical score. A key part of the Western classical music tradition.",
+                "instruments": [
+                    { "name": "Soprano (Dramatic)", "description": "A powerful, trained soprano lead.", "default": true },
+                    { "name": "Alto/Mezzo-Soprano", "description": "A rich, lower female voice.", "default": true },
+                    { "name": "Tenor", "description": "The primary male lead voice." },
+                    { "name": "Baritone/Bass", "description": "Lower male voices, often for villains or authority figures." },
+                    { "name": "Orchestra", "description": "Provides the full musical accompaniment.", "default": true },
+                    { "name": "Choir", "description": "Represents crowds or provides commentary on the action." }
+                ]
+            },
+            "Video Game Score": {
+                "description": "Music for video games, often designed to be looped or to change dynamically based on gameplay. Can range from simple 8-bit chiptunes to full orchestral scores.",
+                "instruments": [
+                    { "name": "Orchestral Elements", "description": "Epic strings and brass for adventure.", "default": true },
+                    { "name": "Electronic Textures", "description": "Synthesizers and drum machines for futuristic or sci-fi settings.", "default": true },
+                    { "name": "Chiptune (8-bit)", "description": "The classic, nostalgic sound of early video games." },
+                    { "name": "Female Vocals (Ethereal)", "description": "Used for magical or emotional themes.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Ethnic Instruments", "description": "Instruments like the shakuhachi or duduk to establish a specific setting." }
+                ]
+            }
+        }
+    },
+    {
+        "name": "Dutch Music",
+        "description": "A collection of musical styles originating from the Netherlands, ranging from traditional folk sounds to modern electronic genres.",
+        "styles": {
+            "Gabber": {
+                "description": "A style of hardcore techno originating in Rotterdam in the 1990s. Characterized by extremely fast tempos (180-220 BPM), distorted kickdrums, and aggressive themes.",
+                "instruments": [
+                    { "name": "Distorted 909 Kickdrum", "description": "The quintessential sound of Gabber, a bass drum sound that is overdriven to the point of distortion.", "default": true },
+                    { "name": "Aggressive Synth Riffs", "description": "Simple, harsh, and repetitive synthesizer melodies.", "default": true },
+                    { "name": "Noisy Hoover Sound", "description": "A famous roaring synthesizer sound from the Roland Alpha Juno.", "default": true },
+                    { "name": "Sampled Vocal Shouts", "description": "Short, aggressive vocal samples from movies or other sources." }
+                ]
+            },
+            "Levenslied": {
+                "description": "A sentimental, narrative style of Dutch folk music. Lyrics often deal with themes of love, loss, and everyday life, sung in a dramatic, heartfelt manner.",
+                "instruments": [
+                    { "name": "Female Vocals (Sentimental)", "description": "Emotional, clear vocals that tell a story, often with a characteristic vibrato.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Accordion", "description": "The primary instrument, providing melody and harmonic accompaniment.", "default": true },
+                    { "name": "Barrel Organ (Draaiorgel)", "description": "Evokes a nostalgic, traditional Dutch street atmosphere.", "default": false },
+                    { "name": "Simple Drums & Bass", "description": "A straightforward, often waltz-time rhythm section.", "default": true },
+                    { "name": "String Section", "description": "Adds to the sentimental and dramatic feel of the song." }
+                ]
+            },
+            "Nederpop": {
+                "description": "The Dutch term for pop music from the Netherlands. It's a broad genre that encompasses everything from 60s beat groups to modern synth-pop, but always with Dutch lyrics.",
+                "instruments": [
+                    { "name": "Female Vocals (Dutch)", "description": "Lead vocals sung in the Dutch language.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Electric Guitar", "description": "Can range from clean pop riffs to distorted rock sounds.", "default": true },
+                    { "name": "Bass Guitar", "description": "The low-end foundation of the track.", "default": true },
+                    { "name": "Drums", "description": "Provides the rhythmic backbone.", "default": true },
+                    { "name": "Synthesizers", "description": "Used for melodies, pads, and modern production textures." }
+                ]
+            },
+            "Palingsound": {
+                "description": "Literally 'Eel Sound', a specific, melodic, and polished pop sound originating from Volendam. Characterized by clean guitar sounds, strings, and melancholic harmony vocals.",
+                "instruments": [
+                    { "name": "Female Vocals (Clear Harmonies)", "description": "Polished, tight vocal harmonies are a key feature.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Clean Electric Guitar", "description": "A bright, clean, often slightly reverberated guitar sound.", "default": true },
+                    { "name": "Orchestral String Section", "description": "Lush, melodic strings that add a melancholic feel.", "default": true },
+                    { "name": "Bass Guitar", "description": "A simple, melodic bassline.", "default": true },
+                    { "name": "Drums", "description": "A straightforward and clean drum beat.", "default": true }
+                ]
+            },
+            "Smartlap": {
+                "description": "A type of Levenslied that is particularly sentimental and designed to be a 'tear-jerker'. The lyrics often tell a tragic story of heartbreak, poverty, or illness.",
+                "instruments": [
+                    { "name": "Female Vocals (Emotional)", "description": "A very emotional, often sobbing or wailing vocal style.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Accordion", "description": "Provides a melancholic, waltzing accompaniment.", "default": true },
+                    { "name": "Piano", "description": "Plays sad, simple chord progressions.", "default": true },
+                    { "name": "Violins", "description": "Weeping, dramatic violin melodies that enhance the sadness.", "default": true },
+                    { "name": "Simple Rhythm Section", "description": "A basic, slow drum and bass accompaniment.", "default": true }
+                ]
+            }
+        }
+    },
+    {
+        "name": "Electronic & Dance",
+        "description": "A broad set of percussive music genres made largely for nightclubs, raves, and festivals. It's produced primarily using synthesizers, drum machines, and sequencers.",
+        "styles": {
+            "Ambient": {
+                "description": "A genre of music that emphasizes tone and atmosphere over traditional musical structure or rhythm. It's often atmospheric, and instrumental.",
+                "instruments": [
+                    { "name": "Synth Pads", "description": "Long, evolving synthesizer chords that create atmosphere.", "default": true },
+                    { "name": "Soundscapes", "description": "Field recordings or abstract electronic textures.", "default": true },
+                    { "name": "Reverb-drenched Piano", "description": "Sparse piano melodies with heavy reverb.", "default": true },
+                    { "name": "Female Vocals (Ethereal)", "description": "Wordless, breathy vocal textures used as an instrument.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Drones", "description": "Sustained, low-frequency sounds that provide a tonal foundation." }
+                ]
+            },
+            "Drum and Bass": {
+                "description": "Characterized by fast breakbeats (typically 165-185 bpm) with heavy bass and sub-bass lines, sampled sources, and synthesizers.",
+                "instruments": [
+                    { "name": "Amen Break", "description": "The iconic, heavily processed drum break is foundational.", "default": true },
+                    { "name": "Reese Bass", "description": "A thick, detuned, and wobbly sub-bass sound.", "default": true },
+                    { "name": "Female Vocals (Soulful/Ragga)", "description": "Can range from smooth and soulful to energetic ragga chants.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Atmospheric Pads", "description": "Lush, evolving synth pads create mood." }
+                ]
+            },
+            "Dubstep": {
+                "description": "Known for its sparse, syncopated rhythms with prominent sub-bass frequencies. The 'drop,' where a heavy bassline and beat switch-up occurs, is a key feature.",
+                "instruments": [
+                    { "name": "Wobble Bass", "description": "A heavy, oscillating bass sound that is a signature of the genre.", "default": true },
+                    { "name": "Syncopated Drums", "description": "A half-time drum pattern with a strong snare or clap.", "default": true },
+                    { "name": "Sub Bass", "description": "Extremely low-frequency bass that you feel more than hear.", "default": true },
+                    { "name": "Female Vocals (Melodic)", "description": "Often used in the build-up sections before the drop.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Synth Arpeggios", "description": "Adds melodic content." }
+                ]
+            },
+            "House": {
+                "description": "Originating in Chicago, house music is dance music characterized by a 4/4 time signature, a tempo of 120-130 BPM, and often features soulful vocals.",
+                "instruments": [
+                    { "name": "Female Vocals (Soulful)", "description": "Powerful, gospel-influenced lead vocals.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Drum Machine (909)", "description": "A classic house beat with a kick on every beat.", "default": true },
+                    { "name": "Piano Riffs", "description": "Upbeat, catchy piano chords are a staple.", "default": true },
+                    { "name": "Bassline", "description": "A deep, groovy bassline.", "default": true },
+                    { "name": "Saxophone", "description": "Adds a live, soulful element." }
+                ]
+            },
+            "Synthwave": {
+                "description": "A modern genre inspired by 1980s film soundtracks and video games. Dominated by synthesizers, gated reverb drums, and a retro-futuristic aesthetic.",
+                "instruments": [
+                    { "name": "Female Vocals", "description": "Lead and backing vocals for the main melody.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Analog Synthesizer", "description": "Produces warm, vintage synth sounds for basses, pads, and leads.", "default": true },
+                    { "name": "Gated Reverb Drums", "description": "The classic, punchy 80s drum sound with a short, sharp reverb.", "default": true },
+                    { "name": "Synth Bass", "description": "A driving, arpeggiated bassline is key to the genre.", "default": true },
+                    { "name": "Saxophone", "description": "Often used for powerful, emotive solos." }
+                ]
+            },
+            "Techno": {
+                "description": "Electronic dance music characterized by a repetitive four-on-the-floor beat, a fast tempo, and the use of synthesizers and drum machines.",
+                "instruments": [
+                    { "name": "Drum Machine (909)", "description": "The iconic sound of the Roland TR-909 is central to techno.", "default": true },
+                    { "name": "Synthesizer Sequence", "description": "Hypnotic, repeating melodic or rhythmic patterns.", "default": true },
+                    { "name": "Synth Bass", "description": "A deep, driving sub-bass or a rhythmic acid bassline.", "default": true },
+                    { "name": "Synth Pad", "description": "Atmospheric chords and textures.", "default": true },
+                    { "name": "Vocal Samples (Chopped)", "description": "Short, rhythmic vocal phrases or single words." }
+                ]
+            },
+            "Trance": {
+                "description": "Characterized by a tempo between 125 and 150 BPM, repeating melodic phrases, and a musical form that builds tension up and down throughout a track.",
+                "instruments": [
+                    { "name": "Female Vocals (Ethereal)", "description": "Soaring, reverb-laden vocals.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Supersaw Synthesizer", "description": "The iconic, layered synth sound of trance.", "default": true },
+                    { "name": "Arpeggiated Bassline", "description": "A fast, rolling bass pattern.", "default": true },
+                    { "name": "Four-on-the-floor Drums", "description": "A steady, driving kick drum.", "default": true },
+                    { "name": "Synth Pads", "description": "Lush, atmospheric pads.", "default": true }
+                ]
+            },
+            "Vaporwave": {
+                "description": "A microgenre characterized by a nostalgic, surrealist engagement with retro-cultural aesthetics, 80s/90s music, and corporate imagery, often slowed down and processed.",
+                "instruments": [
+                    { "name": "Sampled 80s/90s Pop/Jazz", "description": "The core element, often slowed and pitch-shifted.", "default": true },
+                    { "name": "Chopped and Screwed Vocals", "description": "Vocal samples manipulated to be slow and low.", "default": true },
+                    { "name": "Lush Reverb", "description": "Creates a vast, empty, 'mall-like' atmosphere.", "default": true },
+                    { "name": "Classic Drum Machines (LinnDrum)", "description": "Often used sparsely, if at all.", "default": true },
+                    { "name": "Generic Synthesizers", "description": "Simple, often cheesy synth sounds from the era." }
+                ]
+            }
+        }
+    },
+    {
+        "name": "European Folk",
+        "description": "A diverse collection of musical traditions from across Europe. This category highlights specific regional styles known for their unique instrumentation and cultural significance.",
+        "styles": {
+            "Celtic": {
+                "description": "Traditional folk music from Ireland and Scotland. Features acoustic instruments, lively dance tunes (reels, jigs), and narrative ballads.",
+                "instruments": [
+                    { "name": "Female Vocals (Storytelling)", "description": "Clear vocals, often with a lilting quality.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Fiddle", "description": "A lively violin style, central to Celtic folk music.", "default": true },
+                    { "name": "Tin Whistle", "description": "A high-pitched, airy flute that carries melodies.", "default": true },
+                    { "name": "Bodhrán", "description": "A frame drum that provides a driving, hypnotic rhythm.", "default": true },
+                    { "name": "Acoustic Guitar (DADGAD tuning)", "description": "Provides chordal and rhythmic accompaniment.", "default": true },
+                    { "name": "Uilleann Pipes", "description": "The national bagpipe of Ireland, with a sweeter, quieter tone." }
+                ]
+            },
+            "Flamenco": {
+                "description": "An art form native to the Spanish regions of Andalusia, Extremadura and Murcia. It includes cante (singing), toque (guitar playing), baile (dance), jaleo (vocalizations), palmas (handclapping) and pitos (finger snapping).",
+                "instruments": [
+                    { "name": "Female Vocals (Cante)", "description": "Passionate, soulful, and microtonal singing style.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Flamenco Guitar", "description": "A nylon-string guitar played with percussive techniques like 'rasgueado' and 'golpe'.", "default": true },
+                    { "name": "Cajón", "description": "A box-shaped percussion instrument played by slapping the front or rear faces with the hands.", "default": true },
+                    { "name": "Palmas (Hand Claps)", "description": "Complex, rhythmic hand clapping that is integral to the rhythm.", "default": true }
+                ]
+            },
+            "Viking": {
+                "description": "Inspired by Nordic folk traditions. Evokes a primal, epic, and often dark atmosphere with historical instruments and chanting vocals.",
+                "instruments": [
+                    { "name": "Female Vocals (Chanted)", "description": "Powerful, often guttural or throat-singing style vocals.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Tagelharpa/Jouhikko", "description": "A traditional Nordic bowed lyre with a raw, rustic sound.", "default": true },
+                    { "name": "War Horns", "description": "Evokes a sense of battle and grandeur.", "default": true },
+                    { "name": "Throat Singing", "description": "A powerful, low-pitched vocal technique." },
+                    { "name": "Frame Drums", "description": "Primal, heavy percussion.", "default": true },
+                    { "name": "Mouth Harp", "description": "A small instrument creating a twanging, hypnotic sound." }
+                ]
+            }
+        }
+    },
+    {
+        "name": "Experimental & Niche",
+        "description": "Genres that push the boundaries of conventional music. These styles are often characterized by their unconventional structures, avant-garde concepts, and dedicated cult followings.",
+        "styles": {
+            "Dungeon Synth": {
+                "description": "A genre of electronic music that emerged in the 1990s, characterized by its fantasy themes, lo-fi production, and inspiration from black metal and video game music.",
+                "instruments": [
+                    { "name": "Lo-fi Synthesizer", "description": "Basic, often cheap-sounding keyboard patches are key.", "default": true },
+                    { "name": "Synth Flute/Oboe", "description": "Carries simple, medieval-sounding melodies.", "default": true },
+                    { "name": "Synth Strings", "description": "Creates a dark, epic, and atmospheric backdrop.", "default": true },
+                    { "name": "Minimalist Percussion", "description": "Often just a simple, synthesized timpani hit for emphasis." },
+                    { "name": "No Vocals", "description": "The genre is almost exclusively instrumental.", "default": false }
+                ]
+            },
+            "Industrial": {
+                "description": "An aggressive and transgressive style of music. Combines electronic noise, synthesizers, and distorted vocals with provocative themes.",
+                "instruments": [
+                    { "name": "Female Vocals (Distorted/Shouted)", "description": "Vocals are often processed and used as another texture.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Metallic Percussion", "description": "The sound of metal being struck, machine noises, and found sounds.", "default": true },
+                    { "name": "Harsh Synthesizers", "description": "Abrasive, noisy, and dissonant synth textures.", "default": true },
+                    { "name": "Tape Loops", "description": "Repeating loops of recorded sound, often distorted.", "default": true },
+                    { "name": "Distorted Drum Machine", "description": "Aggressive, heavy, and mechanical beats." }
+                ]
+            }
+        }
+    },
+    {
+        "name": "Pop & Mainstream",
+        "description": "Music characterized by catchy melodies, accessible structures, and broad commercial appeal. This category includes a wide range of contemporary sounds designed for popular consumption.",
+        "styles": {
+            "Art Pop": {
+                "description": "A style of pop music that draws on high art concepts, such as fine art, literature, and film, blending pop sensibilities with experimental structures and themes.",
+                "instruments": [
+                    { "name": "Female Vocals (Expressive)", "description": "Vocals used in unconventional ways, focusing on timbre and emotion.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Piano", "description": "Often used as a primary compositional tool.", "default": true },
+                    { "name": "String Quartet", "description": "Adds a classical, sophisticated texture.", "default": true },
+                    { "name": "Synthesizers (Unusual)", "description": "Experimental and atmospheric synth sounds.", "default": true },
+                    { "name": "Unconventional Percussion", "description": "Found sounds, complex rhythms, or sparse electronic beats." }
+                ]
+            },
+            "Ballad": {
+                "description": "A slow-tempo song, often dealing with themes of love, loss, or deep emotion. Characterized by a simple, melodic structure that builds in intensity.",
+                "instruments": [
+                    { "name": "Female Vocals (Emotional)", "description": "Clear, powerful, and emotive lead vocals.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Piano", "description": "The primary instrument, providing chords and melody.", "default": true },
+                    { "name": "String Section", "description": "Adds emotional depth and swells.", "default": true },
+                    { "name": "Acoustic Guitar", "description": "Provides gentle rhythmic accompaniment." },
+                    { "name": "Bass Guitar (Subtle)", "description": "A simple, foundational bassline." },
+                    { "name": "Drums (Soft)", "description": "Often uses brushes or a simple, slow backbeat." }
+                ]
+            },
+            "Dance-Pop": {
+                "description": "Pop music created specifically for dance floors. Features strong beats, simple structures, and catchy hooks designed for movement.",
+                "instruments": [
+                    { "name": "Female Vocals (Strong)", "description": "Powerful, catchy lead vocals.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Four-on-the-floor Beat", "description": "A steady, driving kick drum pattern.", "default": true },
+                    { "name": "Synth Bass", "description": "A groovy, repetitive bassline.", "default": true },
+                    { "name": "Synthesizer Hook", "description": "An unforgettable synth melody.", "default": true },
+                    { "name": "Vocal Chops", "description": "Sampled and rearranged vocal snippets used as a melodic element." }
+                ]
+            },
+            "Electropop": {
+                "description": "A form of synth-pop with a heavy emphasis on its electronic sound. The songs are often catchy, upbeat, and danceable.",
+                "instruments": [
+                    { "name": "Female Vocals (Processed)", "description": "Vocals often feature effects like reverb, delay, or autotune.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Synthesizer Lead", "description": "A prominent, catchy synth melody.", "default": true },
+                    { "name": "Synth Bass", "description": "A powerful, electronic bassline.", "default": true },
+                    { "name": "Drum Machine", "description": "Punchy, electronic drum patterns.", "default": true },
+                    { "name": "Synth Pads", "description": "Atmospheric chords that fill out the sound.", "default": true }
+                ]
+            },
+            "Indie Pop": {
+                "description": "A subgenre of pop music that originated from the independent music scene. It's often more melodic, less polished, and more authentic than mainstream pop music.",
+                "instruments": [
+                    { "name": "Female Vocals", "description": "Often with a quirky, melodic style.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Electric Guitar (Jangly)", "description": "Jangly, clean guitar riffs are a hallmark.", "default": true },
+                    { "name": "Bass Guitar", "description": "Melodic basslines that often carry the tune.", "default": true },
+                    { "name": "Drums (Acoustic)", "description": "A straightforward, often lo-fi drum beat.", "default": true },
+                    { "name": "Synthesizer", "description": "Used for quirky melodies and pads." },
+                    { "name": "Ukulele", "description": "Adds a light, cheerful texture." }
+                ]
+            },
+            "Pop": {
+                "description": "Characterized by catchy melodies, relatable lyrics, and production that appeals to a wide audience. Often features electronic elements and a strong rhythmic backbone.",
+                "instruments": [
+                    { "name": "Female Vocals", "description": "Lead and backing vocals for the main melody.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Synthesizer", "description": "Creates a wide range of electronic sounds, from basses to leads.", "default": true },
+                    { "name": "Drum Machine", "description": "Provides the rhythmic backbone with electronic drum sounds.", "default": true },
+                    { "name": "Electric Guitar", "description": "Often used for catchy riffs and clean melodic lines." },
+                    { "name": "Bass Guitar", "description": "Provides the low-end foundation of the track.", "default": true },
+                    { "name": "Piano", "description": "Used for chords, melodies, and emotional depth." }
+                ]
+            },
+            "Singer-Songwriter": {
+                "description": "Music focused on the artist's personal lyrics and compositions. The instrumentation is typically sparse to highlight the vocals and storytelling.",
+                "instruments": [
+                    { "name": "Female Vocals (Intimate)", "description": "Honest, personal, and direct vocal delivery.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Acoustic Guitar", "description": "The primary instrument for accompaniment.", "default": true },
+                    { "name": "Piano", "description": "An alternative or complementary instrument to the guitar.", "default": true },
+                    { "name": "Harmonica", "description": "Adds a folksy, personal touch." },
+                    { "name": "Cello", "description": "Provides a somber, emotional counter-melody." }
+                ]
+            }
+        }
+    },
+    {
+        "name": "R&B & Soul",
+        "description": "A collection of foundational African-American music genres. Soul is characterized by gospel-infused R&B, while modern R&B combines elements of soul, funk, and hip hop.",
+        "styles": {
+            "Funk": {
+                "description": "Characterized by a strong rhythmic groove of a bass line and drum part. Funk songs are often based on an extended vamp on a single chord.",
+                "instruments": [
+                    { "name": "Female Vocals (Energetic)", "description": "Rhythmic, often percussive vocals and chants.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Electric Bass (Slap)", "description": "A highly rhythmic, percussive bassline is the foundation.", "default": true },
+                    { "name": "Drums (Groovy)", "description": "A strong, danceable beat, especially on the first beat of the bar (\"on the one\").", "default": true },
+                    { "name": "Electric Guitar (Scratchy)", "description": "Playing rhythmic, muted 'scratch' patterns.", "default": true },
+                    { "name": "Clavinet", "description": "A percussive keyboard sound famously used by Stevie Wonder.", "default": true },
+                    { "name": "Horn Section", "description": "Tight, powerful stabs and riffs.", "default": true }
+                ]
+            },
+            "Neo-Soul": {
+                "description": "A style of soul music that emerged in the 90s, blending contemporary R&B and soul with elements of jazz, funk, hip hop, and African music.",
+                "instruments": [
+                    { "name": "Female Vocals (Jazzy/Soulful)", "description": "Complex, improvisational, and deeply soulful vocals.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Fender Rhodes Piano", "description": "The quintessential warm, bell-like keyboard sound.", "default": true },
+                    { "name": "Live Drums (Behind the beat)", "description": "A relaxed, slightly lazy groove is key.", "default": true },
+                    { "name": "Jazz Bass", "description": "Warm, melodic, and groovy basslines.", "default": true },
+                    { "name": "Clean Electric Guitar", "description": "Jazzy chords and subtle licks." }
+                ]
+            },
+            "R&B": {
+                "description": "Rhythm and Blues. A genre that combines elements of pop, soul, funk, hip hop, and electronic music. Known for smooth vocals and melodic arrangements.",
+                "instruments": [
+                    { "name": "Female Vocals (Smooth)", "description": "Silky, often intricate lead vocals and harmonies.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "808s and Electronic Drums", "description": "Modern R&B often uses hip-hop-influenced drum sounds.", "default": true },
+                    { "name": "Synth Bass", "description": "A deep, smooth bassline.", "default": true },
+                    { "name": "Electric Piano (Rhodes)", "description": "Adds a classic, smooth chordal texture.", "default": true },
+                    { "name": "Synth Pads", "description": "Lush, atmospheric background chords.", "default": true }
+                ]
+            },
+            "Soul": {
+                "description": "A popular music genre that originated in the African American community in the 1950s/60s. It combines elements of gospel music, R&B and jazz.",
+                "instruments": [
+                    { "name": "Female Vocals (Powerful & Gritty)", "description": "Passionate lead vocals are the centerpiece.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Horn Section (Brass)", "description": "Stabbing, powerful lines from trumpets, trombones, and saxophones.", "default": true },
+                    { "name": "Electric Organ (Hammond)", "description": "A warm, swirling organ sound.", "default": true },
+                    { "name": "Electric Guitar (Clean)", "description": "Crisp, rhythmic guitar playing.", "default": true },
+                    { "name": "Bass Guitar", "description": "Melodic, groovy basslines.", "default": true },
+                    { "name": "Drums", "description": "A tight, in-the-pocket backbeat.", "default": true }
+                ]
+            }
+        }
+    },
+    {
+        "name": "Rap & Hip Hop",
+        "description": "A genre of popular music that developed in African-American communities, characterized by rhythmic and rhyming speech (rapping) over a musical backing.",
+        "styles": {
+            "Cloud Rap": {
+                "description": "An ethereal and dreamy subgenre. Characterized by hazy, atmospheric production, washed-out samples, and often mumbled or auto-tuned vocals with abstract themes.",
+                "instruments": [
+                    { "name": "Female Vocals (Mumbled/Autotuned)", "description": "Often treated as another texture in the mix.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Hazy Synth Pads", "description": "Lush, reverb-heavy, and often side-chained synthesizers.", "default": true },
+                    { "name": "Trap Hi-Hats", "description": "Skittering, fast hi-hat patterns provide rhythm.", "default": true },
+                    { "name": "Washed-out Samples", "description": "Obscure, heavily processed vocal or instrumental samples.", "default": true },
+                    { "name": "808 Sub Bass", "description": "Deep, often simple basslines." }
+                ]
+            },
+            "Conscious Hip Hop": {
+                "description": "A subgenre of hip hop that challenges the dominant cultural, political, philosophical, and economic consensus. The lyrics are focused on social issues and positive messages.",
+                "instruments": [
+                    { "name": "Female MC (Lyrical)", "description": "A strong focus on clear, intricate, and meaningful lyrics.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Jazzy Samples", "description": "Samples from jazz, soul, and funk records provide a warm, organic feel.", "default": true },
+                    { "name": "Smooth Drum Breaks", "description": "Often uses classic, funky drum loops.", "default": true },
+                    { "name": "Upright Bass", "description": "A warm, acoustic bass sound, often sampled.", "default": true }
+                ]
+            },
+            "Drill": {
+                "description": "A dark, grim style of trap music defined by its ominous mood, sliding 808 basslines, and violent, nihilistic lyricism.",
+                "instruments": [
+                    { "name": "Female Rapper (Deadpan)", "description": "Cold, detached, and often threatening vocal delivery.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Sliding 808s", "description": "Deep sub-bass that glides between notes.", "default": true },
+                    { "name": "Complex Hi-Hat Patterns", "description": "Intricate, skittering hi-hats and counter-snares.", "default": true },
+                    { "name": "Ominous Piano/Synth Melody", "description": "Simple, creepy melodies that create tension.", "default": true }
+                ]
+            },
+            "Gangsta Rap": {
+                "description": "A subgenre of hip hop with themes and lyrics that generally emphasize the 'gangsta' lifestyle. It often features aggressive lyrics and funk-inspired production.",
+                "instruments": [
+                    { "name": "Female MC (Confident)", "description": "An assertive, confident, and often aggressive vocal delivery.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Funk & Soul Samples", "description": "Classic G-funk sound is built on samples from Parliament-Funkadelic and others.", "default": true },
+                    { "name": "808 Drum Machine", "description": "Hard-hitting, classic hip-hop drum sounds.", "default": true },
+                    { "name": "Moog Synthesizer Lead", "description": "A high-pitched, whining synth lead is a hallmark of the G-funk style.", "default": true }
+                ]
+            },
+            "Hip Hop (Boom Bap)": {
+                "description": "A classic style of East Coast hip hop from the late 80s/early 90s, characterized by a hard-hitting acoustic drum loop and samples from jazz and soul records.",
+                "instruments": [
+                    { "name": "Female MC", "description": "Rapping with a focus on lyricism, flow, and storytelling.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Drum Machine (SP-1200/MPC)", "description": "The source of the gritty, punchy drum sounds.", "default": true },
+                    { "name": "Sampled Jazz/Funk Loop", "description": "A short, repeated melodic or chordal phrase from an old record.", "default": true },
+                    { "name": "Upright Bass Sample", "description": "A warm, acoustic bass sound, often sampled.", "default": true },
+                    { "name": "Turntable Scratches", "description": "Adding rhythmic scratches as a percussive element." }
+                ]
+            },
+            "Lo-Fi Hip Hop": {
+                "description": "A subgenre that fuses traditional hip-hop and jazz elements to create an atmospheric, mellow sound. Often has a 'dusty' or 'vintage' quality.",
+                "instruments": [
+                    { "name": "Jazzy Piano Chords", "description": "Mellow, often sampled-sounding piano progressions.", "default": true },
+                    { "name": "Boom Bap Drums", "description": "A relaxed, head-nodding beat, often with vinyl crackle effects.", "default": true },
+                    { "name": "Upright Bass Sample", "description": "A warm, acoustic bass sound.", "default": true },
+                    { "name": "Female Vocals (Spoken/Soft)", "description": "Calm, spoken-word or softly sung snippets.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Saxophone Licks", "description": "Smooth, jazzy saxophone phrases." },
+                    { "name": "Vinyl Crackle", "description": "An essential atmospheric element.", "default": true }
+                ]
+            },
+            "Trap": {
+                "description": "Characterized by its aggressive sound, 808 sub-bass kick drums, and fast, skittering hi-hat patterns. Lyrics often revolve around street life.",
+                "instruments": [
+                    { "name": "Female Vocals (Rapped/Melodic)", "description": "A mix of fast-paced rapping and autotuned singing.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "808 Sub Bass", "description": "A deep, resonant bass that defines the genre.", "default": true },
+                    { "name": "Fast Hi-Hats", "description": "Rapidly repeated hi-hat patterns (triplets, etc.).", "default": true },
+                    { "name": "Snappy Snare/Clap", "description": "A sharp, crisp snare drum sound.", "default": true },
+                    { "name": "Dark Synth Melody", "description": "Often simple, repetitive, and ominous-sounding melodies.", "default": true }
+                ]
+            }
+        }
+    },
+    {
+        "name": "Rock & Metal",
+        "description": "A broad category of popular music that emerged as 'rock and roll' in the mid-1950s and developed into a range of different styles. It is characterized by a strong beat, electric guitars, and powerful vocals.",
+        "styles": {
+            "Alternative Rock": {
+                "description": "Emerged from the independent underground of the 1980s. Characterized by a rejection of mainstream rock conventions, often with a DIY ethic and diverse influences.",
+                "instruments": [
+                    { "name": "Female Vocals (Angsty/Melodic)", "description": "A wide range from soft-spoken to raw and powerful.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Electric Guitar (Distorted/Clean)", "description": "Often utilizes a loud/soft dynamic.", "default": true },
+                    { "name": "Bass Guitar (Driving)", "description": "Prominent, often melodic basslines.", "default": true },
+                    { "name": "Drums (Powerful)", "description": "A solid, driving beat.", "default": true }
+                ]
+            },
+            "Goth Rock": {
+                "description": "A style of post-punk with a dark, often romantic and melancholic atmosphere. Features introspective lyrics, minor key melodies, and driving basslines.",
+                "instruments": [
+                    { "name": "Female Vocals (Deep/Somber)", "description": "Dramatic, mournful, and powerful vocals.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Chorus/Flanger Guitar", "description": "Atmospheric, swirling guitar effects are key.", "default": true },
+                    { "name": "Prominent Bassline", "description": "High-pitched, melodic basslines often lead the song.", "default": true },
+                    { "name": "Drum Machine", "description": "Cold, steady, and often tribal rhythms.", "default": true },
+                    { "name": "Synthesizer", "description": "Provides dark, atmospheric pads and melodies." }
+                ]
+            },
+            "Grunge": {
+                "description": "A subgenre of alternative rock from the American Pacific Northwest. Fuses elements of punk and heavy metal, known for 'sludgy' guitar and apathetic lyrics.",
+                "instruments": [
+                    { "name": "Female Vocals (Anguished)", "description": "Raw, emotional, and often gravelly vocals.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Distorted Guitar", "description": "Heavy, sludgy, and feedback-laden guitar tones.", "default": true },
+                    { "name": "Bass Guitar", "description": "Thick, heavy basslines.", "default": true },
+                    { "name": "Drums", "description": "Simple, powerful, and heavy-hitting.", "default": true }
+                ]
+            },
+            "Hard Rock": {
+                "description": "A louder, more aggressive form of rock. Characterized by strong, distorted guitar riffs, powerful drumming, and assertive vocals.",
+                "instruments": [
+                    { "name": "Female Vocals (Powerful)", "description": "Strong, often belted lead vocals.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Electric Guitar (Distorted Riffs)", "description": "The main driving force of the song.", "default": true },
+                    { "name": "Bass Guitar", "description": "A heavy, driving bassline.", "default": true },
+                    { "name": "Drums (Hard-hitting)", "description": "Loud, powerful drums with a strong backbeat.", "default": true },
+                    { "name": "Guitar Solo", "description": "A virtuosic, often fast-paced guitar solo." }
+                ]
+            },
+            "Heavy Metal": {
+                "description": "A genre of extremes, characterized by loud, distorted guitars, emphatic rhythms, dense bass-and-drum sound, and vigorous vocals.",
+                "instruments": [
+                    { "name": "Female Vocals", "description": "Lead and backing vocals for the main melody.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Electric Guitar (Heavily Distorted)", "description": "High-gain, aggressive guitar tones for riffs and solos.", "default": true },
+                    { "name": "Drums (Double Bass)", "description": "Fast, powerful drumming, often featuring two bass drums.", "default": true },
+                    { "name": "Bass Guitar (Heavy)", "description": "A thick, driving bass that locks in with the guitars.", "default": true },
+                    { "name": "Screaming Vocals", "description": "A common vocal style in many metal subgenres." }
+                ]
+            },
+            "Nu Metal": {
+                "description": "Fuses alternative metal with other genres like hip hop, funk, and industrial. Known for syncopated, riff-based songs and often features rapping.",
+                "instruments": [
+                    { "name": "Female Vocals (Rapped/Sung)", "description": "A mix of rapping, singing, and screaming.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "7-String Guitar", "description": "Down-tuned, heavy, and groovy guitar riffs.", "default": true },
+                    { "name": "5-String Bass", "description": "Slapped and heavy low-end.", "default": true },
+                    { "name": "Drums (Groove-oriented)", "description": "Syncopated, powerful beats.", "default": true },
+                    { "name": "DJ/Turntables", "description": "Adds scratching, sampling, and electronic textures." }
+                ]
+            },
+            "Progressive Rock": {
+                "description": "An ambitious style of rock music that pushes boundaries with complex compositions, unusual time signatures, and conceptual lyrics.",
+                "instruments": [
+                    { "name": "Female Vocals (Melodic/Dramatic)", "description": "Often part of a larger narrative.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Electric Guitar", "description": "Complex riffs and long, intricate solos.", "default": true },
+                    { "name": "Keyboards (Mellotron/Organ)", "description": "Creates orchestral and atmospheric textures.", "default": true },
+                    { "name": "Bass Guitar (Complex)", "description": "Plays its own melodic lines, not just root notes.", "default": true },
+                    { "name": "Drums (Polyrhythmic)", "description": "Utilizes odd time signatures and complex patterns.", "default": true }
+                ]
+            },
+            "Psychedelic Rock": {
+                "description": "Music inspired by or attempting to replicate the mind-altering experiences of psychedelic drugs. Features feedback, sitars, and studio effects.",
+                "instruments": [
+                    { "name": "Female Vocals (Reverb-heavy)", "description": "Often dreamy and drenched in effects.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Electric Guitar (Fuzz/Wah)", "description": "Extensive use of effects like fuzz, wah-wah, and phasers.", "default": true },
+                    { "name": "Organ/Keyboards", "description": "Adds a swirling, trippy texture.", "default": true },
+                    { "name": "Sitar", "description": "Incorporates Eastern influences for a hypnotic sound." },
+                    { "name": "Bass Guitar", "description": "Groovy, often repetitive basslines.", "default": true },
+                    { "name": "Drums (Loose)", "description": "A less rigid, more free-flowing drum style.", "default": true }
+                ]
+            },
+            "Punk Rock": {
+                "description": "Characterized by a fast, hard-edged sound, typically with short songs, stripped-down instrumentation, and often political, anti-establishment lyrics.",
+                "instruments": [
+                    { "name": "Female Vocals (Raw)", "description": "Energetic, often shouted or sneering vocals.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Electric Guitar (Power Chords)", "description": "Fast, simple, distorted guitar riffs.", "default": true },
+                    { "name": "Bass Guitar (Driving)", "description": "Fast, melodic basslines.", "default": true },
+                    { "name": "Drums (Fast & Loud)", "description": "High-speed, aggressive drumming.", "default": true }
+                ]
+            },
+            "Symphonic Metal": {
+                "description": "A subgenre of metal that combines heavy metal with orchestral elements. It often features soaring, operatic female vocals and complex arrangements.",
+                "instruments": [
+                    { "name": "Female Vocals (Operatic)", "description": "Classically trained, powerful soprano vocals.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Orchestra", "description": "Full string, brass, and woodwind sections.", "default": true },
+                    { "name": "Electric Guitar (Heavy)", "description": "Distorted guitars providing the metal backbone.", "default": true },
+                    { "name": "Drums (Double Bass)", "description": "Fast and powerful drumming.", "default": true },
+                    { "name": "Bass Guitar", "description": "Locks in with the drums and guitars.", "default": true },
+                    { "name": "Choir (Epic)", "description": "Large choir providing dramatic backing vocals.", "default": true }
+                ]
+            }
+        }
+    },
+    {
+        "name": "Traditional & Historical",
+        "description": "Foundational genres and art forms that have shaped music history. This includes early American music, classical traditions, and vocal-focused styles.",
+        "styles": {
+            "A Capella": {
+                "description": "Music performed by one or more singers without instrumental accompaniment. It relies entirely on the voice to create melody, harmony, and rhythm.",
+                "instruments": [
+                    { "name": "Soprano (Miranda)", "description": "Sings the highest vocal part, often the melody.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Sings a lower harmony part, providing richness to the sound.", "default": true },
+                    { "name": "Vocal Bass", "description": "A singer mimics the sound and role of a bass guitar, providing the low-end foundation.", "default": true },
+                    { "name": "Beatboxing", "description": "A form of vocal percussion which involves the art of mimicking drum machines using one's mouth, lips, tongue, and voice.", "default": true },
+                    { "name": "Group Harmony", "description": "Multiple vocal parts singing together to create chords and texture." }
+                ]
+            },
+            "Blues": {
+                "description": "Originating from African-American communities in the Southern United States, it's characterized by its specific chord progressions, and 'blue' notes.",
+                "instruments": [
+                    { "name": "Female Vocals (Soulful/Gritty)", "description": "Soulful, expressive lead vocals.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Electric Guitar (Clean/Crunch)", "description": "The heart of modern blues, used for riffs, solos, and rhythm.", "default": true },
+                    { "name": "Harmonica", "description": "A classic blues instrument, used for wailing solos and fills.", "default": true },
+                    { "name": "Piano/Organ", "description": "Provides rhythmic comping and soulful solos.", "default": true },
+                    { "name": "Bass Guitar", "description": "A simple, solid bassline that grounds the music.", "default": true },
+                    { "name": "Drums", "description": "A steady, shuffling backbeat.", "default": true }
+                ]
+            },
+            "Jazz": {
+                "description": "Characterized by swing and blue notes, complex chords, call and response vocals, polyrhythms and improvisation.",
+                "instruments": [
+                    { "name": "Female Vocals", "description": "Scatting and melodic lead vocals.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Piano", "description": "Provides complex chord voicings and improvised solos.", "default": true },
+                    { "name": "Double Bass", "description": "Provides the walking bassline, a cornerstone of the jazz rhythm section.", "default": true },
+                    { "name": "Drums (Brushes)", "description": "Subtle, swinging rhythms, often played with brushes for a softer sound.", "default": true },
+                    { "name": "Saxophone", "description": "A key solo instrument in jazz.", "default": true }
+                ]
+            },
+            "Sea Shanty": {
+                "description": "A type of work song traditionally sung by sailors. Features a call-and-response structure and a strong, steady rhythm to coordinate tasks.",
+                "instruments": [
+                    { "name": "Lead Male Vocal (Shantyman)", "description": "The leader who sings the main lines.", "default": false },
+                    { "name": "Group Vocals", "description": "The crew responding in chorus.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Accordion/Concertina", "description": "Provides the harmonic and rhythmic drive.", "default": true },
+                    { "name": "Fiddle", "description": "Adds a lively melodic element." },
+                    { "name": "Stomping and Clapping", "description": "Provides a percussive, participatory feel.", "default": true }
+                ]
+            },
+            "Swing": {
+                "description": "A form of jazz that developed in the 1930s. It's characterized by a strong rhythm section, often a large 'big band' ensemble, and a danceable swing rhythm.",
+                "instruments": [
+                    { "name": "Female Vocalist (Crooner)", "description": "Smooth, melodic vocals that float over the band.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Big Band Horn Section", "description": "Sections of trumpets, trombones, and saxophones playing powerful arrangements.", "default": true },
+                    { "name": "Walking Double Bass", "description": "A bassline that plays on all four beats of the measure.", "default": true },
+                    { "name": "Drums (with brushes)", "description": "Keeps the swinging, danceable rhythm.", "default": true },
+                    { "name": "Piano", "description": "Provides rhythmic comping and solos." },
+                    { "name": "Clarinet", "description": "A common lead solo instrument in the swing era." }
+                ]
+            }
+        }
+    },
+    {
+        "name": "World Pop",
+        "description": "A category for contemporary pop music from around the globe that has achieved international recognition. These styles often fuse local musical traditions with global pop production.",
+        "styles": {
+            "Bollywood": {
+                "description": "The film music of the Indian film industry. It's a fusion of Indian classical and folk music with Western pop, rock, and electronic music.",
+                "instruments": [
+                    { "name": "Female Vocals (Hindi)", "description": "Melismatic, high-pitched vocals are common.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Sitar", "description": "A classical Indian stringed instrument.", "default": true },
+                    { "name": "Tabla", "description": "A pair of small hand drums.", "default": true },
+                    { "name": "Dholak", "description": "A larger, two-headed hand drum for powerful rhythms.", "default": true },
+                    { "name": "String Section", "description": "Lush, cinematic strings are a hallmark.", "default": true },
+                    { "name": "Synthesizers", "description": "Modern electronic elements are often fused in." }
+                ]
+            },
+            "J-Pop": {
+                "description": "Japanese pop music. Known for its catchy melodies, often complex chord progressions influenced by jazz and anime soundtracks, and a high-energy feel.",
+                "instruments": [
+                    { "name": "Female Vocals (High-pitched/Energetic)", "description": "Often sweet and very melodic vocals.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Electric Guitar", "description": "Often plays rock-influenced riffs and solos.", "default": true },
+                    { "name": "Synthesizers", "description": "Bright, catchy synth leads and pads.", "default": true },
+                    { "name": "Bass Guitar (Melodic)", "description": "Fast, intricate basslines are common.", "default": true },
+                    { "name": "Drums", "description": "A mix of live and electronic drums, always high-energy.", "default": true }
+                ]
+            },
+            "K-Pop": {
+                "description": "Originating in South Korea, K-Pop is characterized by a wide variety of audiovisual elements. It absorbs styles from all over the world, including pop, hip hop, R&B, and EDM.",
+                "instruments": [
+                    { "name": "Female Vocals (Korean/English)", "description": "Polished, tight harmonies and catchy lead vocals.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Synthesizers", "description": "A wide variety of modern synth sounds.", "default": true },
+                    { "name": "Drum Machine", "description": "Hard-hitting, intricate electronic drum patterns.", "default": true },
+                    { "name": "Synth Bass", "description": "Powerful electronic basslines.", "default": true },
+                    { "name": "Rap Verse", "description": "It's common for K-Pop songs to include a rap section." }
+                ]
+            }
+        }
+    }
+]
