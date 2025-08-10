@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Page } from '../types';
 import { useGenerationContext } from '../context/GenerationContext';
+import { useSettings } from '../context/SettingsContext';
 import { useLog } from '../hooks/useLog';
 import { generateTitleAndLyrics } from '../services/geminiService';
 import { LogLevel } from '../types';
@@ -43,12 +44,17 @@ const playSound = () => {
 
 export const LyricsPage: React.FC<LyricsPageProps> = ({ setPage }) => {
     const { state, setTitle, setLyrics, isLoading, setIsLoading } = useGenerationContext();
+    const { apiKey } = useSettings();
     const log = useLog();
     const [error, setError] = useState('');
     const [titleCopied, setTitleCopied] = useState(false);
     const [lyricsCopied, setLyricsCopied] = useState(false);
 
     const performGeneration = async (mode: 'all' | 'title' | 'lyrics') => {
+        if (!apiKey) {
+            setError('Please set your API Key in the settings before generating content.');
+            return;
+        }
         if (!state.style) return;
         
         const message = {
@@ -60,7 +66,7 @@ export const LyricsPage: React.FC<LyricsPageProps> = ({ setPage }) => {
         setIsLoading(true, message);
         setError('');
         try {
-            const { title, lyrics } = await generateTitleAndLyrics({
+            const { title, lyrics } = await generateTitleAndLyrics(apiKey, {
                 topic: state.expandedTopic || state.topic,
                 style: state.style,
                 instruments: state.instruments
@@ -84,10 +90,10 @@ export const LyricsPage: React.FC<LyricsPageProps> = ({ setPage }) => {
     
     useEffect(() => {
         // Generate lyrics automatically if they don't exist when the page is visited
-        if (!state.lyrics && !isLoading && state.style) {
+        if (!state.lyrics && !isLoading && state.style && apiKey) {
             performGeneration('all');
         }
-    }, [state.lyrics, isLoading, state.style]);
+    }, [state.lyrics, isLoading, state.style, apiKey]);
 
     const copyToClipboard = (text: string, setter: React.Dispatch<React.SetStateAction<boolean>>) => {
         navigator.clipboard.writeText(text);
@@ -108,7 +114,7 @@ export const LyricsPage: React.FC<LyricsPageProps> = ({ setPage }) => {
                     <div className="space-y-6 flex-grow flex flex-col overflow-hidden">
                         <div>
                             <div className="flex justify-between items-center mb-2">
-                                <button onClick={() => performGeneration('title')} className="px-3 py-1 text-xs bg-[var(--accent-primary)] text-[var(--text-on-accent)] hover:bg-[var(--accent-hover)] rounded-md transition-colors">
+                                <button onClick={() => performGeneration('title')} disabled={!apiKey} className="px-3 py-1 text-xs bg-[var(--accent-primary)] text-[var(--text-on-accent)] hover:bg-[var(--accent-hover)] rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
                                     Redo Title
                                 </button>
                                 <button onClick={() => copyToClipboard(state.title, setTitleCopied)} className="px-3 py-1 text-xs bg-[var(--bg-tertiary)] text-[var(--text-primary)] hover:opacity-80 rounded-md transition-opacity">
@@ -120,7 +126,7 @@ export const LyricsPage: React.FC<LyricsPageProps> = ({ setPage }) => {
 
                         <div className="flex-grow flex flex-col overflow-hidden">
                             <div className="flex justify-between items-center mb-2">
-                                 <button onClick={() => performGeneration('lyrics')} className="px-3 py-1 text-xs bg-[var(--accent-primary)] text-[var(--text-on-accent)] hover:bg-[var(--accent-hover)] rounded-md transition-colors">
+                                 <button onClick={() => performGeneration('lyrics')} disabled={!apiKey} className="px-3 py-1 text-xs bg-[var(--accent-primary)] text-[var(--text-on-accent)] hover:bg-[var(--accent-hover)] rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
                                     Redo Lyrics
                                 </button>
                                 <button onClick={() => copyToClipboard(state.lyrics, setLyricsCopied)} className="px-3 py-1 text-xs bg-[var(--bg-tertiary)] text-[var(--text-primary)] hover:opacity-80 rounded-md transition-opacity">

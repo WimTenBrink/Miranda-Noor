@@ -27,6 +27,8 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ setPage }) => {
     const { state } = useGenerationContext();
     const [copied, setCopied] = useState<CopiedState>(null);
     const [copyError, setCopyError] = useState('');
+    
+    const selectedImageUrl = state.selectedCoverImageIndex !== null ? state.coverImageUrls[state.selectedCoverImageIndex] : null;
 
     const handleCopy = (type: CopiedState, content: string) => {
         setCopyError('');
@@ -94,9 +96,9 @@ export const CollectionPage: React.FC<CollectionPageProps> = ({ setPage }) => {
                         <pre className="text-[var(--text-secondary)] bg-[var(--bg-inset)] p-3 rounded-md text-sm whitespace-pre-wrap font-sans max-h-48 overflow-y-auto">{state.lyrics || 'No lyrics generated.'}</pre>
                     </CollectionItem>
 
-                    <CollectionItem type="image" title="Cover Image" content={state.coverImageUrl}>
-                        {state.coverImageUrl ? (
-                            <img src={state.coverImageUrl} alt="Cover art thumbnail" className="w-32 h-auto rounded-md" style={{aspectRatio: '3/4'}}/>
+                    <CollectionItem type="image" title="Cover Image" content={selectedImageUrl || ''}>
+                        {selectedImageUrl ? (
+                            <img src={selectedImageUrl} alt="Cover art thumbnail" className="w-32 h-auto rounded-md" style={{aspectRatio: '3/4'}}/>
                         ) : (
                             <p className="text-[var(--text-muted)]">No image generated.</p>
                         )}

@@ -23,8 +23,9 @@ export interface GenerationState {
   instruments: string[];
   title: string;
   lyrics: string;
-  coverImagePrompt: string;
-  coverImageUrl: string;
+  coverImagePrompts: string[];
+  coverImageUrls: string[];
+  selectedCoverImageIndex: number | null;
   thinkingMessage: string;
 }
 

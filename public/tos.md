@@ -12,10 +12,11 @@ This application ("the Service") allows users to:
 
 The Service acts as an interface to Google's AI services. It does not store your generated content on our servers.
 
-## 2. Data Usage and Privacy
+## 2. API Key and Data Usage
 
-To function, this application requires a pre-configured Google AI API key provided through the environment it runs in.
+To function, this application requires you to provide your own Google AI API Key.
 
+- **API Key:** Your key is stored exclusively in your browser's local storage. It is required for all AI generation features and is sent directly from your browser to the Google AI API with each request. It is never transmitted to or stored on our servers.
 - **Input Prompts:** The text and parameters you enter to generate lyrics and images are sent directly to the Google AI API.
 - **Generated Content:** The lyrics and images generated are returned from the Google AI API directly to your browser.
 - **Logging:** The application features a client-side console that logs your requests and Google's responses. This data stays within your browser. You have the option to save these logs to your local machine. No logs are automatically transmitted or stored by us.

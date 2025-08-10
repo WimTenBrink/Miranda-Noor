@@ -1,3 +1,12 @@
+**CRITICAL INSTRUCTION: DO NOT REMOVE USER API KEY FUNCTIONALITY**
+This application is deployed on a public server. To avoid incurring costs on the owner's personal budget, users **MUST** provide their own Google AI API Key.
+- The **Settings Dialog** (`SettingsDialog.tsx`) is essential for users to enter and save their key.
+- The key is stored in the browser's **local storage**.
+- The app must be disabled and prompt the user for a key if one is not present.
+- This functionality is a hard requirement and must not be refactored out in favor of environment variables.
+
+---
+
 The TOS dialog needs to be 90vw and 90vh. The Markdown file needs to be rendered to html. The CSS for all Markdown styling needs to be part of the index.html file, not a separate CSS file.
 
 All dialogs need to be 90vw and 90vh. 

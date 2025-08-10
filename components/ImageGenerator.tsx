@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { generateImage } from '../services/imagenService';
 import { useLog } from '../hooks/useLog';
 import { LogLevel } from '../types';
+import { useSettings } from '../context/SettingsContext';
 
 export const ImageGenerator: React.FC = () => {
     const [prompt, setPrompt] = useState('');
@@ -9,6 +10,7 @@ export const ImageGenerator: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const log = useLog();
+    const { apiKey } = useSettings();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -16,13 +18,18 @@ export const ImageGenerator: React.FC = () => {
             setError('Please enter a description for your cover art.');
             return;
         }
+        if (!apiKey) {
+            setError('Please set your API key in settings.');
+            return;
+        }
+
 
         setError('');
         setImageUrl('');
         setIsLoading(true);
 
         try {
-            const result = await generateImage(prompt, log);
+            const result = await generateImage(apiKey, prompt, log);
             setImageUrl(result);
             log({ level: LogLevel.INFO, source: 'App', header: 'Image generated successfully', details: { prompt } });
         } catch (err: any) {

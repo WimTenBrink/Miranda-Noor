@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { GenerationProvider } from './context/GenerationContext';
 import { LogProvider } from './context/LogContext';
+import { SettingsProvider } from './context/SettingsContext';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
@@ -14,7 +15,9 @@ root.render(
   <React.StrictMode>
     <LogProvider>
       <GenerationProvider>
+        <SettingsProvider>
           <App />
+        </SettingsProvider>
       </GenerationProvider>
     </LogProvider>
   </React.StrictMode>

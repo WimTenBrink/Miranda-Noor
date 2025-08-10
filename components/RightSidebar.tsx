@@ -3,6 +3,8 @@ import { useGenerationContext } from '../context/GenerationContext';
 
 export const RightSidebar: React.FC = () => {
     const { state } = useGenerationContext();
+    const selectedImageUrl = state.selectedCoverImageIndex !== null ? state.coverImageUrls[state.selectedCoverImageIndex] : null;
+
 
     const InfoBlock: React.FC<{title: string; children: React.ReactNode; condition?: boolean}> = ({ title, children, condition = true }) => {
         if (!condition) return null;
@@ -38,8 +40,8 @@ export const RightSidebar: React.FC = () => {
                     <p className="font-semibold text-[var(--accent-secondary)]">{state.title}</p>
                 </InfoBlock>
 
-                <InfoBlock title="Cover Art" condition={!!state.coverImageUrl}>
-                    <img src={state.coverImageUrl} alt="Generated cover art" className="rounded-md aspect-square object-cover" />
+                <InfoBlock title="Cover Art" condition={!!selectedImageUrl}>
+                    <img src={selectedImageUrl!} alt="Generated cover art" className="rounded-md aspect-square object-cover" />
                 </InfoBlock>
             </div>
         </aside>

@@ -50,14 +50,14 @@ export const LeftSidebar: React.FC<LeftSidebarProps> = ({ currentPage, setCurren
         { page: 'collection', title: '6. Collection' },
     ];
     
-    const isCollectionReady = state.title.length > 0 && state.lyrics.length > 0 && state.coverImageUrl.length > 0 && state.instruments.length > 0;
+    const isCollectionReady = state.title.length > 0 && state.lyrics.length > 0 && state.coverImageUrls.length > 0 && state.instruments.length > 0;
 
     const completionStatus = {
         topic: state.topic.length > 0,
         style: state.style !== null,
         instruments: state.instruments.length > 0,
         lyrics: state.lyrics.length > 0,
-        cover: state.coverImageUrl.length > 0,
+        cover: state.coverImageUrls.length > 0,
         collection: isCollectionReady,
     };
 

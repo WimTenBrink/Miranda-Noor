@@ -11,6 +11,7 @@ import { SunIcon } from './icons/SunIcon';
 import { MoonIcon } from './icons/MoonIcon';
 import { MusicIcon } from './icons/MusicIcon';
 import { ReportIcon } from './icons/ReportIcon';
+import { SettingsIcon } from './icons/SettingsIcon';
 
 interface HeaderProps {
   onConsoleClick: () => void;
@@ -18,6 +19,7 @@ interface HeaderProps {
   onAboutClick: () => void;
   onManualClick: () => void;
   onMusicStylesClick: () => void;
+  onSettingsClick: () => void;
   onResetClick: () => void;
   showDownloadButton: boolean;
   onDownloadClick: () => void;
@@ -33,6 +35,7 @@ export const Header: React.FC<HeaderProps> = ({
     onAboutClick,
     onManualClick,
     onMusicStylesClick,
+    onSettingsClick,
     onResetClick, 
     showDownloadButton, 
     onDownloadClick,
@@ -71,6 +74,9 @@ export const Header: React.FC<HeaderProps> = ({
           
           <div className="w-px h-6 bg-[var(--border-primary)] mx-2"></div>
 
+          <button onClick={onSettingsClick} className="p-2 rounded-full hover:bg-[var(--bg-tertiary)] transition-colors" title="Settings">
+            <SettingsIcon className="w-5 h-5 text-[var(--text-muted)]" />
+          </button>
           <button onClick={onConsoleClick} className="p-2 rounded-full hover:bg-[var(--bg-tertiary)] transition-colors" title="Console">
             <ConsoleIcon className="w-5 h-5 text-[var(--text-muted)]" />
           </button>

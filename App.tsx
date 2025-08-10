@@ -11,7 +11,10 @@ import { AboutDialog } from './components/AboutDialog';
 import { ManualDialog } from './components/ManualDialog';
 import { MusicStylesDialog } from './components/MusicStylesDialog';
 import { ReportDialog } from './components/ReportDialog';
+import { SettingsDialog } from './components/SettingsDialog';
+import { ApiKeyOverlay } from './components/ApiKeyOverlay';
 import { useGenerationContext } from './context/GenerationContext';
+import { useSettings } from './context/SettingsContext';
 import { Page, GenerationState, MusicStyleDefinition } from './types';
 import { LeftSidebar } from './components/LeftSidebar';
 import { RightSidebar } from './components/RightSidebar';
@@ -25,14 +28,15 @@ import { CoverImagePage } from './pages/CoverImagePage';
 import { CollectionPage } from './pages/CollectionPage';
 
 
-type ModalType = 'console' | 'tos' | 'about' | 'manual' | 'musicStyles' | 'report' | null;
+type ModalType = 'console' | 'tos' | 'about' | 'manual' | 'musicStyles' | 'report' | 'settings' | null;
 type Theme = 'light' | 'dark';
 
 const App: React.FC = () => {
     const [activeModal, setActiveModal] = useState<ModalType>(null);
     const [currentPage, setCurrentPage] = useState<Page>('topic');
     const [theme, setTheme] = useState<Theme>('dark');
-    const { state, isLoading, reset, styleData } = useGenerationContext();
+    const { state, isLoading, reset, styleData, isStyleDataLoading } = useGenerationContext();
+    const { apiKey } = useSettings();
 
     useEffect(() => {
         const storedTheme = localStorage.getItem('theme') as Theme | null;
@@ -46,6 +50,12 @@ const App: React.FC = () => {
             document.documentElement.classList.remove('dark');
         }
     }, []);
+    
+    useEffect(() => {
+        if (!apiKey && !isStyleDataLoading) {
+            setActiveModal('settings');
+        }
+    }, [apiKey, isStyleDataLoading]);
 
     const toggleTheme = useCallback(() => {
         setTheme(prevTheme => {
@@ -81,7 +91,7 @@ const App: React.FC = () => {
     }
 
     const handleDownload = async () => {
-        if (!state.title || !state.lyrics || !state.coverImageUrl || !state.style) {
+        if (!state.title || !state.lyrics || state.coverImageUrls.length === 0 || state.selectedCoverImageIndex === null || !state.style) {
             console.error("Missing data for download.");
             alert("Cannot download collection, some assets are missing.");
             return;
@@ -93,6 +103,11 @@ const App: React.FC = () => {
                 const instrument = styleInfo?.instruments.find(i => i.name === instName);
                 return `- **${instName}:** ${instrument?.description || 'No description available.'}`;
             }).join('\n');
+            
+            const coverImagesMarkdown = state.coverImageUrls.map((_, index) => 
+                `![Cover Art ${index + 1}](cover-${index + 1}.png)`
+            ).join('\n\n');
+
             return `
 # ${state.title}
 
@@ -107,7 +122,7 @@ ${state.lyrics || 'No lyrics generated.'}
 \`\`\`
 ---
 ## Cover Art
-![Cover Art for ${state.title}](cover.png)
+${coverImagesMarkdown}
             `.trim().replace(/^\s+/gm, '');
         };
 
@@ -167,10 +182,13 @@ ${state.lyrics || 'No lyrics generated.'}
         zip.file("report.html", htmlReport);
     
         try {
-            const response = await fetch(state.coverImageUrl);
-            const imageBlob = await response.blob();
-            zip.file("cover.png", imageBlob);
-    
+            const imagePromises = state.coverImageUrls.map(async (url, index) => {
+                const response = await fetch(url);
+                const imageBlob = await response.blob();
+                zip.file(`cover-${index + 1}.png`, imageBlob);
+            });
+            await Promise.all(imagePromises);
+
             const content = await zip.generateAsync({ type: "blob" });
             const fileName = `${state.title.replace(/[^a-z0-9]/gi, '_').toLowerCase() || 'song_collection'}.zip`;
             saveAs(content, fileName);
@@ -181,7 +199,7 @@ ${state.lyrics || 'No lyrics generated.'}
         }
     };
 
-    const isCollectionReady = !!state.title && !!state.lyrics && !!state.coverImageUrl && state.instruments.length > 0;
+    const isCollectionReady = !!state.title && !!state.lyrics && state.coverImageUrls.length > 0 && state.selectedCoverImageIndex !== null && state.instruments.length > 0;
     const showDownloadButton = currentPage === 'collection' && isCollectionReady;
     const showReportButton = currentPage === 'collection' && isCollectionReady;
 
@@ -194,6 +212,7 @@ ${state.lyrics || 'No lyrics generated.'}
                 onManualClick={() => setActiveModal('manual')}
                 onMusicStylesClick={() => setActiveModal('musicStyles')}
                 onReportClick={() => setActiveModal('report')}
+                onSettingsClick={() => setActiveModal('settings')}
                 onResetClick={handleReset}
                 showDownloadButton={showDownloadButton}
                 onDownloadClick={handleDownload}
@@ -206,18 +225,26 @@ ${state.lyrics || 'No lyrics generated.'}
                 <LeftSidebar currentPage={currentPage} setCurrentPage={setCurrentPage} />
                 
                 <main className="flex-grow w-[50vw] relative bg-[var(--bg-inset)] flex flex-col overflow-hidden">
-                    <div className="flex-grow overflow-y-auto">
-                        <div className="relative h-full">
-                             <div className={`p-8 h-full`}>
-                                {renderCurrentPage()}
+                   {!apiKey && !isStyleDataLoading ? (
+                        <div className="h-full flex items-center justify-center p-8">
+                            <ApiKeyOverlay />
+                        </div>
+                    ) : (
+                        <>
+                            <div className="flex-grow overflow-y-auto">
+                                <div className="relative h-full">
+                                    <div className={`p-8 h-full`}>
+                                        {renderCurrentPage()}
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                     {isLoading && (
-                        <div className="absolute inset-0 bg-[var(--bg-primary)]/60 backdrop-blur-sm z-20 flex items-center justify-center p-8">
-                            <LoadingOverlay />
-                        </div>
-                    )}
+                            {isLoading && (
+                                <div className="absolute inset-0 bg-[var(--bg-primary)]/60 backdrop-blur-sm z-20 flex items-center justify-center p-8">
+                                    <LoadingOverlay />
+                                </div>
+                            )}
+                        </>
+                   )}
                 </main>
 
                 <RightSidebar />
@@ -231,6 +258,7 @@ ${state.lyrics || 'No lyrics generated.'}
             <ManualDialog isOpen={activeModal === 'manual'} onClose={() => setActiveModal(null)} />
             <MusicStylesDialog isOpen={activeModal === 'musicStyles'} onClose={() => setActiveModal(null)} />
             <ReportDialog isOpen={activeModal === 'report'} onClose={() => setActiveModal(null)} />
+            <SettingsDialog isOpen={activeModal === 'settings'} onClose={() => setActiveModal(null)} />
         </div>
     );
 };

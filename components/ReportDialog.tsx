@@ -20,6 +20,10 @@ const generateReportMarkdown = (state: GenerationState, styleData: Record<string
         const instrument = styleInfo?.instruments.find(i => i.name === instName);
         return `- **${instName}:** ${instrument?.description || 'No description available.'}`;
     }).join('\n');
+    
+    const coverImagesMarkdown = state.coverImageUrls.map((_, index) => 
+        `![Cover Art ${index + 1}](cover-${index + 1}.png)`
+    ).join('\n\n');
 
     return `
 # ${state.title}
@@ -43,11 +47,11 @@ ${state.lyrics || 'No lyrics generated.'}
 
 ## Cover Art
 
-![Cover Art for ${state.title}](cover.png)
+${coverImagesMarkdown}
     `.trim().replace(/^\s+/gm, '');
 };
 
-const markdownToHtml = (text: string, imageUrl: string): string => {
+const markdownToHtml = (text: string, imageUrls: string[]): string => {
     let html = text
         .replace(/^# (.*$)/gim, '<h1>$1</h1>')
         .replace(/^## (.*$)/gim, '<h2>$1</h2>')
@@ -55,10 +59,17 @@ const markdownToHtml = (text: string, imageUrl: string): string => {
         .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
         .replace(/\*(.*?)\*/gim, '<em>$1</em>')
         .replace(/^---$/gim, '<hr class="my-8 border-[var(--border-primary)]" />')
-        .replace(/!\[(.*?)\]\((.*?)\)/gim, `<img src="${imageUrl}" alt="$1" style="max-width: 100%; max-height: 60vh; height: auto; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 1rem auto; display: block;" />`)
         .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
         .replace(/```([\s\S]*?)```/g, (match, content) => `<pre class="bg-[var(--bg-inset)] p-4 rounded-md whitespace-pre-wrap font-sans text-[var(--text-secondary)] overflow-x-auto">${content.trim()}</pre>`);
 
+    html = html.replace(/!\[(.*?)\]\(cover-(\d+)\.png\)/gim, (match, alt, indexStr) => {
+        const index = parseInt(indexStr, 10) - 1;
+        const imageUrl = imageUrls[index];
+        if (imageUrl) {
+             return `<img src="${imageUrl}" alt="${alt}" style="max-width: 100%; max-height: 60vh; height: auto; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 1rem auto; display: block;" />`;
+        }
+        return '';
+    });
 
     // Handle lists
     html = html.replace(/^\s*[-*] (.*)/gm, '<li>$1</li>');
@@ -85,7 +96,7 @@ export const ReportDialog: React.FC<ReportDialogProps> = ({ isOpen, onClose }) =
     useEffect(() => {
         if (isOpen && state.title && styleData) {
             const markdown = generateReportMarkdown(state, styleData);
-            const html = markdownToHtml(markdown, state.coverImageUrl);
+            const html = markdownToHtml(markdown, state.coverImageUrls);
             setHtmlContent(html);
         }
     }, [isOpen, state, styleData]);

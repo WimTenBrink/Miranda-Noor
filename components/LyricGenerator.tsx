@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { generateTitleAndLyrics } from '../services/geminiService';
 import { useLog } from '../hooks/useLog';
 import { LogLevel } from '../types';
+import { useSettings } from '../context/SettingsContext';
 
 export const LyricGenerator: React.FC = () => {
     const [prompt, setPrompt] = useState('');
@@ -9,11 +10,16 @@ export const LyricGenerator: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const log = useLog();
+    const { apiKey } = useSettings();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!prompt) {
             setError('Please enter a theme or topic for your lyrics.');
+            return;
+        }
+        if (!apiKey) {
+            setError('Please set your API key in settings.');
             return;
         }
 
@@ -22,7 +28,7 @@ export const LyricGenerator: React.FC = () => {
         setIsLoading(true);
 
         try {
-            const result = await generateTitleAndLyrics({
+            const result = await generateTitleAndLyrics(apiKey, {
                 topic: prompt,
                 style: 'Pop',
                 instruments: ['Synthesizer', 'Drum Machine']

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Modal } from './Modal';
 import { useGenerationContext } from '../context/GenerationContext';
+import { useSettings } from '../context/SettingsContext';
 import { StyleGroup, MusicStyleDefinition, Instrument } from '../types';
 import { useLog } from '../hooks/useLog';
 import { LogLevel } from '../types';
@@ -24,6 +25,7 @@ const ChevronRightIcon: React.FC<{ className?: string }> = ({ className }) => (
 
 export const MusicStylesDialog: React.FC<MusicStylesDialogProps> = ({ isOpen, onClose }) => {
     const { styleGroups, isStyleDataLoading } = useGenerationContext();
+    const { apiKey } = useSettings();
     const log = useLog();
 
     const [expandedGroup, setExpandedGroup] = useState<string | null>(null);
@@ -48,6 +50,11 @@ export const MusicStylesDialog: React.FC<MusicStylesDialogProps> = ({ isOpen, on
     };
 
     const handleGenerateImage = async (instrument: Instrument) => {
+        if (!apiKey) {
+            setError("Please set your API Key in the settings before generating content.");
+            return;
+        }
+
         setIsGenerating(true);
         setGeneratedImageUrl(null);
         setError(null);
@@ -55,7 +62,7 @@ export const MusicStylesDialog: React.FC<MusicStylesDialogProps> = ({ isOpen, on
         const prompt = `Photorealistic studio photograph of a single ${instrument.name}. Description: ${instrument.description}. The instrument is the sole focus, presented against a clean, neutral background to highlight its features. Use cinematic lighting to emphasize details like wood grain, metal texture, or strings. Image should be sharp focus, high-detail, 8k.`;
         
         try {
-            const imageUrl = await generateImage(prompt, log);
+            const imageUrl = await generateImage(apiKey, prompt, log);
             setGeneratedImageUrl(imageUrl);
         } catch (err: any) {
             setError(err.message || "An error occurred during image generation.");
@@ -137,7 +144,7 @@ export const MusicStylesDialog: React.FC<MusicStylesDialogProps> = ({ isOpen, on
                                     <h2 className="text-2xl font-bold text-[var(--accent-secondary)]">{selectedItem.data.name}</h2>
                                     <p className="text-[var(--text-secondary)]">{selectedItem.data.description}</p>
                                      <div className="pt-4 border-t border-[var(--border-primary)]">
-                                        <button onClick={() => handleGenerateImage(selectedItem.data)} disabled={isGenerating} className="px-4 py-2 bg-[var(--accent-primary)] text-white font-semibold rounded-md hover:bg-[var(--accent-hover)] disabled:bg-slate-500 disabled:cursor-not-allowed transition-colors">
+                                        <button onClick={() => handleGenerateImage(selectedItem.data)} disabled={isGenerating || !apiKey} className="px-4 py-2 bg-[var(--accent-primary)] text-white font-semibold rounded-md hover:bg-[var(--accent-hover)] disabled:bg-slate-500 disabled:cursor-not-allowed transition-colors">
                                             {isGenerating ? 'Generating Image...' : 'Generate Image'}
                                         </button>
                                      </div>

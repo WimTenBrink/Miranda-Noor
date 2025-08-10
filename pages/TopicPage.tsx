@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Page } from '../types';
 import { useGenerationContext } from '../context/GenerationContext';
+import { useSettings } from '../context/SettingsContext';
 import { useLog } from '../hooks/useLog';
 import { expandTopic, suggestStyle } from '../services/geminiService';
 import { LogLevel } from '../types';
@@ -12,10 +13,15 @@ interface TopicPageProps {
 
 export const TopicPage: React.FC<TopicPageProps> = ({ setPage }) => {
     const { state, setTopic, setExpandedTopic, isLoading, setIsLoading, setStyle, styleData } = useGenerationContext();
+    const { apiKey } = useSettings();
     const log = useLog();
     const [error, setError] = useState('');
 
     const handleExpand = async () => {
+        if (!apiKey) {
+            setError('Please set your API Key in the settings before generating content.');
+            return;
+        }
         if (!state.topic) {
             setError('Please enter a topic before expanding.');
             return;
@@ -24,7 +30,7 @@ export const TopicPage: React.FC<TopicPageProps> = ({ setPage }) => {
         setIsLoading(true, 'Expanding with AI...');
         setError('');
         try {
-            const expanded = await expandTopic(state.topic, log);
+            const expanded = await expandTopic(apiKey, state.topic, log);
             setExpandedTopic(expanded);
         } catch (err: any) {
             const errorMessage = err.message || 'An unknown error occurred.';
@@ -40,15 +46,26 @@ export const TopicPage: React.FC<TopicPageProps> = ({ setPage }) => {
             setPage('style');
             return;
         }
+        
+        if (!apiKey) {
+            setPage('style'); // Allow navigation, but style won't be suggested
+            return;
+        }
 
         setIsLoading(true, 'Analyzing topic for style...');
         
         const allStyles = Object.keys(styleData);
         if (allStyles.length > 0) {
-            const suggested = await suggestStyle(state.expandedTopic || state.topic, allStyles, log);
-            if (suggested) {
-                setStyle(suggested);
-                log({ level: LogLevel.INFO, source: 'App', header: 'AI suggested style', details: { style: suggested } });
+            try {
+                const suggested = await suggestStyle(apiKey, state.expandedTopic || state.topic, allStyles, log);
+                if (suggested) {
+                    setStyle(suggested);
+                    log({ level: LogLevel.INFO, source: 'App', header: 'AI suggested style', details: { style: suggested } });
+                }
+            } catch (err: any) {
+                 const errorMessage = err.message || 'An unknown error occurred.';
+                 log({ level: LogLevel.ERROR, source: 'App', header: 'Style suggestion failed', details: { error: errorMessage } });
+                 // Non-fatal, just log and continue
             }
         }
         
@@ -78,7 +95,7 @@ export const TopicPage: React.FC<TopicPageProps> = ({ setPage }) => {
                     </div>
                     <button
                         onClick={handleExpand}
-                        disabled={isLoading || !state.topic}
+                        disabled={isLoading || !state.topic || !apiKey}
                         className="px-4 py-2 bg-[var(--accent-primary)]/80 text-[var(--accent-subtle-text)] font-semibold rounded-md hover:bg-[var(--accent-primary)] disabled:bg-[var(--bg-tertiary)] disabled:text-[var(--text-muted)] disabled:cursor-not-allowed transition-colors"
                     >
                         {isLoading ? 'Expanding with AI...' : 'Expand Topic'}
