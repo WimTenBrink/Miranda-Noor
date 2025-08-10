@@ -53,21 +53,10 @@ Follow these instructions to set up and run the project on your local machine fo
     ```
     *(Replace `your-username/miranda-noor-app.git` with the actual repository URL)*
 
-<<<<<<< HEAD
-2.  **Run the application:**
-=======
 2.  **API Key Configuration:**
     This application requires a Google AI API key to function. The code expects the user to provide one, so the owner of the website does not need to spend his own budget.
 
     This API key can be set in the settings button with the gears symbol. The browser will store the key in local storage and never sends it to the server.
-
-4.  **Run the application:**
->>>>>>> b63af7010fe1a048d062fb7e95c0a8f9a719bdea
-    Since this is a static web application, you can serve it with any simple HTTP server. We recommend using `serve`.
-    ```sh
-    npx serve
-    ```
-    The server will start and provide you with a local URL (e.g., `http://localhost:3000`). Open this URL in your web browser.
 
 3.  **API Key Configuration:**
     The application requires a Google AI API key to function. The key is **not** stored in the code. When you run the application, you must enter your key via the user interface.
@@ -77,6 +66,13 @@ Follow these instructions to set up and run the project on your local machine fo
     - Click "Save & Close".
 
     Your key will be saved in your browser's local storage for future sessions.
+
+4.  **Run the application:**
+    Since this is a static web application, you can serve it with any simple HTTP server. We recommend using `serve`.
+    ```sh
+    npx serve
+    ```
+    The server will start and provide you with a local URL (e.g., `http://localhost:3000`). Open this URL in your web browser.
 
 ## Project Structure
 
