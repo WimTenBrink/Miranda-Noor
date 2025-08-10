@@ -12,26 +12,21 @@ This application ("the Service") allows users to:
 
 The Service acts as an interface to Google's AI services. It does not store your generated content on our servers.
 
-## 2. API Key Requirement
+## 2. Data Usage and Privacy
 
-**Crucially, this application DOES NOT provide a Google AI API Key.** To use the Service, you must obtain your own API key from Google AI Studio and enter it into the application's Settings.
-
-- **Your Responsibility:** You are solely responsible for all activity that occurs under your API key. This includes usage costs, rate limits, and compliance with Google's own terms of service.
-- **Security:** Your API key is stored only in your browser's local storage. It is never sent to our servers. However, you should treat your API key as a sensitive password and not share it. We are not liable for any unauthorized use of your API key.
-
-## 3. Data Usage and Privacy
+To function, this application requires a pre-configured Google AI API key provided through the environment it runs in.
 
 - **Input Prompts:** The text and parameters you enter to generate lyrics and images are sent directly to the Google AI API.
 - **Generated Content:** The lyrics and images generated are returned from the Google AI API directly to your browser.
 - **Logging:** The application features a client-side console that logs your requests and Google's responses. This data stays within your browser. You have the option to save these logs to your local machine. No logs are automatically transmitted or stored by us.
-- **No Server-Side Storage:** We do not host, store, or view your prompts, your generated content, or your API key.
+- **No Server-Side Storage:** We do not host, store, or view your prompts, your generated content, or any API key information.
 
-## 4. Disclaimers
+## 3. Disclaimers
 
 - The Service is provided "as is" without any warranties.
 - The output from the AI models is generated algorithmically and may not be unique, accurate, or free from biases. You are responsible for reviewing and editing the content to suit your needs.
 - We are not responsible for the content you generate or how you choose to use it. You must ensure your use of the generated content complies with all applicable laws and does not infringe on any third-party rights.
 
-## 5. Contact
+## 4. Contact
 
 For any questions about these terms, please contact us at contact@mirandanoor.com.

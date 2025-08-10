@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Page } from '../types';
 import { useGenerationContext } from '../context/GenerationContext';
-import { useSettings } from '../context/SettingsContext';
 import { useLog } from '../hooks/useLog';
 import { generateTitleAndLyrics } from '../services/geminiService';
 import { LogLevel } from '../types';
@@ -44,14 +43,13 @@ const playSound = () => {
 
 export const LyricsPage: React.FC<LyricsPageProps> = ({ setPage }) => {
     const { state, setTitle, setLyrics, isLoading, setIsLoading } = useGenerationContext();
-    const { apiKey } = useSettings();
     const log = useLog();
     const [error, setError] = useState('');
     const [titleCopied, setTitleCopied] = useState(false);
     const [lyricsCopied, setLyricsCopied] = useState(false);
 
     const performGeneration = async (mode: 'all' | 'title' | 'lyrics') => {
-        if (!state.style || !apiKey) return;
+        if (!state.style) return;
         
         const message = {
             all: 'Crafting title and lyrics...',
@@ -62,7 +60,7 @@ export const LyricsPage: React.FC<LyricsPageProps> = ({ setPage }) => {
         setIsLoading(true, message);
         setError('');
         try {
-            const { title, lyrics } = await generateTitleAndLyrics(apiKey, {
+            const { title, lyrics } = await generateTitleAndLyrics({
                 topic: state.expandedTopic || state.topic,
                 style: state.style,
                 instruments: state.instruments
@@ -86,10 +84,10 @@ export const LyricsPage: React.FC<LyricsPageProps> = ({ setPage }) => {
     
     useEffect(() => {
         // Generate lyrics automatically if they don't exist when the page is visited
-        if (!state.lyrics && !isLoading && state.style && apiKey) {
+        if (!state.lyrics && !isLoading && state.style) {
             performGeneration('all');
         }
-    }, [state.lyrics, isLoading, state.style, apiKey]);
+    }, [state.lyrics, isLoading, state.style]);
 
     const copyToClipboard = (text: string, setter: React.Dispatch<React.SetStateAction<boolean>>) => {
         navigator.clipboard.writeText(text);

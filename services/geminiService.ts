@@ -3,15 +3,13 @@ import { LogEntry, LogLevel, MusicStyle } from '../types';
 
 type LogFn = (entry: Omit<LogEntry, 'timestamp'>) => void;
 
-const getAi = (apiKey: string) => {
-    if (!apiKey) {
-        throw new Error("API Key is not set. Please set it in the Settings.");
-    }
-    return new GoogleGenAI({ apiKey });
+const getAi = () => {
+    // API Key is now expected to be in the environment variables
+    return new GoogleGenAI({ apiKey: process.env.API_KEY });
 };
 
-export const expandTopic = async (apiKey: string, topic: string, log: LogFn): Promise<string> => {
-    const ai = getAi(apiKey);
+export const expandTopic = async (topic: string, log: LogFn): Promise<string> => {
+    const ai = getAi();
     const prompt = `You are a creative muse. Expand the following user-provided topic or keywords into a rich, descriptive paragraph of about 300-500 words. This will be used as the basis for a song. Focus on imagery, emotion, and potential narrative arcs. Do not write lyrics, just the underlying story and mood. User topic: "${topic}"`;
     
     const requestPayload = {
@@ -31,8 +29,8 @@ export const expandTopic = async (apiKey: string, topic: string, log: LogFn): Pr
     }
 };
 
-export const generateTitleAndLyrics = async (apiKey: string, { topic, style, instruments }: { topic: string, style: MusicStyle, instruments: string[] }, log: LogFn): Promise<{ title: string, lyrics: string }> => {
-    const ai = getAi(apiKey);
+export const generateTitleAndLyrics = async ({ topic, style, instruments }: { topic: string, style: MusicStyle, instruments: string[] }, log: LogFn): Promise<{ title: string, lyrics: string }> => {
+    const ai = getAi();
     const prompt = `You are an expert songwriter creating lyrics for a song to be performed by a female duet (Miranda Noor and Annelies Brink).
     The song is in the style of: ${style}.
     It should feature the following instruments: ${instruments.join(', ')}.
@@ -140,8 +138,8 @@ export const generateTitleAndLyrics = async (apiKey: string, { topic, style, ins
     }
 };
 
-export const generateImagePrompt = async (apiKey: string, { topic, style }: { topic: string, style: MusicStyle | null }, log: LogFn): Promise<string> => {
-    const ai = getAi(apiKey);
+export const generateImagePrompt = async ({ topic, style }: { topic: string, style: MusicStyle | null }, log: LogFn): Promise<string> => {
+    const ai = getAi();
     const prompt = `You are an expert prompt engineer for text-to-image models like Imagen.
 Your task is to create a detailed, high-quality image prompt for a song's cover art.
 The song's theme is: "${topic || "Two female musicians creating music together"}".
@@ -175,8 +173,8 @@ Output only the final prompt as a single line of text. Do not include any other 
     }
 };
 
-export const suggestStyle = async (apiKey: string, topic: string, allStyles: string[], log: LogFn): Promise<MusicStyle | null> => {
-    const ai = getAi(apiKey);
+export const suggestStyle = async (topic: string, allStyles: string[], log: LogFn): Promise<MusicStyle | null> => {
+    const ai = getAi();
     const prompt = `From the following list of music styles, which one best fits the song topic provided below?
 Your answer must be ONLY the style name, exactly as it appears in the list. Do not add any other words, punctuation, or explanations.
 

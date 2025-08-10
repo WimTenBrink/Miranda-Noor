@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Page } from '../types';
 import { useGenerationContext } from '../context/GenerationContext';
-import { useSettings } from '../context/SettingsContext';
 import { useLog } from '../hooks/useLog';
 import { generateImagePrompt } from '../services/geminiService';
 import { generateImage } from '../services/imagenService';
@@ -13,18 +12,16 @@ interface CoverImagePageProps {
 
 export const CoverImagePage: React.FC<CoverImagePageProps> = ({ setPage }) => {
     const { state, setCoverImagePrompt, setCoverImageUrl, isLoading, setIsLoading, setThinkingMessage } = useGenerationContext();
-    const { apiKey } = useSettings();
     const log = useLog();
     const [error, setError] = useState('');
 
     const handleGenerate = async () => {
-        if (!apiKey) return;
         setIsLoading(true, 'Starting cover art generation...');
         setError('');
         try {
             // Step 1: Generate a good prompt for Imagen
             setThinkingMessage('Generating image prompt...');
-            const imagePrompt = await generateImagePrompt(apiKey, {
+            const imagePrompt = await generateImagePrompt({
                 topic: state.expandedTopic || state.topic,
                 style: state.style
             }, log);
@@ -32,7 +29,7 @@ export const CoverImagePage: React.FC<CoverImagePageProps> = ({ setPage }) => {
 
             // Step 2: Use that prompt to generate the image
             setThinkingMessage('Creating image with Imagen...');
-            const imageUrl = await generateImage(apiKey, imagePrompt, log);
+            const imageUrl = await generateImage(imagePrompt, log);
             setCoverImageUrl(imageUrl);
 
         } catch (err: any) {
@@ -45,10 +42,10 @@ export const CoverImagePage: React.FC<CoverImagePageProps> = ({ setPage }) => {
 
     useEffect(() => {
         // Auto-generate if no image exists
-        if (!state.coverImageUrl && apiKey && !isLoading) {
+        if (!state.coverImageUrl && !isLoading) {
             handleGenerate();
         }
-    }, [state.coverImageUrl, apiKey, isLoading]);
+    }, [state.coverImageUrl, isLoading]);
     
     const getFilename = () => {
         return `${(state.title || 'song-cover').replace(/[^a-z0-9]/gi, '_').toLowerCase()}.png`;

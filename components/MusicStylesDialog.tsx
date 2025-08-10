@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Modal } from './Modal';
 import { useGenerationContext } from '../context/GenerationContext';
 import { StyleGroup, MusicStyleDefinition, Instrument } from '../types';
-import { useSettings } from '../context/SettingsContext';
 import { useLog } from '../hooks/useLog';
 import { LogLevel } from '../types';
 import { generateImage } from '../services/imagenService';
@@ -25,7 +24,6 @@ const ChevronRightIcon: React.FC<{ className?: string }> = ({ className }) => (
 
 export const MusicStylesDialog: React.FC<MusicStylesDialogProps> = ({ isOpen, onClose }) => {
     const { styleGroups, isStyleDataLoading } = useGenerationContext();
-    const { apiKey } = useSettings();
     const log = useLog();
 
     const [expandedGroup, setExpandedGroup] = useState<string | null>(null);
@@ -50,12 +48,6 @@ export const MusicStylesDialog: React.FC<MusicStylesDialogProps> = ({ isOpen, on
     };
 
     const handleGenerateImage = async (instrument: Instrument) => {
-        if (!apiKey) {
-            setError("API Key is missing. Please set it in Settings.");
-            log({ level: LogLevel.WARN, source: 'App', header: 'Instrument image generation attempt without API Key', details: {} });
-            return;
-        }
-
         setIsGenerating(true);
         setGeneratedImageUrl(null);
         setError(null);
@@ -63,7 +55,7 @@ export const MusicStylesDialog: React.FC<MusicStylesDialogProps> = ({ isOpen, on
         const prompt = `Photorealistic studio photograph of a single ${instrument.name}. Description: ${instrument.description}. The instrument is the sole focus, presented against a clean, neutral background to highlight its features. Use cinematic lighting to emphasize details like wood grain, metal texture, or strings. Image should be sharp focus, high-detail, 8k.`;
         
         try {
-            const imageUrl = await generateImage(apiKey, prompt, log);
+            const imageUrl = await generateImage(prompt, log);
             setGeneratedImageUrl(imageUrl);
         } catch (err: any) {
             setError(err.message || "An error occurred during image generation.");

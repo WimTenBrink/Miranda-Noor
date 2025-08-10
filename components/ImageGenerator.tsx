@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { generateImage } from '../services/imagenService';
-import { useSettings } from '../context/SettingsContext';
 import { useLog } from '../hooks/useLog';
 import { LogLevel } from '../types';
 
@@ -9,7 +8,6 @@ export const ImageGenerator: React.FC = () => {
     const [imageUrl, setImageUrl] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
-    const { apiKey } = useSettings();
     const log = useLog();
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -18,18 +16,13 @@ export const ImageGenerator: React.FC = () => {
             setError('Please enter a description for your cover art.');
             return;
         }
-        if (!apiKey) {
-            setError('API Key is missing. Please set it in Settings.');
-            log({ level: LogLevel.WARN, source: 'App', header: 'Image generation attempt without API Key', details: {} });
-            return;
-        }
 
         setError('');
         setImageUrl('');
         setIsLoading(true);
 
         try {
-            const result = await generateImage(apiKey, prompt, log);
+            const result = await generateImage(prompt, log);
             setImageUrl(result);
             log({ level: LogLevel.INFO, source: 'App', header: 'Image generated successfully', details: { prompt } });
         } catch (err: any) {

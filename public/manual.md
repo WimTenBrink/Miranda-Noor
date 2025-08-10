@@ -1,16 +1,8 @@
 # Miranda Noor Lyric & Art Generator - User Manual
 
-Welcome! This application is a creative partner designed to help you generate complete song concepts, from lyrical themes to final cover art, ready for use with music platforms like Suno.
+Welcome! This application is a creative partner designed to help you generate complete song concepts, from lyrical themes to final cover art, ready for use with music platforms like Suno. This app uses Google's AI models (Gemini and Imagen) to generate content.
 
-## 1. The Most Important Thing: Your API Key
-
-This application is a user interface that connects directly to Google's AI models (Gemini and Imagen). It **does not** have its own server and **does not** collect any of your data. To use it, you must provide your own Google AI API Key.
-
-- **How to get a key:** You can obtain a free API key from [Google AI Studio](https://aistudio.google.com/app/apikey).
-- **How it's stored:** Your API key is saved **only** in your browser's local storage. It is never sent to our servers or seen by us. All communication happens directly between your browser and the Google AI services.
-- **Enabling the App:** The core features of the app will be disabled until you enter a valid API key in the **Settings** panel (the gear icon in the header).
-
-## 2. The Creative Workflow
+## The Creative Workflow
 
 The application is designed as a step-by-step process. You can navigate through the pages using the "Creative Steps" menu on the left. A step is marked as complete when you've generated content for it.
 
@@ -44,14 +36,14 @@ Create the visual identity for your song.
 ### Step 6: Collection
 Your completed song package.
 - **What to do:** This page provides a summary of all your generated assets: Title, Style & Instruments, Lyrics, and Cover Art.
-- **Download All:** Use the "Download All" button in the header to save a ZIP file containing your title, lyrics, instrument list, and the full-resolution cover image.
+- **Download All & View Report:** When your collection is ready, buttons will appear in the header to "Download All" assets or "View Report".
 
-## 3. Header Buttons
+## Header Buttons & Features
 
 - **Theme (Sun/Moon):** Switch between light and dark mode.
 - **Reset (Trash Can):** Starts a completely new session. This will clear all your current progress.
-- **Settings (Gear):** Enter and save your Google AI API Key.
 - **Console (Terminal):** View a detailed log of all API requests and responses. Useful for debugging.
-- **Manual (Book):** Opens this manual.
+- **Music Styles Explorer (Music Note):** A dialog to browse all available music styles and their instruments. You can even generate images of the instruments here.
+- **Manual (Book):** Opens this guide.
 - **Terms of Service (Document):** View the application's ToS.
 - **About (Info):** Learn more about the creators, Miranda Noor and Annelies Brink.

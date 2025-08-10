@@ -1,6 +1,7 @@
+
+
 import React from 'react';
 import { LogoIcon } from './icons/LogoIcon';
-import { SettingsIcon } from './icons/SettingsIcon';
 import { ConsoleIcon } from './icons/ConsoleIcon';
 import { TosIcon } from './icons/TosIcon';
 import { AboutIcon } from './icons/AboutIcon';
@@ -9,9 +10,9 @@ import { ManualIcon } from './icons/ManualIcon';
 import { SunIcon } from './icons/SunIcon';
 import { MoonIcon } from './icons/MoonIcon';
 import { MusicIcon } from './icons/MusicIcon';
+import { ReportIcon } from './icons/ReportIcon';
 
 interface HeaderProps {
-  onSettingsClick: () => void;
   onConsoleClick: () => void;
   onTosClick: () => void;
   onAboutClick: () => void;
@@ -20,12 +21,13 @@ interface HeaderProps {
   onResetClick: () => void;
   showDownloadButton: boolean;
   onDownloadClick: () => void;
+  showReportButton: boolean;
+  onReportClick: () => void;
   theme: 'light' | 'dark';
   onThemeToggle: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({ 
-    onSettingsClick, 
     onConsoleClick, 
     onTosClick, 
     onAboutClick,
@@ -34,6 +36,8 @@ export const Header: React.FC<HeaderProps> = ({
     onResetClick, 
     showDownloadButton, 
     onDownloadClick,
+    showReportButton,
+    onReportClick,
     theme,
     onThemeToggle
 }) => {
@@ -45,6 +49,12 @@ export const Header: React.FC<HeaderProps> = ({
           <span className="text-xl font-bold text-[var(--text-primary)] tracking-wider">Miranda Noor</span>
         </div>
         <nav className="flex items-center gap-2">
+           {showReportButton && (
+             <button onClick={onReportClick} className="px-3 py-1.5 text-sm rounded-md bg-[var(--accent-secondary)] text-white hover:opacity-90 transition-opacity font-semibold flex items-center gap-2" title="View Collection Report">
+                <ReportIcon className="h-4 w-4" />
+                View Report
+             </button>
+           )}
            {showDownloadButton && (
              <button onClick={onDownloadClick} className="px-3 py-1.5 text-sm rounded-md bg-[var(--color-green)] text-white hover:opacity-90 transition-opacity font-semibold flex items-center gap-2" title="Download Collection as ZIP">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
@@ -61,9 +71,6 @@ export const Header: React.FC<HeaderProps> = ({
           
           <div className="w-px h-6 bg-[var(--border-primary)] mx-2"></div>
 
-          <button onClick={onSettingsClick} className="p-2 rounded-full hover:bg-[var(--bg-tertiary)] transition-colors" title="Settings">
-            <SettingsIcon className="w-5 h-5 text-[var(--text-muted)]" />
-          </button>
           <button onClick={onConsoleClick} className="p-2 rounded-full hover:bg-[var(--bg-tertiary)] transition-colors" title="Console">
             <ConsoleIcon className="w-5 h-5 text-[var(--text-muted)]" />
           </button>

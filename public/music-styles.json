@@ -292,6 +292,34 @@
         }
     },
     {
+        "name": "Avant-Garde & Industrial",
+        "description": "Genres that push the boundaries of conventional music. These styles are often characterized by their unconventional structures, avant-garde concepts, and provocative themes.",
+        "styles": {
+            "Dungeon Synth": {
+                "description": "A genre of electronic music that emerged in the 1990s, characterized by its fantasy themes, lo-fi production, and inspiration from black metal and video game music.",
+                "instruments": [
+                    { "name": "Lo-fi Synthesizer", "description": "Basic, often cheap-sounding keyboard patches are key.", "default": true },
+                    { "name": "Synth Flute/Oboe", "description": "Carries simple, medieval-sounding melodies.", "default": true },
+                    { "name": "Synth Strings", "description": "Creates a dark, epic, and atmospheric backdrop.", "default": true },
+                    { "name": "Minimalist Percussion", "description": "Often just a simple, synthesized timpani hit for emphasis." },
+                    { "name": "No Vocals", "description": "The genre is almost exclusively instrumental.", "default": false }
+                ]
+            },
+            "Industrial": {
+                "description": "An aggressive and transgressive style of music. Combines electronic noise, synthesizers, and distorted vocals with provocative themes.",
+                "instruments": [
+                    { "name": "Female Vocals (Distorted/Shouted)", "description": "Vocals are often processed and used as another texture.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Metallic Percussion", "description": "The sound of metal being struck, machine noises, and found sounds.", "default": true },
+                    { "name": "Harsh Synthesizers", "description": "Abrasive, noisy, and dissonant synth textures.", "default": true },
+                    { "name": "Tape Loops", "description": "Repeating loops of recorded sound, often distorted.", "default": true },
+                    { "name": "Distorted Drum Machine", "description": "Aggressive, heavy, and mechanical beats." }
+                ]
+            }
+        }
+    },
+    {
         "name": "Children's Music",
         "description": "Songs created specifically for children and young people. This music is characterized by simple melodies, clear vocals, playful instrumentation, and often educational or narrative themes.",
         "styles": {
@@ -405,6 +433,42 @@
                     { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
                     { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
                     { "name": "Ethnic Instruments", "description": "Instruments like the shakuhachi or duduk to establish a specific setting." }
+                ]
+            }
+        }
+    },
+    {
+        "name": "Drums & Percussion",
+        "description": "A collection of styles focused purely on the power and complexity of rhythm, featuring massive drums and percussive instruments from around the world.",
+        "styles": {
+            "Epic War Drums": {
+                "description": "A thunderous, cinematic rhythm section evoking scenes of ancient battles and epic marches. Heavy, resonant, and intimidating.",
+                "instruments": [
+                    { "name": "Taiko Drums", "description": "Large Japanese drums known for their deep, resonant sound and powerful performance style.", "default": true },
+                    { "name": "Davul", "description": "A large double-headed drum played with mallets, providing a deep bass sound.", "default": true },
+                    { "name": "War Horns", "description": "Large horns used to signal on the battlefield, adding a majestic and intimidating layer.", "default": true },
+                    { "name": "Group Chants", "description": "Aggressive, rhythmic shouts and chants from a group of warriors.", "default": true },
+                    { "name": "Metal Percussion", "description": "The sound of clanging metal, like swords hitting shields, for sharp accents." }
+                ]
+            },
+            "Gamelan Percussion": {
+                "description": "Focuses on the intricate, interlocking percussive elements of Indonesian Gamelan music, creating a shimmering, hypnotic soundscape.",
+                "instruments": [
+                    { "name": "Gong Ageng", "description": "The largest, most resonant gong, used to mark major sections of the music.", "default": true },
+                    { "name": "Kendhang", "description": "A two-headed drum that acts as the conductor of the ensemble.", "default": true },
+                    { "name": "Bonang", "description": "A collection of small, kettle-like gongs laid out in a row, playing elaborating melodies.", "default": true },
+                    { "name": "Saron", "description": "A metallophone instrument with thick bronze bars, playing the core melody.", "default": true },
+                    { "name": "Kenong", "description": "A set of large kettle gongs that punctuate the structure.", "default": true }
+                ]
+            },
+            "Korean Drum Ensemble": {
+                "description": "A dynamic and complex percussion piece from Korea, traditionally featuring four instruments played in a seated position. It is known for its intricate rhythms and driving energy.",
+                "instruments": [
+                    { "name": "Buk", "description": "A barrel drum providing a deep, foundational beat.", "default": true },
+                    { "name": "Janggu", "description": "An hourglass-shaped drum that plays the basic rhythmic patterns.", "default": true },
+                    { "name": "Jing", "description": "A large gong that is struck to mark rhythmic cycles.", "default": true },
+                    { "name": "Kkwaenggwari", "description": "A small, hand-held gong played with a mallet, leading the ensemble with intricate, high-pitched patterns.", "default": true },
+                    { "name": "CheonGo Drum", "description": "The 'Heaven drum', a massive Korean drum with a thunderous sound used for dramatic effect.", "default": false }
                 ]
             }
         }
@@ -613,29 +677,34 @@
         }
     },
     {
-        "name": "Experimental & Niche",
-        "description": "Genres that push the boundaries of conventional music. These styles are often characterized by their unconventional structures, avant-garde concepts, and dedicated cult followings.",
+        "name": "Experimental & Esoteric Instruments",
+        "description": "Explore the stranger side of music with styles built around rare, ancient, or unconventional instruments.",
         "styles": {
-            "Dungeon Synth": {
-                "description": "A genre of electronic music that emerged in the 1990s, characterized by its fantasy themes, lo-fi production, and inspiration from black metal and video game music.",
+            "Crwth Drone Folk": {
+                "description": "A hypnotic and ancient-sounding piece based on the Welsh Crwth, a bowed lyre. The music is built on a continuous drone with a simple, melancholic melody played over it.",
                 "instruments": [
-                    { "name": "Lo-fi Synthesizer", "description": "Basic, often cheap-sounding keyboard patches are key.", "default": true },
-                    { "name": "Synth Flute/Oboe", "description": "Carries simple, medieval-sounding melodies.", "default": true },
-                    { "name": "Synth Strings", "description": "Creates a dark, epic, and atmospheric backdrop.", "default": true },
-                    { "name": "Minimalist Percussion", "description": "Often just a simple, synthesized timpani hit for emphasis." },
-                    { "name": "No Vocals", "description": "The genre is almost exclusively instrumental.", "default": false }
+                    { "name": "Crwth", "description": "A bowed lyre from Wales, with melody and drone strings, creating a raw, ancient sound.", "default": true },
+                    { "name": "Bodhrán", "description": "A simple, hypnotic beat on the Irish frame drum.", "default": true },
+                    { "name": "Female Vocals (Welsh/Old English)", "description": "Chanted or sung vocals with a storytelling, bardic quality.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true }
                 ]
             },
-            "Industrial": {
-                "description": "An aggressive and transgressive style of music. Combines electronic noise, synthesizers, and distorted vocals with provocative themes.",
+            "Glass Harmonica Ambience": {
+                "description": "A delicate, crystalline, and slightly unsettling ambient piece created with the Glass Harmonica. The sound is pure, celestial, and haunting.",
                 "instruments": [
-                    { "name": "Female Vocals (Distorted/Shouted)", "description": "Vocals are often processed and used as another texture.", "default": true },
-                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
-                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
-                    { "name": "Metallic Percussion", "description": "The sound of metal being struck, machine noises, and found sounds.", "default": true },
-                    { "name": "Harsh Synthesizers", "description": "Abrasive, noisy, and dissonant synth textures.", "default": true },
-                    { "name": "Tape Loops", "description": "Repeating loops of recorded sound, often distorted.", "default": true },
-                    { "name": "Distorted Drum Machine", "description": "Aggressive, heavy, and mechanical beats." }
+                    { "name": "Glass Harmonica", "description": "A series of glass bowls that rotate and are played with wet fingers, producing an ethereal, singing tone.", "default": true },
+                    { "name": "Sine Wave Drone", "description": "A pure, low-frequency electronic tone providing a subtle bed for the harmony.", "default": true },
+                    { "name": "Soft String Swells", "description": "Very gentle, slow-moving string chords in the background.", "default": true }
+                ]
+            },
+            "Theremin Sci-Fi": {
+                "description": "A spooky, otherworldly soundscape reminiscent of 1950s science fiction films, with the eerie, sliding notes of the Theremin as the centerpiece.",
+                "instruments": [
+                    { "name": "Theremin", "description": "An electronic instrument controlled without physical contact, producing an eerie, gliding sound.", "default": true },
+                    { "name": "Tape Loops", "description": "Degraded, looping sounds creating a distorted and unsettling atmosphere.", "default": true },
+                    { "name": "Echo and Reverb", "description": "Heavy use of space-creating effects is essential.", "default": true },
+                    { "name": "Ondes Martenot", "description": "An early electronic keyboard instrument with a similar eerie, gliding sound." }
                 ]
             }
         }
@@ -1003,6 +1072,39 @@
         }
     },
     {
+        "name": "String Instruments",
+        "description": "Music that celebrates the rich and emotive sounds of stringed instruments, from the soaring melodies of a violin to the resonant pluck of a harp.",
+        "styles": {
+            "Gypsy Jazz Ensemble": {
+                "description": "A style of jazz music often said to have been started by guitarist Jean 'Django' Reinhardt in the 1930s. Known for its virtuosic guitar playing and driving 'la pompe' rhythm.",
+                "instruments": [
+                    { "name": "Lead Acoustic Guitar (Manouche)", "description": "Plays dazzling, improvisational lead lines.", "default": true },
+                    { "name": "Rhythm Guitar (La Pompe)", "description": "Provides a percussive, swinging rhythm.", "default": true },
+                    { "name": "Violin", "description": "A key solo instrument, trading melodic ideas with the lead guitar.", "default": true },
+                    { "name": "Double Bass", "description": "Provides a solid, swinging bassline.", "default": true }
+                ]
+            },
+            "Harp Dreamscape": {
+                "description": "An ethereal and magical piece dominated by the gentle, flowing arpeggios of a concert harp. Creates a sense of peace and wonder.",
+                "instruments": [
+                    { "name": "Concert Harp", "description": "The central instrument, playing cascading arpeggios and gentle melodies.", "default": true },
+                    { "name": "Celesta", "description": "A keyboard instrument with a soft, bell-like tone that adds to the magical quality.", "default": true },
+                    { "name": "Ethereal Female Choir (oohs and aahs)", "description": "Wordless choir adding an angelic texture.", "default": true },
+                    { "name": "String Section (pads)", "description": "Soft, sustained string notes providing a gentle background.", "default": true }
+                ]
+            },
+            "String Quartet": {
+                "description": "A classical composition for four string players, a form perfected by composers like Haydn and Beethoven. Known for its intricate counterpoint and emotional depth.",
+                "instruments": [
+                    { "name": "Violin I", "description": "Plays the primary melody and highest part.", "default": true },
+                    { "name": "Violin II", "description": "Plays a secondary melody or harmony part.", "default": true },
+                    { "name": "Viola", "description": "The alto voice, filling in the harmony between the violins and cello.", "default": true },
+                    { "name": "Cello", "description": "The bass voice of the quartet, providing a rich foundation and often playing melodic lines.", "default": true }
+                ]
+            }
+        }
+    },
+    {
         "name": "Traditional & Historical",
         "description": "Foundational genres and art forms that have shaped music history. This includes early American music, classical traditions, and vocal-focused styles.",
         "styles": {
@@ -1064,6 +1166,40 @@
                     { "name": "Drums (with brushes)", "description": "Keeps the swinging, danceable rhythm.", "default": true },
                     { "name": "Piano", "description": "Provides rhythmic comping and solos." },
                     { "name": "Clarinet", "description": "A common lead solo instrument in the swing era." }
+                ]
+            }
+        }
+    },
+    {
+        "name": "Wind Instruments",
+        "description": "Styles highlighting the expressive power of wind instruments, from the gentle breath of a flute to the commanding call of a brass section.",
+        "styles": {
+            "Brass Fanfare": {
+                "description": "A powerful and majestic piece performed by a brass ensemble, perfect for royal announcements, ceremonies, or triumphant moments.",
+                "instruments": [
+                    { "name": "Trumpets", "description": "Play the high, brilliant melodic lines.", "default": true },
+                    { "name": "French Horns", "description": "Provide a rich, noble harmony in the middle register.", "default": true },
+                    { "name": "Trombones", "description": "Add a powerful, heroic quality to the lower-middle register.", "default": true },
+                    { "name": "Tuba", "description": "The bass foundation of the brass family, providing a deep, resonant sound.", "default": true },
+                    { "name": "Timpani", "description": "Adds percussive power and punctuation.", "default": true }
+                ]
+            },
+            "Pan Flute Meditation": {
+                "description": "A serene and calming piece centered around the ethereal sound of the pan flute, often accompanied by soft, atmospheric pads.",
+                "instruments": [
+                    { "name": "Pan Flute", "description": "The lead instrument, playing a gentle, breathy melody.", "default": true },
+                    { "name": "Ambient Synth Pads", "description": "Soft, evolving chords that create a peaceful atmosphere.", "default": true },
+                    { "name": "Chimes", "description": "Delicate wind chimes providing a light, sparkling texture.", "default": true },
+                    { "name": "Nature Sounds", "description": "Subtle sounds of a stream or gentle wind.", "default": false }
+                ]
+            },
+            "Woodwind Quartet": {
+                "description": "An intimate and intricate piece for a classical woodwind quartet, showcasing the unique timbres and interplay of the instruments.",
+                "instruments": [
+                    { "name": "Flute", "description": "The highest voice, playing light and agile melodies.", "default": true },
+                    { "name": "Oboe", "description": "A double-reed instrument with a distinctive, poignant tone.", "default": true },
+                    { "name": "Clarinet", "description": "Known for its wide range and smooth, liquid tone.", "default": true },
+                    { "name": "Bassoon", "description": "The lowest voice of the quartet, providing a warm and mellow bassline.", "default": true }
                 ]
             }
         }

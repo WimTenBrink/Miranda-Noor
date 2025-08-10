@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { generateTitleAndLyrics } from '../services/geminiService';
-import { useSettings } from '../context/SettingsContext';
 import { useLog } from '../hooks/useLog';
 import { LogLevel } from '../types';
 
@@ -9,7 +8,6 @@ export const LyricGenerator: React.FC = () => {
     const [lyrics, setLyrics] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
-    const { apiKey } = useSettings();
     const log = useLog();
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -18,18 +16,13 @@ export const LyricGenerator: React.FC = () => {
             setError('Please enter a theme or topic for your lyrics.');
             return;
         }
-        if (!apiKey) {
-            setError('API Key is missing. Please set it in Settings.');
-            log({ level: LogLevel.WARN, source: 'App', header: 'Lyric generation attempt without API Key', details: {} });
-            return;
-        }
 
         setError('');
         setLyrics('');
         setIsLoading(true);
 
         try {
-            const result = await generateTitleAndLyrics(apiKey, {
+            const result = await generateTitleAndLyrics({
                 topic: prompt,
                 style: 'Pop',
                 instruments: ['Synthesizer', 'Drum Machine']

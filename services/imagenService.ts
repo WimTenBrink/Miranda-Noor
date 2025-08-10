@@ -2,15 +2,10 @@ import { GoogleGenAI } from "@google/genai";
 import { LogEntry, LogLevel } from '../types';
 
 export const generateImage = async (
-    apiKey: string,
     prompt: string,
     log: (entry: Omit<LogEntry, 'timestamp'>) => void
 ): Promise<string> => {
-    if (!apiKey) {
-        throw new Error("API Key is not set. Please set it in the Settings.");
-    }
-
-    const ai = new GoogleGenAI({ apiKey });
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     
     const requestPayload = {
         model: 'imagen-3.0-generate-002',

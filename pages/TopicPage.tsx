@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Page } from '../types';
 import { useGenerationContext } from '../context/GenerationContext';
-import { useSettings } from '../context/SettingsContext';
 import { useLog } from '../hooks/useLog';
 import { expandTopic, suggestStyle } from '../services/geminiService';
 import { LogLevel } from '../types';
@@ -13,7 +12,6 @@ interface TopicPageProps {
 
 export const TopicPage: React.FC<TopicPageProps> = ({ setPage }) => {
     const { state, setTopic, setExpandedTopic, isLoading, setIsLoading, setStyle, styleData } = useGenerationContext();
-    const { apiKey } = useSettings();
     const log = useLog();
     const [error, setError] = useState('');
 
@@ -22,12 +20,11 @@ export const TopicPage: React.FC<TopicPageProps> = ({ setPage }) => {
             setError('Please enter a topic before expanding.');
             return;
         }
-        if (!apiKey) return;
 
         setIsLoading(true, 'Expanding with AI...');
         setError('');
         try {
-            const expanded = await expandTopic(apiKey, state.topic, log);
+            const expanded = await expandTopic(state.topic, log);
             setExpandedTopic(expanded);
         } catch (err: any) {
             const errorMessage = err.message || 'An unknown error occurred.';
@@ -46,14 +43,12 @@ export const TopicPage: React.FC<TopicPageProps> = ({ setPage }) => {
 
         setIsLoading(true, 'Analyzing topic for style...');
         
-        if (apiKey) {
-            const allStyles = Object.keys(styleData);
-            if (allStyles.length > 0) {
-                const suggested = await suggestStyle(apiKey, state.expandedTopic || state.topic, allStyles, log);
-                if (suggested) {
-                    setStyle(suggested);
-                    log({ level: LogLevel.INFO, source: 'App', header: 'AI suggested style', details: { style: suggested } });
-                }
+        const allStyles = Object.keys(styleData);
+        if (allStyles.length > 0) {
+            const suggested = await suggestStyle(state.expandedTopic || state.topic, allStyles, log);
+            if (suggested) {
+                setStyle(suggested);
+                log({ level: LogLevel.INFO, source: 'App', header: 'AI suggested style', details: { style: suggested } });
             }
         }
         
