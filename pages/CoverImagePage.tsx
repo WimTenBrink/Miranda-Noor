@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Page } from '../types';
 import { useGenerationContext } from '../context/GenerationContext';
@@ -6,39 +7,76 @@ import { useLog } from '../hooks/useLog';
 import { generateImagePrompt } from '../services/geminiService';
 import { generateImage } from '../services/imagenService';
 import { NavigationButtons } from '../components/common/NavigationButtons';
+import { Modal } from '../components/Modal';
+import { LogLevel } from '../types';
 
 interface CoverImagePageProps {
   setPage: (page: Page) => void;
 }
 
 export const CoverImagePage: React.FC<CoverImagePageProps> = ({ setPage }) => {
-    const { state, addCoverImagePrompt, addCoverImageUrl, setSelectedCoverImageIndex, isLoading, setIsLoading, setThinkingMessage } = useGenerationContext();
+    const { state, addCoverImagePrompt, addCoverImageUrl, setCoverImagePrompts, setCoverImageUrls, setSelectedCoverImageIndex, isLoading, setIsLoading } = useGenerationContext();
     const { apiKey } = useSettings();
     const log = useLog();
     const [error, setError] = useState('');
+    const [isPromptModalOpen, setIsPromptModalOpen] = useState(false);
+    
+    // Core function to generate a single image and its prompt.
+    const generateOneImage = async (): Promise<{ prompt: string, url: string }> => {
+        if (!apiKey) {
+            throw new Error('API Key is not set.');
+        }
+        
+        log({
+            level: LogLevel.INFO,
+            source: 'App',
+            header: 'Generating new image prompt',
+            details: { topic: state.expandedTopic || state.topic, style: state.style }
+        });
+        const imagePrompt = await generateImagePrompt(apiKey, {
+            topic: state.expandedTopic || state.topic,
+            style: state.style
+        }, log);
 
-    const handleGenerate = async () => {
+        log({
+            level: LogLevel.INFO,
+            source: 'App',
+            header: 'Generating image with Imagen',
+            details: { prompt: imagePrompt }
+        });
+        const imageUrl = await generateImage(apiKey, imagePrompt, log);
+        
+        return { prompt: imagePrompt, url: imageUrl };
+    };
+    
+    const handleGenerate = async (count: number = 1) => {
         if (!apiKey) {
             setError('Please set your API Key in the settings before generating content.');
             return;
         }
 
-        setIsLoading(true, 'Starting cover art generation...');
+        setIsLoading(true, count > 1 ? `Generating ${count} image concepts...` : 'Generating new cover art...');
         setError('');
+
         try {
-            // Step 1: Generate a good prompt for Imagen
-            setThinkingMessage('Generating image prompt...');
-            const imagePrompt = await generateImagePrompt(apiKey, {
-                topic: state.expandedTopic || state.topic,
-                style: state.style
-            }, log);
-            addCoverImagePrompt(imagePrompt);
+            if (count > 1) {
+                // Parallel generation for initial load
+                const promises = Array.from({ length: count }, () => generateOneImage());
+                const results = await Promise.all(promises);
 
-            // Step 2: Use that prompt to generate the image
-            setThinkingMessage('Creating image with Imagen...');
-            const imageUrl = await generateImage(apiKey, imagePrompt, log);
-            addCoverImageUrl(imageUrl);
-
+                const newPrompts = [...state.coverImagePrompts, ...results.map(r => r.prompt)];
+                const newUrls = [...state.coverImageUrls, ...results.map(r => r.url)];
+                
+                // Update context state in one go
+                setCoverImagePrompts(newPrompts);
+                setCoverImageUrls(newUrls);
+                setSelectedCoverImageIndex(newUrls.length - 1); // Select the last generated image
+            } else {
+                // Single generation for the button click
+                const { prompt, url } = await generateOneImage();
+                addCoverImagePrompt(prompt);
+                addCoverImageUrl(url); // This will select the new image automatically
+            }
         } catch (err: any) {
             const errorMessage = err.message || 'An unknown error occurred.';
             setError(`Failed to generate cover art: ${errorMessage}`);
@@ -48,11 +86,11 @@ export const CoverImagePage: React.FC<CoverImagePageProps> = ({ setPage }) => {
     };
 
     useEffect(() => {
-        // Auto-generate if no images exist
+        // Auto-generate two images in parallel if no images exist
         if (state.coverImageUrls.length === 0 && !isLoading && apiKey) {
-            handleGenerate();
+            handleGenerate(2);
         }
-    }, [state.coverImageUrls, isLoading, apiKey]);
+    }, [state.coverImageUrls.length, isLoading, apiKey]);
     
     const getFilename = (index: number) => {
         return `${(state.title || `song-cover-${index + 1}`).replace(/[^a-z0-9]/gi, '_').toLowerCase()}.png`;
@@ -68,6 +106,25 @@ export const CoverImagePage: React.FC<CoverImagePageProps> = ({ setPage }) => {
 
                 <div className="mt-6 flex flex-col items-center">
                     
+                    {!isLoading && (
+                        <div className="mb-6 flex justify-center items-center gap-4">
+                            <button
+                                onClick={() => handleGenerate(1)}
+                                disabled={isLoading || !apiKey}
+                                className="px-6 py-2 bg-[var(--color-fuchsia)] text-white font-semibold rounded-md hover:opacity-80 disabled:bg-[var(--bg-tertiary)] disabled:text-[var(--text-muted)] disabled:cursor-not-allowed transition-all"
+                            >
+                                Generate New Cover Art
+                            </button>
+                            <button
+                                onClick={() => setIsPromptModalOpen(true)}
+                                disabled={state.selectedCoverImageIndex === null}
+                                className="px-6 py-2 bg-[var(--bg-tertiary)] text-[var(--text-primary)] font-semibold rounded-md hover:opacity-80 disabled:bg-[var(--bg-tertiary)] disabled:text-[var(--text-muted)] disabled:cursor-not-allowed transition-opacity"
+                            >
+                                View Prompt
+                            </button>
+                        </div>
+                    )}
+
                     {error && <p className="my-4 text-[var(--color-red)] bg-[var(--color-red)]/10 p-3 rounded-md w-full max-w-2xl">{error}</p>}
 
                     {state.coverImageUrls.length > 0 && !isLoading && (
@@ -97,21 +154,6 @@ export const CoverImagePage: React.FC<CoverImagePageProps> = ({ setPage }) => {
                                     </div>
                                 ))}
                             </div>
-                            {selectedPrompt && (
-                                <p className="text-xs text-center text-[var(--text-muted)] mt-4 p-2 bg-[var(--bg-secondary)] rounded w-full max-w-2xl">Prompt: "{selectedPrompt}"</p>
-                            )}
-                        </div>
-                    )}
-
-                    {!isLoading && (
-                        <div className="mt-8">
-                            <button
-                                onClick={handleGenerate}
-                                disabled={isLoading || !apiKey}
-                                className="px-6 py-2 bg-[var(--color-fuchsia)] text-white font-semibold rounded-md hover:opacity-80 disabled:bg-[var(--bg-tertiary)] disabled:text-[var(--text-muted)] disabled:cursor-not-allowed transition-all"
-                            >
-                                Generate New Cover Art
-                            </button>
                         </div>
                     )}
                 </div>
@@ -124,6 +166,25 @@ export const CoverImagePage: React.FC<CoverImagePageProps> = ({ setPage }) => {
                     nextDisabled={state.selectedCoverImageIndex === null}
                 />
             </div>
+
+            <Modal isOpen={isPromptModalOpen} onClose={() => setIsPromptModalOpen(false)} title="Image Generation Prompt">
+                <div className="flex flex-col h-full">
+                    <div className="flex-grow space-y-4 overflow-y-auto pr-2">
+                        <p className="text-[var(--text-secondary)]">The following prompt was used to generate the selected image:</p>
+                        <pre className="p-4 bg-[var(--bg-inset)] rounded-md whitespace-pre-wrap font-sans text-[var(--text-secondary)]">
+                            {selectedPrompt || 'No prompt available. Select an image first.'}
+                        </pre>
+                    </div>
+                     <div className="flex justify-end pt-4 flex-shrink-0">
+                         <button
+                            onClick={() => setIsPromptModalOpen(false)}
+                            className="px-6 py-2 bg-[var(--bg-tertiary)] text-[var(--text-primary)] rounded-md hover:opacity-80 transition-opacity focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[var(--bg-secondary)] focus:ring-[var(--accent-secondary)]"
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </Modal>
         </div>
     );
 };

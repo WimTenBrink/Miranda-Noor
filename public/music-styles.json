@@ -1072,6 +1072,56 @@
         }
     },
     {
+        "name": "Loud",
+        "description": "Music composed from extremely loud, earth-shattering sound events. These styles are built on powerful, often chaotic sounds like explosions, industrial noise, and natural disasters.",
+        "styles": {
+            "Artillery Symphony": {
+                "description": "A rhythmic composition built from the sounds of a battlefield. It uses cannon fire, machine guns, and explosions as its primary percussive and melodic elements, creating a shockingly powerful and organized chaos.",
+                "instruments": [
+                    { "name": "Cannon Fire", "description": "The deep, booming report of large-caliber cannons, serving as the bass drum.", "default": true },
+                    { "name": "Heavy Machine Gun Bursts", "description": "Acts as the snare or hi-hat, providing rapid, rhythmic patterns.", "default": true },
+                    { "name": "Distant Explosions", "description": "Provides an ambient, rumbling backdrop of destruction.", "default": true },
+                    { "name": "Ricocheting Bullets", "description": "High-pitched, whizzing sounds that add texture and accents.", "default": false },
+                    { "name": "Artillery Shell Whistles", "description": "The eerie sound of shells flying overhead before impact, creating tension.", "default": true },
+                    { "name": "War Sirens", "description": "A wailing siren sound to create an atmosphere of alarm.", "default": false }
+                ]
+            },
+            "Industrial Demolition": {
+                "description": "The soundscape of a large structure being torn down. This style uses the chaotic noise of crashing steel, concrete, and heavy machinery to create an aggressive and abrasive industrial track.",
+                "instruments": [
+                    { "name": "Building Collapse", "description": "The massive, rumbling crash of a building imploding, serving as a major impact.", "default": true },
+                    { "name": "Wrecking Ball Impact", "description": "The heavy, rhythmic thud of a wrecking ball hitting concrete and steel.", "default": true },
+                    { "name": "Tearing Metal", "description": "High-pitched, screeching sounds of metal being twisted and torn apart.", "default": true },
+                    { "name": "Jackhammer Rhythm", "description": "A fast, percussive rhythm from pneumatic jackhammers.", "default": true },
+                    { "name": "Bulldozer Engine Drone", "description": "A low, constant rumble from heavy earth-moving equipment.", "default": false },
+                    { "name": "Explosive Charges", "description": "Sharp, powerful blasts used for controlled demolition.", "default": true }
+                ]
+            },
+            "Rocket Launch": {
+                "description": "Captures the awe-inspiring and deafening power of a space rocket launch. The style builds from a low rumble to an overwhelming wall of sound, then fades as the rocket disappears into the sky.",
+                "instruments": [
+                    { "name": "Main Engine Ignition", "description": "The initial, sharp explosion and roar as the main engines fire up.", "default": true },
+                    { "name": "Sustained Rocket Roar", "description": "The overwhelming, continuous, white-hot noise of the rocket engines at full thrust.", "default": true },
+                    { "name": "Launchpad Vibration Rumble", "description": "A deep, subsonic rumble that shakes everything, felt more than heard.", "default": true },
+                    { "name": "High-Pressure Steam Vents", "description": "Hissing sounds from high-pressure systems releasing steam and gas.", "default": true },
+                    { "name": "Mission Control Countdown", "description": "The iconic, calm countdown voice providing a stark contrast to the noise.", "default": false },
+                    { "name": "Sonic Boom", "description": "A sharp, explosive crack as the rocket breaks the sound barrier.", "default": false }
+                ]
+            },
+            "Thunderstorm Concerto": {
+                "description": "A musical piece composed entirely of the sounds of a violent thunderstorm. It captures the tension, release, and ambient sounds of a major weather event.",
+                "instruments": [
+                    { "name": "Close Thunder Clap", "description": "A sharp, deafening crack of thunder from a nearby lightning strike.", "default": true },
+                    { "name": "Distant Thunder Rumble", "description": "Low, rolling rumbles that create a continuous, ominous backdrop.", "default": true },
+                    { "name": "Torrential Rain", "description": "The heavy, percussive sound of a downpour, creating a dense wall of white noise.", "default": true },
+                    { "name": "Howling Wind", "description": "The shrieking and moaning of strong winds.", "default": true },
+                    { "name": "Hailstones on Metal Roof", "description": "A sharp, chaotic, and clattering percussive sound.", "default": false },
+                    { "name": "Tornado Siren", "description": "A wailing, rising and falling siren that adds a sense of dread and emergency.", "default": false }
+                ]
+            }
+        }
+    },
+    {
         "name": "String Instruments",
         "description": "Music that celebrates the rich and emotive sounds of stringed instruments, from the soaring melodies of a violin to the resonant pluck of a harp.",
         "styles": {
