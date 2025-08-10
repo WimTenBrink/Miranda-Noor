@@ -51,23 +51,11 @@ Follow these instructions to set up and run the project on your local machine fo
     *(Replace `your-username/miranda-noor-app.git` with the actual repository URL)*
 
 2.  **API Key Configuration:**
-    This application requires a Google AI API key to function. The code expects this key to be available in the execution environment as `process.env.API_KEY`.
+    This application requires a Google AI API key to function. The code expects the user to provide one, so the owner of the website does not need to spend his own budget.
 
-    For local development in a static setup without a build process, `process.env` is not directly available. You will need to manually provide your key. The simplest way is to replace `process.env.API_KEY` with your actual key string in the following files:
-    - `src/services/geminiService.ts`
-    - `src/services/imagenService.ts`
+    This API key can be set in the settings button with the gears symbol. The browser will store the key in local storage and never sends it to the server.
 
-    Find this line in both files:
-    ```typescript
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-    ```
-    And replace it with your key:
-    ```typescript
-    const ai = new GoogleGenAI({ apiKey: 'YOUR_API_KEY_HERE' });
-    ```
-    > **Warning:** Do not commit your API key to your Git repository. Treat it as a secret.
-
-3.  **Run the application:**
+4.  **Run the application:**
     Since this is a static web application, you can serve it with any simple HTTP server. We recommend using `serve`.
     ```sh
     npx serve
