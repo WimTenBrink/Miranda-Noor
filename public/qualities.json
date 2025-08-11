@@ -1,0 +1,47 @@
+
+[
+  {
+    "groupName": "Mood & Emotion",
+    "key": "mood",
+    "description": "Select the primary emotional tone of the song. This will heavily influence the lyrical content and musical expression.",
+    "qualities": [
+      "Awe-inspiring", "Brooding", "Calm", "Celebratory", "Charming", "Cinematic", "Confident", 
+      "Confused", "Contemplative", "Creepy", "Dark", "Determined", "Dreamy", "Emotional", 
+      "Energetic", "Eerie", "Exhilarating", "Fantasy", "Foreboding", "Grave", "Heartbreaking", 
+      "Heroic", "Hopeful", "Humorous", "Inspirational", "Intense", "Joyful", "Lonely", 
+      "Magical", "Mysterious", "Nostalgic", "Peaceful", "Playful", "Quirky", "Reflective", 
+      "Reverent", "Romantic", "Sad", "Serene", "Somber", "Solemn", "Spooky", "Suspenseful", 
+      "Tense", "Tragic", "Triumphant", "Uplifting", "Urgent", "Vast", "Vibrant", "Wistful", "Whimsical"
+    ]
+  },
+  {
+    "groupName": "Genre & Style",
+    "key": "genre",
+    "description": "Provide a broad genre to guide the AI's understanding. This complements the specific style chosen later.",
+    "qualities": [
+      "Ambient", "Blues", "Classical", "Country", "Dance", "Electronic", "Experimental", 
+      "Folk", "Funk", "Gospel", "Hip-hop", "Jazz", "Latin", "Lofi", "Metal", 
+      "Minimalist", "New Age", "Orchestral", "Pop", "Punk", "Reggae", "Rock", "Soul", "Synthwave"
+    ]
+  },
+  {
+    "groupName": "Pace & Dynamics",
+    "key": "pace",
+    "description": "Define the song's energy level and changes in volume. This affects the arrangement and performance directions.",
+    "qualities": [
+      "Accelerating", "Adagio", "Allegro", "Andante", "Building", "Crescendo", "Decrescendo", 
+      "Driving", "Fast", "Frenetic", "Gradual", "Lento", "Loud", "Piano", "Rhythmic", 
+      "Slowing", "Soft", "Staccato", "Sustained", "Tempo", "Unstable"
+    ]
+  },
+  {
+    "groupName": "Instrumentation & Texture",
+    "key": "instrumentation",
+    "description": "Describe the overall sound palette. For example, 'Acoustic' favors non-electric instruments, while 'Thick' suggests many layers of sound.",
+    "qualities": [
+      "Acoustic", "Brass", "Choral", "Dissonant", "Echoing", "Electronic", "Ethereal", 
+      "Full-orchestra", "Harmonic", "Hollow", "Monophonic", "Piano", "Polyrhythmic", 
+      "Pulsing", "String", "Synthesized", "Textural", "Thick", "Thin", "Woodwind"
+    ]
+  }
+]

@@ -1,0 +1,158 @@
+
+[
+  {
+    "groupName": "Commonly Used",
+    "languages": [
+      { "name": "Arabic", "code": "ar" },
+      { "name": "Chinese (Mandarin)", "code": "zh" },
+      { "name": "Dutch", "code": "nl" },
+      { "name": "English", "code": "en" },
+      { "name": "French", "code": "fr" },
+      { "name": "German", "code": "de" },
+      { "name": "Hindi", "code": "hi" },
+      { "name": "Italian", "code": "it" },
+      { "name": "Japanese", "code": "ja" },
+      { "name": "Korean", "code": "ko" },
+      { "name": "Portuguese", "code": "pt" },
+      { "name": "Russian", "code": "ru" },
+      { "name": "Spanish", "code": "es" },
+      { "name": "Swahili", "code": "sw" }
+    ]
+  },
+  {
+    "groupName": "Classical & Ancient",
+    "languages": [
+      { "name": "Ancient Greek", "code": "grc" },
+      { "name": "Aramaic", "code": "arc" },
+      { "name": "Classical Latin", "code": "la" },
+      { "name": "Coptic", "code": "cop" },
+      { "name": "Gothic", "code": "got" },
+      { "name": "Old English", "code": "ang" },
+      { "name": "Old Norse", "code": "non" },
+      { "name": "Sanskrit", "code": "sa" },
+      { "name": "Sumerian", "code": "sux" }
+    ]
+  },
+  {
+    "groupName": "Fictional & Constructed",
+    "languages": [
+      { "name": "Borg Assimilation Speech", "code": "borg" },
+      { "name": "Dothraki", "code": "dothraki" },
+      { "name": "Elvish (Sindarin)", "code": "sjn" },
+      { "name": "Esperanto", "code": "eo" },
+      { "name": "High Valyrian", "code": "valyrian" },
+      { "name": "Klingon", "code": "tlh" },
+      { "name": "Lojban", "code": "jbo" },
+      { "name": "Na'vi", "code": "nav" },
+      { "name": "Quenya", "code": "qya" }
+    ]
+  },
+  {
+    "groupName": "African Languages",
+    "languages": [
+      { "name": "Afrikaans", "code": "af" },
+      { "name": "Amharic", "code": "am" },
+      { "name": "Hausa", "code": "ha" },
+      { "name": "Igbo", "code": "ig" },
+      { "name": "Oromo", "code": "om" },
+      { "name": "Shona", "code": "sn" },
+      { "name": "Somali", "code": "so" },
+      { "name": "Tigrinya", "code": "ti" },
+      { "name": "Xhosa", "code": "xh" },
+      { "name": "Yoruba", "code": "yo" },
+      { "name": "Zulu", "code": "zu" }
+    ]
+  },
+  {
+    "groupName": "European Languages",
+    "languages": [
+      { "name": "Albanian", "code": "sq" },
+      { "name": "Basque", "code": "eu" },
+      { "name": "Belarusian", "code": "be" },
+      { "name": "Bosnian", "code": "bs" },
+      { "name": "Bulgarian", "code": "bg" },
+      { "name": "Catalan", "code": "ca" },
+      { "name": "Croatian", "code": "hr" },
+      { "name": "Czech", "code": "cs" },
+      { "name": "Danish", "code": "da" },
+      { "name": "Estonian", "code": "et" },
+      { "name": "Finnish", "code": "fi" },
+      { "name": "Galician", "code": "gl" },
+      { "name": "Greek (Modern)", "code": "el" },
+      { "name": "Hungarian", "code": "hu" },
+      { "name": "Icelandic", "code": "is" },
+      { "name": "Irish Gaelic", "code": "ga" },
+      { "name": "Latvian", "code": "lv" },
+      { "name": "Lithuanian", "code": "lt" },
+      { "name": "Luxembourgish", "code": "lb" },
+      { "name": "Macedonian", "code": "mk" },
+      { "name": "Maltese", "code": "mt" },
+      { "name": "Norwegian", "code": "no" },
+      { "name": "Polish", "code": "pl" },
+      { "name": "Romanian", "code": "ro" },
+      { "name": "Scottish Gaelic", "code": "gd" },
+      { "name": "Serbian", "code": "sr" },
+      { "name": "Slovak", "code": "sk" },
+      { "name": "Slovenian", "code": "sl" },
+      { "name": "Swedish", "code": "sv" },
+      { "name": "Ukrainian", "code": "uk" },
+      { "name": "Welsh", "code": "cy" },
+      { "name": "Yiddish", "code": "yi" }
+    ]
+  },
+  {
+    "groupName": "Asian & Middle Eastern Languages",
+    "languages": [
+      { "name": "Armenian", "code": "hy" },
+      { "name": "Azerbaijani", "code": "az" },
+      { "name": "Bengali", "code": "bn" },
+      { "name": "Burmese", "code": "my" },
+      { "name": "Filipino (Tagalog)", "code": "tl" },
+      { "name": "Georgian", "code": "ka" },
+      { "name": "Gujarati", "code": "gu" },
+      { "name": "Hebrew", "code": "he" },
+      { "name": "Indonesian", "code": "id" },
+      { "name": "Javanese", "code": "jv" },
+      { "name": "Kannada", "code": "kn" },
+      { "name": "Kazakh", "code": "kk" },
+      { "name": "Khmer", "code": "km" },
+      { "name": "Kurdish", "code": "ku" },
+      { "name": "Kyrgyz", "code": "ky" },
+      { "name": "Lao", "code": "lo" },
+      { "name": "Malay", "code": "ms" },
+      { "name": "Malayalam", "code": "ml" },
+      { "name": "Marathi", "code": "mr" },
+      { "name": "Mongolian", "code": "mn" },
+      { "name": "Nepali", "code": "ne" },
+      { "name": "Pashto", "code": "ps" },
+      { "name": "Persian (Farsi)", "code": "fa" },
+      { "name": "Punjabi", "code": "pa" },
+      { "name": "Sindhi", "code": "sd" },
+      { "name": "Sinhala", "code": "si" },
+      { "name": "Tajik", "code": "tg" },
+      { "name": "Tamil", "code": "ta" },
+      { "name": "Telugu", "code": "te" },
+      { "name": "Thai", "code": "th" },
+      { "name": "Turkish", "code": "tr" },
+      { "name": "Turkmen", "code": "tk" },
+      { "name": "Urdu", "code": "ur" },
+      { "name": "Uzbek", "code": "uz" },
+      { "name": "Vietnamese", "code": "vi" }
+    ]
+  },
+  {
+    "groupName": "Americas & Oceanic Languages",
+    "languages": [
+      { "name": "Cree", "code": "cr" },
+      { "name": "Fijian", "code": "fj" },
+      { "name": "Guarani", "code": "gn" },
+      { "name": "Haitian Creole", "code": "ht" },
+      { "name": "Hawaiian", "code": "haw" },
+      { "name": "Maori", "code": "mi" },
+      { "name": "Navajo", "code": "nv" },
+      { "name": "Quechua", "code": "qu" },
+      { "name": "Samoan", "code": "sm" },
+      { "name": "Tongan", "code": "to" }
+    ]
+  }
+]
