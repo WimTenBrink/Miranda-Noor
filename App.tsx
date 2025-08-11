@@ -1,5 +1,7 @@
 
 
+
+
 import React, { useState, useEffect, useCallback } from 'react';
 import JSZip from 'jszip';
 import saveAs from 'file-saver';
@@ -32,6 +34,7 @@ import { KaraokePage } from './pages/KaraokePage';
 
 import { useLog } from './hooks/useLog';
 import { generateReportIntroduction, translateLyricsToEnglish } from './services/geminiService';
+import { playBeep } from './utils/audio';
 
 
 type ModalType = 'console' | 'tos' | 'about' | 'manual' | 'musicStyles' | 'report' | 'settings' | null;
@@ -119,7 +122,7 @@ const App: React.FC = () => {
                 try {
                     const introText = await generateReportIntroduction(apiKey, {
                         title: state.title,
-                        expandedTopic: state.expandedTopic || state.topic,
+                        topic: state.topic,
                         lyrics: state.lyrics,
                         singers: state.singers
                     }, log);
@@ -328,6 +331,7 @@ ${aboutChapter}
             const content = await zip.generateAsync({ type: "blob" });
             const fileName = `${state.title.replace(/[^a-z0-9]/gi, '_').toLowerCase() || 'song_collection'}.zip`;
             saveAs(content, fileName);
+            playBeep();
     
         } catch (error) {
             console.error("Error creating zip file:", error);

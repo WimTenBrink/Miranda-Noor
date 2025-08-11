@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { generateTitleAndLyrics } from '../services/geminiService';
 import { useLog } from '../hooks/useLog';
@@ -37,6 +38,7 @@ export const LyricGenerator: React.FC = () => {
                 language: state.language,
                 language2: state.language2,
                 singers: state.singers,
+                rating: state.rating,
                 mood: state.mood,
                 genre: state.genre,
                 pace: state.pace,

@@ -1,9 +1,6 @@
 
-
-
-
 import React, { createContext, useState, useContext, ReactNode, Dispatch, SetStateAction, useEffect } from 'react';
-import { GenerationState, MusicStyle, StyleGroup, MusicStyleDefinition, LanguageGroup, Singer, QualityGroup } from '../types';
+import { GenerationState, MusicStyle, StyleGroup, MusicStyleDefinition, LanguageGroup, Singer, QualityGroup, SongRating } from '../types';
 
 interface GenerationContextType {
   state: GenerationState;
@@ -11,7 +8,6 @@ interface GenerationContextType {
   isLoading: boolean;
   setIsLoading: (loading: boolean, message?: string) => void;
   setTopic: (topic: string) => void;
-  setExpandedTopic: (expandedTopic: string) => void;
   setStyle: (style: MusicStyle | null) => void;
   setMood: (mood: string | null) => void;
   setGenre: (genre: string | null) => void;
@@ -23,6 +19,7 @@ interface GenerationContextType {
   setSnareType: (snareType: string | null) => void;
   setSpecialInstrument: (specialInstrument: string | null) => void;
   setNarrativeDynamic: (narrativeDynamic: string | null) => void;
+  setRating: (rating: SongRating) => void;
   setInstruments: (instruments: string[]) => void;
   setSingers: (singers: Singer[]) => void;
   setTitle: (title: string) => void;
@@ -61,7 +58,6 @@ export const ALL_SINGERS: Singer[] = [
 
 const initialState: GenerationState = {
   topic: '',
-  expandedTopic: '',
   style: null,
   mood: null,
   genre: null,
@@ -73,6 +69,7 @@ const initialState: GenerationState = {
   snareType: null,
   specialInstrument: null,
   narrativeDynamic: null,
+  rating: 'PG-13',
   instruments: [],
   singers: [ALL_SINGERS[0], ALL_SINGERS[1]],
   title: '',
@@ -167,7 +164,6 @@ export const GenerationProvider: React.FC<{ children: ReactNode }> = ({ children
   };
 
   const setTopic = (topic: string) => setState(s => ({ ...s, topic }));
-  const setExpandedTopic = (expandedTopic: string) => setState(s => ({ ...s, expandedTopic }));
   const setStyle = (style: MusicStyle | null) => setState(s => ({ ...s, style, instruments: [] }));
   const setMood = (mood: string | null) => setState(s => ({ ...s, mood }));
   const setGenre = (genre: string | null) => setState(s => ({ ...s, genre }));
@@ -179,6 +175,7 @@ export const GenerationProvider: React.FC<{ children: ReactNode }> = ({ children
   const setSnareType = (snareType: string | null) => setState(s => ({ ...s, snareType }));
   const setSpecialInstrument = (specialInstrument: string | null) => setState(s => ({ ...s, specialInstrument }));
   const setNarrativeDynamic = (narrativeDynamic: string | null) => setState(s => ({ ...s, narrativeDynamic }));
+  const setRating = (rating: SongRating) => setState(s => ({...s, rating}));
   const setInstruments = (instruments: string[]) => setState(s => ({ ...s, instruments }));
   const setSingers = (singers: Singer[]) => setState(s => ({ ...s, singers }));
   const setTitle = (title: string) => setState(s => ({ ...s, title }));
@@ -211,7 +208,6 @@ export const GenerationProvider: React.FC<{ children: ReactNode }> = ({ children
     isLoading,
     setIsLoading,
     setTopic,
-    setExpandedTopic,
     setStyle,
     setMood,
     setGenre,
@@ -223,6 +219,7 @@ export const GenerationProvider: React.FC<{ children: ReactNode }> = ({ children
     setSnareType,
     setSpecialInstrument,
     setNarrativeDynamic,
+    setRating,
     setInstruments,
     setSingers,
     setTitle,

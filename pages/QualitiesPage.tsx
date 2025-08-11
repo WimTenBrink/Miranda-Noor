@@ -1,5 +1,9 @@
 
 
+
+
+
+
 import React from 'react';
 import { Page } from '../types';
 import { useGenerationContext } from '../context/GenerationContext';
@@ -9,6 +13,7 @@ import { suggestStyle } from '../services/geminiService';
 import { LogLevel } from '../types';
 import { NavigationButtons } from '../components/common/NavigationButtons';
 import { Tooltip } from '../components/common/Tooltip';
+import { playBeep } from '../utils/audio';
 
 interface QualitiesPageProps {
   setPage: (page: Page) => void;
@@ -43,7 +48,7 @@ export const QualitiesPage: React.FC<QualitiesPageProps> = ({ setPage }) => {
         const allStyles = Object.keys(styleData);
         if (allStyles.length > 0) {
             try {
-                const suggested = await suggestStyle(apiKey, state.expandedTopic || state.topic, allStyles, {
+                const suggested = await suggestStyle(apiKey, state.topic, allStyles, {
                      language: state.language,
                      language2: state.language2,
                      mood: state.mood, 
@@ -60,6 +65,7 @@ export const QualitiesPage: React.FC<QualitiesPageProps> = ({ setPage }) => {
                 if (suggested) {
                     setStyle(suggested);
                     log({ level: LogLevel.INFO, source: 'App', header: 'AI suggested style', details: { style: suggested } });
+                    playBeep();
                 }
             } catch (err: any) {
                  const errorMessage = err.message || 'An unknown error occurred.';

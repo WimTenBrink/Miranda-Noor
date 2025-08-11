@@ -1,20 +1,22 @@
 
 
 import React, { useState } from 'react';
-import { Page, Singer, LogLevel } from '../types';
+import { Page, Singer, LogLevel, SongRating } from '../types';
 import { useGenerationContext, ALL_SINGERS } from '../context/GenerationContext';
 import { NavigationButtons } from '../components/common/NavigationButtons';
 import { useSettings } from '../context/SettingsContext';
 import { useLog } from '../hooks/useLog';
 import { expandTopic } from '../services/geminiService';
+import { playBeep } from '../utils/audio';
 
+const RATINGS: SongRating[] = ['G', 'PG', 'PG-13', 'R', 'NC-17'];
 
 interface TopicPageProps {
   setPage: (page: Page) => void;
 }
 
 export const TopicPage: React.FC<TopicPageProps> = ({ setPage }) => {
-    const { state, setTopic, setSingers, setExpandedTopic, isLoading, setIsLoading } = useGenerationContext();
+    const { state, setTopic, setSingers, setRating, isLoading, setIsLoading } = useGenerationContext();
     const { apiKey } = useSettings();
     const log = useLog();
     const [error, setError] = useState('');
@@ -42,8 +44,9 @@ export const TopicPage: React.FC<TopicPageProps> = ({ setPage }) => {
         setIsLoading(true, 'Expanding with AI...');
         setError('');
         try {
-            const expanded = await expandTopic(apiKey, state.topic, state.singers, log);
-            setExpandedTopic(expanded);
+            const expanded = await expandTopic(apiKey, state.topic, state.singers, state.rating, log);
+            setTopic(expanded);
+            playBeep();
         } catch (err: any) {
             const errorMessage = err.message || 'An unknown error occurred.';
             setError(`Failed to expand topic: ${errorMessage}`);
@@ -61,47 +64,50 @@ export const TopicPage: React.FC<TopicPageProps> = ({ setPage }) => {
                 
                 <div className="mt-6 space-y-6">
                     <div>
+                        <label className="block text-sm font-medium text-[var(--text-muted)] mb-2">
+                            Song Rating
+                        </label>
+                        <div className="flex flex-wrap gap-2 p-2 bg-[var(--bg-secondary)] rounded-md border border-[var(--border-primary)]">
+                            {RATINGS.map(rating => (
+                                <button
+                                    key={rating}
+                                    onClick={() => setRating(rating)}
+                                    className={`flex-1 px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                                        state.rating === rating
+                                            ? 'bg-[var(--accent-primary)] text-[var(--text-on-accent)] font-bold shadow-md'
+                                            : 'bg-[var(--bg-tertiary)] text-[var(--text-secondary)] hover:bg-[var(--border-secondary)]'
+                                    }`}
+                                >
+                                    {rating}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div>
                         <label htmlFor="topic" className="block text-sm font-medium text-[var(--text-muted)] mb-1">
-                            Song Topic or Keywords
+                            Song Topic, Theme, or Story
                         </label>
                         <textarea
                             id="topic"
-                            rows={5}
+                            rows={8}
                             value={state.topic}
                             onChange={(e) => setTopic(e.target.value)}
                             placeholder="e.g., a lonely robot finding a friend, a summer rainstorm in the city"
                             className="w-full px-3 py-2 bg-[var(--bg-secondary)] border border-[var(--border-secondary)] rounded-md text-[var(--text-primary)] focus:ring-2 focus:ring-[var(--accent-primary)] focus:border-[var(--accent-primary)]"
                         />
-                    </div>
-                    
-                    <div className="flex items-center gap-4">
-                        <button
-                            onClick={handleExpand}
-                            disabled={isLoading || !state.topic || !apiKey}
-                            className="px-4 py-2 bg-[var(--accent-primary)]/80 text-[var(--accent-subtle-text)] font-semibold rounded-md hover:bg-[var(--accent-primary)] disabled:bg-[var(--bg-tertiary)] disabled:text-[var(--text-muted)] disabled:cursor-not-allowed transition-colors"
-                        >
-                            {isLoading ? 'Expanding...' : 'Expand Topic with AI'}
-                        </button>
-                        <p className="text-sm text-[var(--text-muted)]">Let AI enrich your initial topic into a more detailed story.</p>
-                    </div>
-                    {error && <p className="text-sm text-[var(--color-red)]">{error}</p>}
-                    
-                    {state.expandedTopic && (
-                        <div>
-                            <label htmlFor="expandedTopic" className="block text-sm font-medium text-[var(--text-muted)] mb-1">
-                                Expanded Story
-                            </label>
-                            <textarea
-                                id="expandedTopic"
-                                readOnly
-                                value={state.expandedTopic}
-                                rows={8}
-                                className="mt-1 w-full p-4 bg-[var(--bg-inset)] border border-[var(--border-secondary)] rounded-md whitespace-pre-wrap font-sans text-[var(--text-secondary)]"
-                            />
-                            <p className="text-xs text-[var(--text-muted)] mt-1">This expanded story will be used as the primary input for lyric generation.</p>
+                         <div className="flex items-center gap-4 mt-2">
+                            <button
+                                onClick={handleExpand}
+                                disabled={isLoading || !state.topic || !apiKey}
+                                className="px-4 py-2 bg-[var(--accent-primary)]/80 text-[var(--accent-subtle-text)] font-semibold rounded-md hover:bg-[var(--accent-primary)] disabled:bg-[var(--bg-tertiary)] disabled:text-[var(--text-muted)] disabled:cursor-not-allowed transition-colors"
+                            >
+                                {isLoading ? 'Expanding...' : 'Expand Topic with AI'}
+                            </button>
+                            <p className="text-sm text-[var(--text-muted)]">Let AI enrich your topic. The result will replace the text above, allowing you to edit and expand again.</p>
                         </div>
-                    )}
-
+                        {error && <p className="text-sm text-[var(--color-red)] mt-2">{error}</p>}
+                    </div>
 
                     <div>
                         <label className="block text-sm font-medium text-[var(--text-muted)] mb-2">

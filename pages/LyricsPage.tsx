@@ -1,7 +1,4 @@
 
-
-
-
 import React, { useEffect, useState } from 'react';
 import { Page } from '../types';
 import { useGenerationContext } from '../context/GenerationContext';
@@ -10,41 +7,11 @@ import { useLog } from '../hooks/useLog';
 import { generateTitleAndLyrics } from '../services/geminiService';
 import { LogLevel } from '../types';
 import { NavigationButtons } from '../components/common/NavigationButtons';
+import { playBeep } from '../utils/audio';
 
 interface LyricsPageProps {
   setPage: (page: Page) => void;
 }
-
-const playSound = () => {
-    // Use Web Audio API to play a sound without needing an audio file.
-    // This avoids errors from trying to load a non-existent file.
-    const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
-    if (!audioContext) {
-        console.warn("Web Audio API is not supported in this browser.");
-        return;
-    }
-
-    try {
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
-
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-
-        oscillator.type = 'sine';
-        // A short, pleasant C5 note
-        oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); 
-        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime); // Start at a reasonable volume
-        // Fade out quickly for a nice 'pop' sound
-        gainNode.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 0.2);
-
-        oscillator.start(audioContext.currentTime);
-        oscillator.stop(audioContext.currentTime + 0.2); // Play for 0.2 seconds
-    } catch (e) {
-        console.error("Error playing sound with Web Audio API:", e);
-    }
-};
-
 
 export const LyricsPage: React.FC<LyricsPageProps> = ({ setPage }) => {
     const { state, setTitle, setLyrics, isLoading, setIsLoading } = useGenerationContext();
@@ -78,12 +45,13 @@ export const LyricsPage: React.FC<LyricsPageProps> = ({ setPage }) => {
         setError('');
         try {
             const { title, lyrics } = await generateTitleAndLyrics(apiKey, {
-                topic: state.expandedTopic || state.topic,
+                topic: state.topic,
                 style: state.style,
                 instruments: state.instruments,
                 language: state.language,
                 language2: state.language2,
                 singers: state.singers,
+                rating: state.rating,
                 mood: state.mood,
                 genre: state.genre,
                 pace: state.pace,
@@ -103,7 +71,7 @@ export const LyricsPage: React.FC<LyricsPageProps> = ({ setPage }) => {
                 setLyrics(lyrics);
             }
             log({ level: LogLevel.INFO, source: 'App', header: `Lyrics generation (${mode}) successful`, details: { title } });
-            playSound();
+            playBeep();
         } catch (err: any) {
             const errorMessage = err.message || 'An unknown error occurred.';
             setError(`Failed to generate content: ${errorMessage}`);
@@ -117,7 +85,7 @@ export const LyricsPage: React.FC<LyricsPageProps> = ({ setPage }) => {
         if (state.topic && !state.lyrics && !isLoading && state.style && apiKey && state.singers.length > 0) {
             performGeneration('all');
         }
-    }, [state.topic, state.lyrics, isLoading, state.style, apiKey, state.language, state.language2, state.singers, state.mood, state.genre, state.pace, state.instrumentation, state.vocalStyle, state.lyricalTheme, state.drumStyle, state.snareType, state.specialInstrument, state.narrativeDynamic]);
+    }, [state.topic, state.lyrics, isLoading, state.style, apiKey, state.language, state.language2, state.singers, state.rating, state.mood, state.genre, state.pace, state.instrumentation, state.vocalStyle, state.lyricalTheme, state.drumStyle, state.snareType, state.specialInstrument, state.narrativeDynamic]);
 
     const copyToClipboard = (text: string, setter: React.Dispatch<React.SetStateAction<boolean>>) => {
         navigator.clipboard.writeText(text);
@@ -176,7 +144,7 @@ export const LyricsPage: React.FC<LyricsPageProps> = ({ setPage }) => {
                             <textarea
                                 value={state.lyrics}
                                 onChange={(e) => setLyrics(e.target.value)}
-                                className="w-full p-4 bg-[var(--bg-secondary)] rounded-md font-sans text-[var(--text-secondary)] focus:ring-2 focus:ring-[var(--accent-primary)] focus:border-[var(--accent-primary)] border border-[var(--border-primary)] flex-grow min-h-[200px]"
+                                className="w-full p-4 bg-[var(--bg-secondary)] rounded-md font-sans text-[var(--text-secondary)] focus:ring-2 focus:ring-[var(--accent-primary)] focus:border-[var(--border-primary)] border border-[var(--border-primary)] flex-grow min-h-[200px]"
                                 placeholder="Lyrics will appear here..."
                             />
                         </div>

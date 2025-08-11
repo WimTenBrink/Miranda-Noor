@@ -1,5 +1,9 @@
 
 
+
+
+
+
 import React, { useEffect, useState } from 'react';
 import { Page } from '../types';
 import { useGenerationContext } from '../context/GenerationContext';
@@ -10,6 +14,7 @@ import { generateImage } from '../services/imagenService';
 import { NavigationButtons } from '../components/common/NavigationButtons';
 import { Modal } from '../components/Modal';
 import { LogLevel } from '../types';
+import { playBeep } from '../utils/audio';
 
 interface CoverImagePageProps {
   setPage: (page: Page) => void;
@@ -38,10 +43,10 @@ export const CoverImagePage: React.FC<CoverImagePageProps> = ({ setPage }) => {
             level: LogLevel.INFO,
             source: 'App',
             header: 'Generating new image prompt',
-            details: { topic: state.expandedTopic || state.topic, style: state.style, singers: state.singers }
+            details: { topic: state.topic, style: state.style, singers: state.singers }
         });
         const imagePrompt = await generateImagePrompt(apiKey, {
-            topic: state.expandedTopic || state.topic,
+            topic: state.topic,
             style: state.style,
             singers: state.singers,
         }, log);
@@ -86,6 +91,7 @@ export const CoverImagePage: React.FC<CoverImagePageProps> = ({ setPage }) => {
                 addCoverImagePrompt(prompt);
                 addCoverImageUrl(url); // This will select the new image automatically
             }
+            playBeep();
         } catch (err: any) {
             const errorMessage = err.message || 'An unknown error occurred.';
             if (errorMessage.toLowerCase().includes('quota exceeded')) {

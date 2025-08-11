@@ -1,7 +1,7 @@
 
 
 import { GoogleGenAI, GenerateContentResponse, Type } from "@google/genai";
-import { LogEntry, LogLevel, MusicStyle, Singer } from '../types';
+import { LogEntry, LogLevel, MusicStyle, Singer, SongRating } from '../types';
 import { getCharacterDescriptions } from './characterService';
 
 type LogFn = (entry: Omit<LogEntry, 'timestamp'>) => void;
@@ -26,22 +26,54 @@ const getAi = (apiKey: string) => {
     return new GoogleGenAI({ apiKey });
 };
 
-export const expandTopic = async (apiKey: string, topic: string, singers: Singer[], log: LogFn): Promise<string> => {
+export const expandTopic = async (apiKey: string, topic: string, singers: Singer[], rating: SongRating, log: LogFn): Promise<string> => {
     const ai = getAi(apiKey);
     
-    const singerNames = singers.map(s => s.name).join(', ');
+    const singerNames = singers.map(s => s.name);
+    const has = (name: string) => singerNames.includes(name);
+
     let performerDescription = '';
     if (singers.length === 1) {
         performerDescription = `a solo performance by ${singers[0].name}.`;
     } else if (singers.length === 2) {
-        performerDescription = `a duet between ${singers[0].name} and ${singers[1].name}.`;
+        performerDescription = `a duet between ${singerNames[0]} and ${singerNames[1]}.`;
     } else {
-        performerDescription = `a small choir piece for ${singerNames}.`;
+        performerDescription = `a small choir piece for ${singerNames.join(', ')}.`;
     }
+
+    let personalContext = '';
+    if (singers.length === 2) {
+        const isMirandaAndAnnelies = has('Miranda Noor') && has('Annelies Brink');
+        const isFannieAndEmma = has('Fannie de Jong') && has('Emma Vermeer');
+
+        if (isMirandaAndAnnelies) {
+            personalContext = ' The performers, Miranda and Annelies, are a romantic couple. Their music often reflects their deep, romantic bond.';
+        } else if (isFannieAndEmma) {
+            personalContext = ' The performers, Fannie and Emma, are close friends. Their music often reflects their intimate and playful chemistry.';
+        }
+    } else if (singers.length === 4 && has('Miranda Noor') && has('Annelies Brink') && has('Fannie de Jong') && has('Emma Vermeer')) {
+        personalContext = ' The group consists of two pairs: the romantic couple Miranda and Annelies, and the playful, close friends Fannie and Emma. You can draw on these dynamics.';
+    }
+
+    if (personalContext) {
+        personalContext += ' A consistent underlying theme for all their songs is a subtle sapphic sensibility, exploring love and connection from a female perspective.';
+    }
+
+    const ratingInstruction = `**Content Rating:** The narrative must adhere to a "${rating}" rating.
+- G: Suitable for all audiences. No mature themes.
+- PG: Parental guidance suggested. May contain mild thematic elements.
+- PG-13: Parents strongly cautioned. May contain some suggestive themes, brief strong language, or non-graphic allusions to mature topics.
+- R: Restricted. May contain strong language, mature themes, and non-explicit references to violence or sensuality.
+- NC-17: Adults only. Can explore themes of violence and eroticism in an artistic, non-gratuitous way. Polite but explicit names for body parts and specific acts can be used.`;
+
 
     const prompt = `You are a creative muse. Your goal is to expand a user's song idea into a rich, descriptive paragraph of about 300-500 words. This will be used as the basis for a song.
     
-The song will be performed by ${performerDescription}. This context should influence the narrative; for example, a solo might be more introspective, while a duet or choir song could explore themes of interaction, harmony, or contrasting viewpoints. If the user's topic mentions any names, you must incorporate them into the narrative you create.
+${ratingInstruction}
+
+The song will be performed by ${performerDescription}. This context can optionally influence the narrative. For example, a solo might be more introspective, while a duet or choir song could explore themes of interaction, harmony, or contrasting viewpoints.
+${personalContext ? `\nFor additional, optional context about the performers: ${personalContext}\n` : ''}
+If the user's topic mentions any names, you must incorporate them into the narrative you create.
 
 Focus on imagery, emotion, and potential narrative arcs. Do not write lyrics, just the underlying story and mood. Do not mention specific instruments or musical styles.
 
@@ -64,7 +96,7 @@ User topic: "${topic}"`;
     }
 };
 
-export const generateTitleAndLyrics = async (apiKey: string, { topic, style, instruments, language, language2, singers, mood, genre, pace, instrumentation, vocalStyle, lyricalTheme, drumStyle, snareType, specialInstrument, narrativeDynamic }: { topic: string, style: MusicStyle, instruments: string[], language: string, language2: string, singers: Singer[], mood: string | null, genre: string | null, pace: string | null, instrumentation: string | null, vocalStyle: string | null, lyricalTheme: string | null, drumStyle: string | null, snareType: string | null, specialInstrument: string | null, narrativeDynamic: string | null }, log: LogFn): Promise<{ title: string, lyrics: string }> => {
+export const generateTitleAndLyrics = async (apiKey: string, { topic, style, instruments, language, language2, singers, rating, mood, genre, pace, instrumentation, vocalStyle, lyricalTheme, drumStyle, snareType, specialInstrument, narrativeDynamic }: { topic: string, style: MusicStyle, instruments: string[], language: string, language2: string, singers: Singer[], rating: SongRating, mood: string | null, genre: string | null, pace: string | null, instrumentation: string | null, vocalStyle: string | null, lyricalTheme: string | null, drumStyle: string | null, snareType: string | null, specialInstrument: string | null, narrativeDynamic: string | null }, log: LogFn): Promise<{ title: string, lyrics: string }> => {
     const ai = getAi(apiKey);
 
     const isBilingual = language.toLowerCase() !== language2.toLowerCase();
@@ -142,45 +174,58 @@ For full choir parts, use the primary language, ${language}.`;
         }
     }
 
+    const ratingInstruction = `**Content Rating:** The song must adhere to a "${rating}" rating.
+- G: Suitable for all audiences. No mature themes.
+- PG: Parental guidance suggested. May contain mild thematic elements.
+- PG-13: Parents strongly cautioned. May contain some suggestive themes, brief strong language, or non-graphic allusions to mature topics.
+- R: Restricted. May contain strong language, mature themes, and non-explicit references to violence or sensuality.
+- NC-17: Adults only. Can explore themes of violence and eroticism in an artistic, non-gratuitous way. Polite but explicit names for body parts and specific acts can be used.`;
 
     const prompt = `You are an expert songwriter creating lyrics for a song.
-    ${performerInstruction}
-    ${languageInstruction}
-    ${relationshipInstruction}
-    The song is in the style of: ${style}.
-    It should feature the following instruments: ${instruments.join(', ')}.
-    The song's theme is based on this story:
-    ---
-    ${topic || "An uplifting song about friendship and creativity."}
-    ---
-    Also, consider these qualities for the song's overall feel:
-    - Narrative Dynamic: ${narrativeDynamic || 'Not specified'}
-    - Mood: ${mood || 'Not specified'}
-    - Genre Context: ${genre || 'Not specified'}
-    - Pace: ${pace || 'Not specified'}
-    - Texture: ${instrumentation || 'Not specified'}
-    - Lyrical Theme: ${lyricalTheme || 'Not specified'}
-    - Vocal Style: ${vocalStyle || 'Not specified'}
-    - Drum Style: ${drumStyle || 'Not specified'}
-    - Snare Sound: ${snareType || 'Not specified'}
-    - Special Instrument Feature: ${specialInstrument || 'Not specified'}
-    These should influence the lyrical tone, the structure, and the performance directions you provide in brackets.
 
-    Your task is to generate a suitable song title and the full song lyrics. To ensure the song fits within typical generation limits (around 2-3 minutes including instrumentals), please create a concise song structure.
-    For example, a good structure would be: [Intro], [Verse 1], [Chorus], [Verse 2], [Chorus], [Bridge], [Instrumental Solo], [Chorus], [Outro].
-    Avoid overly long verses or too many repeating sections.
-    
-    Follow these strict formatting rules for Suno AI:
-    - Use tags like [Intro], [Verse], [Chorus], [Bridge], [Outro], etc., to structure the song.
-    - Indicate non-lyrical vocalizations like (oohs), (aahs).
-    - Use [Spoken Word] for spoken parts.
-    - Use *sound effect* for sound effects, like *thunder clap*.
-    - ${singers.length > 1 ? `Clearly label parts for each singer or group (e.g., ${singerLabels.join(', ')}, [Duet], [Choir]).` : `Label the singer part as ${singerLabels[0]}.`}
-    
-    **Critically Important:** All musical or performance instructions MUST be enclosed in \`[]\` brackets. Do NOT write descriptive sentences about the music within the lyrics, such as 'The guitar comes in here'. Instead, use bracketed tags like \`[Acoustic guitar intro]\` or \`[Music fades out]\`. The lyrics should only contain the words to be sung and the bracketed instructions.
+**Primary Directive:** The song's narrative, story, and core subject matter MUST be derived exclusively from the "Song's Theme" provided below. The musical style, instruments, and other qualities are for tonal and structural guidance only; they should influence the *feeling* and *rhythm* of the lyrics, but **not** the story itself. For example, if the style is 'Merfolk/Siren' but the topic is 'a robot finding a friend', the lyrics must be about the robot, with a haunting or alluring *tone*, not about the sea.
 
-    Output a JSON object with two keys: "title" and "lyrics". The title must be in ${language}. The lyrics must follow the language instructions provided above.
-    Do not include any other text or explanation outside of the JSON object.`;
+${ratingInstruction}
+
+${performerInstruction}
+${languageInstruction}
+${relationshipInstruction}
+
+The song should be written in the *tonal spirit* of: ${style}.
+The song's *rhythmic feel* should be compatible with: ${instruments.join(', ')}.
+
+The song's theme, which dictates the story, is based on this:
+---
+${topic || "An uplifting song about friendship and creativity."}
+---
+Also, consider these qualities for the song's overall feel:
+- Narrative Dynamic: ${narrativeDynamic || 'Not specified'}
+- Mood: ${mood || 'Not specified'}
+- Genre Context: ${genre || 'Not specified'}
+- Pace: ${pace || 'Not specified'}
+- Texture: ${instrumentation || 'Not specified'}
+- Lyrical Theme: ${lyricalTheme || 'Not specified'}
+- Vocal Style: ${vocalStyle || 'Not specified'}
+- Drum Style: ${drumStyle || 'Not specified'}
+- Snare Sound: ${snareType || 'Not specified'}
+- Special Instrument Feature: ${specialInstrument || 'Not specified'}
+These should influence the lyrical tone, the structure, and the performance directions you provide in brackets.
+
+Your task is to generate a suitable song title and the full song lyrics. To ensure the song fits within typical generation limits (around 2-3 minutes including instrumentals), please create a concise song structure.
+For example, a good structure would be: [Intro], [Verse 1], [Chorus], [Verse 2], [Chorus], [Bridge], [Instrumental Solo], [Chorus], [Outro].
+Avoid overly long verses or too many repeating sections.
+    
+Follow these strict formatting rules for Suno AI:
+- Use tags like [Intro], [Verse], [Chorus], [Bridge], [Outro], etc., to structure the song.
+- Indicate non-lyrical vocalizations like (oohs), (aahs).
+- Use [Spoken Word] for spoken parts.
+- Use *sound effect* for sound effects, like *thunder clap*.
+- ${singers.length > 1 ? `Clearly label parts for each singer or group (e.g., ${singerLabels.join(', ')}, [Duet], [Choir]).` : `Label the singer part as ${singerLabels[0]}.`}
+    
+**Critically Important:** All musical or performance instructions MUST be enclosed in \`[]\` brackets. Do NOT write descriptive sentences about the music within the lyrics, such as 'The guitar comes in here'. Instead, use bracketed tags like \`[Acoustic guitar intro]\` or \`[Music fades out]\`. The lyrics should only contain the words to be sung and the bracketed instructions.
+
+Output a JSON object with two keys: "title" and "lyrics". The title must be in ${language}. The lyrics must follow the language instructions provided above.
+Do not include any other text or explanation outside of the JSON object.`;
     
     const requestPayload = {
         model: "gemini-2.5-flash",
@@ -266,7 +311,7 @@ For full choir parts, use the primary language, ${language}.`;
     }
 };
 
-export const generateReportIntroduction = async (apiKey: string, { title, expandedTopic, lyrics, singers }: { title: string, expandedTopic: string, lyrics: string, singers: Singer[] }, log: LogFn): Promise<string> => {
+export const generateReportIntroduction = async (apiKey: string, { title, topic, lyrics, singers }: { title: string, topic: string, lyrics: string, singers: Singer[] }, log: LogFn): Promise<string> => {
     const ai = getAi(apiKey);
     const singerNames = singers.map(s => s.name);
     const has = (name: string) => singerNames.includes(name);
@@ -277,24 +322,22 @@ export const generateReportIntroduction = async (apiKey: string, { title, expand
     // Only include Miranda and Annelies in the personal notes, per user request.
     if (has('Miranda Noor')) {
         characterContext += `- Miranda Noor: A passionate storyteller and musician (Indian/Dutch/American heritage). She is resilient, empathetic, and channels her experiences with identity and love into her music. She is in a romantic relationship with Annelies.\n`;
-        personalNotesInstructions.push(`- A personal note from Miranda Noor about the song's inspiration and meaning to her.`);
+        personalNotesInstructions.push(`- A personal note from Miranda Noor, reflecting on the song's origin and its meaning to her.`);
     }
     if (has('Annelies Brink')) {
         characterContext += `- Annelies Brink: A calm, supportive, and creative graphic designer and poet from the Netherlands. She is loyal and optimistic, often providing a grounding presence. She is in a romantic relationship with Miranda.\n`;
-        personalNotesInstructions.push(`- A personal note from Annelies Brink about her perspective on the song and its creation.`);
+        personalNotesInstructions.push(`- A personal note from Annelies Brink, reflecting on her perspective on the song and its creation.`);
     }
 
 
-    const prompt = `You are a music journalist and creative analyst. Your task is to write a comprehensive and detailed deep-dive analysis (between 500 and 1000 words) for a song report. This analysis should be insightful, artistic, and engaging.
-
-The report must include a main analysis of the song, followed by personal notes from each of the performers included in the context below.
+    const prompt = `You are a creative writer and biographer for the musical duo Noor (Miranda Noor and Annelies Brink). Your task is to write the introductory chapter for a song report about their new song, "${title}".
 
 **Song Details:**
 - Title: "${title}"
 - Singers: ${singerNames.join(', ')}
 - Core Story/Theme:
 ---
-${expandedTopic}
+${topic}
 ---
 - Lyrics:
 ---
@@ -306,24 +349,33 @@ ${characterContext || 'No specific character context provided.'}
 - General Theme: The artists explore themes of love, connection, and identity from a female perspective, often with a subtle sapphic sensibility. Their relationships (Miranda/Annelies are a couple) should inform the tone of their personal notes.
 
 **Instructions:**
-1.  **Main Analysis (Journalist Persona):**
-    - Begin with a compelling hook.
-    - Analyze the song's lyrical themes, narrative arc, and emotional journey.
-    - Discuss how the title reflects the song's content and style.
-    - Interpret symbolism and metaphors in the lyrics.
-    - Write in a sophisticated, journalistic style.
-    - Structure the analysis into multiple paragraphs for readability. Ensure there are line breaks between paragraphs.
+Your response must be structured in two distinct parts: "The Story" and "Personal Notes".
 
-2.  **Personal Notes (Character Personas):**
-    - Create the following sections, each with a short, heartfelt note from the respective singer's perspective.
+**Part 1: The Story**
+
+1.  **Fictional Origin Story:**
+    - As a creative writer, invent a compelling, fictional origin story for the song. This should be a small adventure or a moment of sudden inspiration.
+    - **CRITICAL:** This story **MUST** be written as three or more distinct paragraphs. Each paragraph should be separated by a newline. Do not merge them into a single block of text. For example:
+      Paragraph 1...
+      
+      Paragraph 2...
+      
+      Paragraph 3...
+    - The story should be engaging and weave in elements from the song's theme and lyrics.
+
+2.  **The Song's Message:**
+    - Immediately after the story, write a new, separate paragraph that explains the core message of the song in simple, plain language. This paragraph should start with something like "At its heart, the song is about..."
+
+**Part 2: Personal Notes**
+
+1.  **Singer Reflections:**
+    - After explaining the message, create the following sections, each with a short, heartfelt note from the singer's perspective.
     ${personalNotesInstructions.join('\n')}
-    - In each note, invent a plausible motivation or inspiration for the song that feels authentic to their described personality and their relationship with the other members.
+    - In each note, the singer should reflect on the fictional origin story you created and their personal connection to the song's message.
 
 **Output Format:**
-Please structure your response using Markdown headers. Do not add any other preamble or explanation. Your entire response should be the report content itself.
-Use the following format for the personal notes, creating a section for each singer included in the character context:
-## A Note from [Singer Name]
-[The singer's personal note here...]
+- Use Markdown for formatting. The personal notes must use \`## A Note from [Singer Name]\` headers.
+- The entire response should be the report content. Do not add any preamble.
 `;
 
     const requestPayload = {
@@ -336,12 +388,9 @@ Use the following format for the personal notes, creating a section for each sin
     try {
         const response = await ai.models.generateContent(requestPayload);
         log({ level: LogLevel.GEMINI, source: 'Gemini', header: 'Response: Generate Report Introduction', details: response });
-        // The introduction from the AI will now include its own markdown headers, so we combine it into a single text block.
-        const fullIntro = `
-# Song Analysis: ${title}
-${response.text.trim()}
-        `;
-        return fullIntro;
+        // The introduction from the AI will now include its own markdown headers for the notes,
+        // and the consuming components add the main chapter header. We just return the text.
+        return response.text.trim();
     } catch (error: any) {
         log({ level: LogLevel.ERROR, source: 'Gemini', header: 'Error Generating Report Introduction', details: { error: error.message, stack: error.stack } });
         throw error;
@@ -440,7 +489,7 @@ ${descriptions}
 - Describe their appearances based on the descriptions, their clothing, their emotional expressions, and their interaction with each other (and perhaps their instruments).
 - Focus on creating a visually stunning and emotionally resonant image.
 - Use descriptive keywords that text-to-image models understand well:
-    - For Composition: cinematic, dynamic angle, symmetrical, rule of thirds.
+    - For Composition: cinematic, dynamic angle, rule of thirds.
     - For Lighting: soft lighting, dramatic lighting, neon glow, golden hour, Rembrandt lighting.
     - For Detail: photorealistic, 8k, hyper-detailed, intricate, sharp focus.
     - For Mood: ethereal, energetic, melancholic, joyful, mysterious.

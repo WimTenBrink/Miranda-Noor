@@ -1,5 +1,9 @@
 
 
+
+
+
+
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Modal } from './Modal';
 import { useGenerationContext } from '../context/GenerationContext';
@@ -8,6 +12,7 @@ import { generateReportIntroduction, translateLyricsToEnglish } from '../service
 import { useSettings } from '../context/SettingsContext';
 import { useLog } from '../hooks/useLog';
 import saveAs from 'file-saver';
+import { playBeep } from '../utils/audio';
 
 
 interface ReportDialogProps {
@@ -188,23 +193,30 @@ ${aboutChapter}
                 return;
             }
 
+            let somethingGenerated = false;
             if (needsTranslation) {
                 const translation = await translateLyricsToEnglish(apiKey, state.lyrics, log);
                 setTranslatedLyrics(translation);
+                somethingGenerated = true;
             }
 
             if (needsIntroGeneration) {
                 const introText = await generateReportIntroduction(apiKey, {
                     title: state.title,
-                    expandedTopic: state.expandedTopic || state.topic,
+                    topic: state.topic,
                     lyrics: state.lyrics,
                     singers: state.singers
                 }, log);
                 setReportIntroduction(introText);
+                somethingGenerated = true;
             }
 
             // Snapshot the lyrics that were used for this generation attempt
             setReportLyricsSnapshot(state.lyrics);
+
+            if (somethingGenerated) {
+                playBeep();
+            }
         
         } catch (err: any) {
             const errorMessage = err.message || 'An unknown error occurred';
@@ -225,7 +237,6 @@ ${aboutChapter}
         state.language2,
         state.title,
         state.topic,
-        state.expandedTopic,
         state.singers,
         log,
         setReportIntroduction,

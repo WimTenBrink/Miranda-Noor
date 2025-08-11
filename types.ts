@@ -1,5 +1,5 @@
 
-
+export type SongRating = 'G' | 'PG' | 'PG-13' | 'R' | 'NC-17';
 
 export interface Singer {
   name: string;
@@ -24,7 +24,6 @@ export interface LogEntry {
 
 export interface GenerationState {
   topic: string;
-  expandedTopic: string;
   style: MusicStyle | null;
   mood: string | null;
   genre: string | null;
@@ -36,6 +35,7 @@ export interface GenerationState {
   snareType: string | null;
   specialInstrument: string | null;
   narrativeDynamic: string | null;
+  rating: SongRating;
   instruments: string[];
   singers: Singer[];
   title: string;
