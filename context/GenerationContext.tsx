@@ -2,7 +2,6 @@
 
 
 
-
 import React, { createContext, useState, useContext, ReactNode, Dispatch, SetStateAction, useEffect } from 'react';
 import { GenerationState, MusicStyle, StyleGroup, MusicStyleDefinition, LanguageGroup, Singer, QualityGroup } from '../types';
 
@@ -20,10 +19,17 @@ interface GenerationContextType {
   setInstrumentation: (instrumentation: string | null) => void;
   setVocalStyle: (vocalStyle: string | null) => void;
   setLyricalTheme: (lyricalTheme: string | null) => void;
+  setDrumStyle: (drumStyle: string | null) => void;
+  setSnareType: (snareType: string | null) => void;
+  setSpecialInstrument: (specialInstrument: string | null) => void;
+  setNarrativeDynamic: (narrativeDynamic: string | null) => void;
   setInstruments: (instruments: string[]) => void;
   setSingers: (singers: Singer[]) => void;
   setTitle: (title: string) => void;
   setLyrics: (lyrics: string) => void;
+  setReportIntroduction: (intro: string) => void;
+  setReportLyricsSnapshot: (lyrics: string) => void;
+  setTranslatedLyrics: (translation: string) => void;
   setLanguage: (language: string) => void;
   setLanguage2: (language: string) => void;
   addCoverImagePrompt: (prompt: string) => void;
@@ -63,10 +69,17 @@ const initialState: GenerationState = {
   instrumentation: null,
   vocalStyle: null,
   lyricalTheme: null,
+  drumStyle: null,
+  snareType: null,
+  specialInstrument: null,
+  narrativeDynamic: null,
   instruments: [],
   singers: [ALL_SINGERS[0], ALL_SINGERS[1]],
   title: '',
   lyrics: '',
+  reportIntroduction: '',
+  reportLyricsSnapshot: '',
+  translatedLyrics: '',
   language: 'English',
   language2: 'English',
   coverImagePrompts: [],
@@ -162,12 +175,19 @@ export const GenerationProvider: React.FC<{ children: ReactNode }> = ({ children
   const setInstrumentation = (instrumentation: string | null) => setState(s => ({ ...s, instrumentation }));
   const setVocalStyle = (vocalStyle: string | null) => setState(s => ({ ...s, vocalStyle }));
   const setLyricalTheme = (lyricalTheme: string | null) => setState(s => ({ ...s, lyricalTheme }));
+  const setDrumStyle = (drumStyle: string | null) => setState(s => ({ ...s, drumStyle }));
+  const setSnareType = (snareType: string | null) => setState(s => ({ ...s, snareType }));
+  const setSpecialInstrument = (specialInstrument: string | null) => setState(s => ({ ...s, specialInstrument }));
+  const setNarrativeDynamic = (narrativeDynamic: string | null) => setState(s => ({ ...s, narrativeDynamic }));
   const setInstruments = (instruments: string[]) => setState(s => ({ ...s, instruments }));
   const setSingers = (singers: Singer[]) => setState(s => ({ ...s, singers }));
   const setTitle = (title: string) => setState(s => ({ ...s, title }));
   const setLyrics = (lyrics: string) => setState(s => ({ ...s, lyrics }));
   const setLanguage = (language: string) => setState(s => ({ ...s, language }));
   const setLanguage2 = (language: string) => setState(s => ({ ...s, language2: language }));
+  const setReportIntroduction = (intro: string) => setState(s => ({ ...s, reportIntroduction: intro }));
+  const setReportLyricsSnapshot = (lyrics: string) => setState(s => ({ ...s, reportLyricsSnapshot: lyrics }));
+  const setTranslatedLyrics = (translation: string) => setState(s => ({...s, translatedLyrics: translation}));
   
   const addCoverImagePrompt = (prompt: string) => setState(s => ({...s, coverImagePrompts: [...s.coverImagePrompts, prompt]}));
   const addCoverImageUrl = (url: string) => setState(s => ({ 
@@ -199,10 +219,17 @@ export const GenerationProvider: React.FC<{ children: ReactNode }> = ({ children
     setInstrumentation,
     setVocalStyle,
     setLyricalTheme,
+    setDrumStyle,
+    setSnareType,
+    setSpecialInstrument,
+    setNarrativeDynamic,
     setInstruments,
     setSingers,
     setTitle,
     setLyrics,
+    setReportIntroduction,
+    setReportLyricsSnapshot,
+    setTranslatedLyrics,
     setLanguage,
     setLanguage2,
     addCoverImagePrompt,

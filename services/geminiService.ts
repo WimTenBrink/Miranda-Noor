@@ -1,11 +1,5 @@
 
 
-
-
-
-
-
-
 import { GoogleGenAI, GenerateContentResponse, Type } from "@google/genai";
 import { LogEntry, LogLevel, MusicStyle, Singer } from '../types';
 import { getCharacterDescriptions } from './characterService';
@@ -19,6 +13,10 @@ interface SelectorOptions {
     instrumentation: string | null;
     vocalStyle: string | null;
     lyricalTheme: string | null;
+    drumStyle: string | null;
+    snareType: string | null;
+    specialInstrument: string | null;
+    narrativeDynamic: string | null;
 }
 
 const getAi = (apiKey: string) => {
@@ -28,7 +26,7 @@ const getAi = (apiKey: string) => {
     return new GoogleGenAI({ apiKey });
 };
 
-export const expandTopic = async (apiKey: string, topic: string, singers: Singer[], { mood, genre, pace, instrumentation, vocalStyle, lyricalTheme }: SelectorOptions, log: LogFn): Promise<string> => {
+export const expandTopic = async (apiKey: string, topic: string, singers: Singer[], { mood, genre, pace, instrumentation, vocalStyle, lyricalTheme, drumStyle, snareType, specialInstrument, narrativeDynamic }: SelectorOptions, log: LogFn): Promise<string> => {
     const ai = getAi(apiKey);
     
     const singerNames = singers.map(s => s.name).join(', ');
@@ -51,7 +49,11 @@ When expanding the topic, subtly weave in the following user-selected qualities 
 - Pace/Dynamics: ${pace || 'Not specified'}
 - Texture: ${instrumentation || 'Not specified'}
 - Lyrical Theme: ${lyricalTheme || 'Not specified'}
+- Narrative Dynamic: ${narrativeDynamic || 'Not specified'}
 - Vocal Style: ${vocalStyle || 'Not specified'}
+- Drum Style: ${drumStyle || 'Not specified'}
+- Snare Sound: ${snareType || 'Not specified'}
+- Special Instrument Feature: ${specialInstrument || 'Not specified'}
 
 Focus on imagery, emotion, and potential narrative arcs. Do not write lyrics, just the underlying story and mood.
 
@@ -74,7 +76,7 @@ User topic: "${topic}"`;
     }
 };
 
-export const generateTitleAndLyrics = async (apiKey: string, { topic, style, instruments, language, language2, singers, mood, genre, pace, instrumentation, vocalStyle, lyricalTheme }: { topic: string, style: MusicStyle, instruments: string[], language: string, language2: string, singers: Singer[], mood: string | null, genre: string | null, pace: string | null, instrumentation: string | null, vocalStyle: string | null, lyricalTheme: string | null }, log: LogFn): Promise<{ title: string, lyrics: string }> => {
+export const generateTitleAndLyrics = async (apiKey: string, { topic, style, instruments, language, language2, singers, mood, genre, pace, instrumentation, vocalStyle, lyricalTheme, drumStyle, snareType, specialInstrument, narrativeDynamic }: { topic: string, style: MusicStyle, instruments: string[], language: string, language2: string, singers: Singer[], mood: string | null, genre: string | null, pace: string | null, instrumentation: string | null, vocalStyle: string | null, lyricalTheme: string | null, drumStyle: string | null, snareType: string | null, specialInstrument: string | null, narrativeDynamic: string | null }, log: LogFn): Promise<{ title: string, lyrics: string }> => {
     const ai = getAi(apiKey);
 
     const isBilingual = language.toLowerCase() !== language2.toLowerCase();
@@ -128,23 +130,30 @@ For full choir parts, use the primary language, ${language}.`;
         }
     }
 
-    const singerNames = singers.map(s => s.name);
-    const has = (name: string) => singerNames.includes(name);
+    let relationshipInstruction = '';
+    if (narrativeDynamic) {
+        relationshipInstruction = `The core narrative dynamic of the song is: **${narrativeDynamic}**. The lyrics MUST reflect this dynamic in the interactions and perspectives of the singers. All lyrics should be interpreted from a female perspective.`;
+    } else {
+        // Fallback to original hardcoded logic if no dynamic is chosen
+        const singerNames = singers.map(s => s.name);
+        const has = (name: string) => singerNames.includes(name);
 
-    let relationshipInstruction = 'A consistent underlying theme for all their songs is a subtle sapphic sensibility; the lyrics should reflect this, exploring themes of love, connection, and identity from a female perspective, regardless of the main topic.';
+        relationshipInstruction = 'A consistent underlying theme for all their songs is a subtle sapphic sensibility; the lyrics should reflect this, exploring themes of love, connection, and identity from a female perspective, regardless of the main topic.';
 
-    if (singers.length === 2) {
-        const isMirandaAndAnnelies = has('Miranda Noor') && has('Annelies Brink');
-        const isFannieAndEmma = has('Fannie de Jong') && has('Emma Vermeer');
+        if (singers.length === 2) {
+            const isMirandaAndAnnelies = has('Miranda Noor') && has('Annelies Brink');
+            const isFannieAndEmma = has('Fannie de Jong') && has('Emma Vermeer');
 
-        if (isMirandaAndAnnelies) {
-            relationshipInstruction += ' This song is for the couple Miranda and Annelies. The lyrics should reflect their deep, romantic bond.';
-        } else if (isFannieAndEmma) {
-            relationshipInstruction += ' This song is for the close friends Fannie and Emma. The lyrics should reflect their intimate and playful chemistry.';
+            if (isMirandaAndAnnelies) {
+                relationshipInstruction += ' This song is for the couple Miranda and Annelies. The lyrics should reflect their deep, romantic bond.';
+            } else if (isFannieAndEmma) {
+                relationshipInstruction += ' This song is for the close friends Fannie and Emma. The lyrics should reflect their intimate and playful chemistry.';
+            }
+        } else if (singers.length === 4 && has('Miranda Noor') && has('Annelies Brink') && has('Fannie de Jong') && has('Emma Vermeer')) {
+            relationshipInstruction += ' The group consists of two pairs: the romantic couple Miranda and Annelies, and the playful, close friends Fannie and Emma. The lyrics can explore the dynamics within and between these pairs.';
         }
-    } else if (singers.length === 4 && has('Miranda Noor') && has('Annelies Brink') && has('Fannie de Jong') && has('Emma Vermeer')) {
-        relationshipInstruction += ' The group consists of two pairs: the romantic couple Miranda and Annelies, and the playful, close friends Fannie and Emma. The lyrics can explore the dynamics within and between these pairs.';
     }
+
 
     const prompt = `You are an expert songwriter creating lyrics for a song.
     ${performerInstruction}
@@ -157,12 +166,16 @@ For full choir parts, use the primary language, ${language}.`;
     ${topic || "An uplifting song about friendship and creativity."}
     ---
     Also, consider these qualities for the song's overall feel:
+    - Narrative Dynamic: ${narrativeDynamic || 'Not specified'}
     - Mood: ${mood || 'Not specified'}
     - Genre Context: ${genre || 'Not specified'}
     - Pace: ${pace || 'Not specified'}
     - Texture: ${instrumentation || 'Not specified'}
     - Lyrical Theme: ${lyricalTheme || 'Not specified'}
     - Vocal Style: ${vocalStyle || 'Not specified'}
+    - Drum Style: ${drumStyle || 'Not specified'}
+    - Snare Sound: ${snareType || 'Not specified'}
+    - Special Instrument Feature: ${specialInstrument || 'Not specified'}
     These should influence the lyrical tone, the structure, and the performance directions you provide in brackets.
 
     Your task is to generate a suitable song title and the full song lyrics. To ensure the song fits within typical generation limits (around 2-3 minutes including instrumentals), please create a concise song structure.
@@ -273,6 +286,7 @@ export const generateReportIntroduction = async (apiKey: string, { title, expand
     let characterContext = '';
     const personalNotesInstructions: string[] = [];
 
+    // Only include Miranda and Annelies in the personal notes, per user request.
     if (has('Miranda Noor')) {
         characterContext += `- Miranda Noor: A passionate storyteller and musician (Indian/Dutch/American heritage). She is resilient, empathetic, and channels her experiences with identity and love into her music. She is in a romantic relationship with Annelies.\n`;
         personalNotesInstructions.push(`- A personal note from Miranda Noor about the song's inspiration and meaning to her.`);
@@ -281,19 +295,11 @@ export const generateReportIntroduction = async (apiKey: string, { title, expand
         characterContext += `- Annelies Brink: A calm, supportive, and creative graphic designer and poet from the Netherlands. She is loyal and optimistic, often providing a grounding presence. She is in a romantic relationship with Miranda.\n`;
         personalNotesInstructions.push(`- A personal note from Annelies Brink about her perspective on the song and its creation.`);
     }
-    if (has('Fannie de Jong')) {
-        characterContext += `- Fannie de Jong: An average Dutch girl with freckles, glasses, and a playful nature. She is a close friend (with benefits) of Emma Vermeer.\n`;
-        personalNotesInstructions.push(`- A personal note from Fannie de Jong about her experience with the song.`);
-    }
-    if (has('Emma Vermeer')) {
-        characterContext += `- Emma Vermeer: A Dutch girl with reddish, shoulder-length hair and an introspective personality. She is a close friend (with benefits) of Fannie de Jong.\n`;
-        personalNotesInstructions.push(`- A personal note from Emma Vermeer about her thoughts on the song.`);
-    }
 
 
     const prompt = `You are a music journalist and creative analyst. Your task is to write a comprehensive and detailed deep-dive analysis (between 500 and 1000 words) for a song report. This analysis should be insightful, artistic, and engaging.
 
-The report must include a main analysis of the song, followed by personal notes from each of the performers.
+The report must include a main analysis of the song, followed by personal notes from each of the performers included in the context below.
 
 **Song Details:**
 - Title: "${title}"
@@ -308,8 +314,8 @@ ${lyrics}
 ---
 
 **Character Context for Personal Notes:**
-${characterContext}
-- General Theme: The artists explore themes of love, connection, and identity from a female perspective, often with a subtle sapphic sensibility. Their relationships (Miranda/Annelies are a couple, Fannie/Emma are friends with benefits) should inform the tone of their personal notes.
+${characterContext || 'No specific character context provided.'}
+- General Theme: The artists explore themes of love, connection, and identity from a female perspective, often with a subtle sapphic sensibility. Their relationships (Miranda/Annelies are a couple) should inform the tone of their personal notes.
 
 **Instructions:**
 1.  **Main Analysis (Journalist Persona):**
@@ -318,15 +324,16 @@ ${characterContext}
     - Discuss how the title reflects the song's content and style.
     - Interpret symbolism and metaphors in the lyrics.
     - Write in a sophisticated, journalistic style.
+    - Structure the analysis into multiple paragraphs for readability. Ensure there are line breaks between paragraphs.
 
 2.  **Personal Notes (Character Personas):**
     - Create the following sections, each with a short, heartfelt note from the respective singer's perspective.
-    ${personalNotesInstructions.map(instr => `    ${instr}`).join('\n')}
+    ${personalNotesInstructions.join('\n')}
     - In each note, invent a plausible motivation or inspiration for the song that feels authentic to their described personality and their relationship with the other members.
 
 **Output Format:**
 Please structure your response using Markdown headers. Do not add any other preamble or explanation. Your entire response should be the report content itself.
-Use the following format for the personal notes, creating a section for each singer involved in the song:
+Use the following format for the personal notes, creating a section for each singer included in the character context:
 ## A Note from [Singer Name]
 [The singer's personal note here...]
 `;
@@ -349,6 +356,40 @@ ${response.text.trim()}
         return fullIntro;
     } catch (error: any) {
         log({ level: LogLevel.ERROR, source: 'Gemini', header: 'Error Generating Report Introduction', details: { error: error.message, stack: error.stack } });
+        throw error;
+    }
+};
+
+export const translateLyricsToEnglish = async (apiKey: string, lyrics: string, log: LogFn): Promise<string> => {
+    const ai = getAi(apiKey);
+    const prompt = `Translate the following song lyrics to English.
+    **Crucial instructions:**
+    1.  Preserve the original song structure perfectly. This includes all tags like [Verse], [Chorus], [Bridge], [Intro], [Outro], etc.
+    2.  Preserve all singer labels, such as [Miranda], [Annelies], [Duet], [Choir], etc.
+    3.  Preserve all language specifiers like [English] or [Dutch] if they appear before a singer label.
+    4.  Translate only the lyrical content. Do not translate the tags or labels themselves.
+    5.  The goal is a natural-sounding English translation that fits the song's context, not a literal word-for-word translation. Capture the meaning and emotion.
+    6.  Output ONLY the translated lyrics text. Do not add any preamble, explanation, or extra formatting.
+
+    Lyrics to translate:
+    ---
+    ${lyrics}
+    ---
+    `;
+
+    const requestPayload = {
+        model: "gemini-2.5-flash",
+        contents: prompt,
+    };
+    
+    log({ level: LogLevel.GEMINI, source: 'Gemini', header: 'Request: Translate Lyrics', details: requestPayload });
+
+    try {
+        const response = await ai.models.generateContent(requestPayload);
+        log({ level: LogLevel.GEMINI, source: 'Gemini', header: 'Response: Translate Lyrics', details: response });
+        return response.text.trim();
+    } catch (error: any) {
+        log({ level: LogLevel.ERROR, source: 'Gemini', header: 'Error Translating Lyrics', details: { error: error.message, stack: error.stack } });
         throw error;
     }
 };
@@ -435,7 +476,7 @@ Output only the final prompt as a single line of text. Do not include any other 
     }
 };
 
-export const suggestStyle = async (apiKey: string, topic: string, allStyles: string[], { mood, genre, pace, instrumentation, vocalStyle, lyricalTheme }: SelectorOptions, log: LogFn): Promise<MusicStyle | null> => {
+export const suggestStyle = async (apiKey: string, topic: string, allStyles: string[], { mood, genre, pace, instrumentation, vocalStyle, lyricalTheme, drumStyle, snareType, specialInstrument, narrativeDynamic }: SelectorOptions, log: LogFn): Promise<MusicStyle | null> => {
     const ai = getAi(apiKey);
     const prompt = `From the following list of music styles, which one best fits the song described below?
 Your answer must be ONLY the style name, exactly as it appears in the list. Do not add any other words, punctuation, or explanations.
@@ -451,7 +492,11 @@ Description of the Song:
 - Pace/Dynamics: ${pace || 'Not specified'}
 - Texture/Instrumentation: ${instrumentation || 'Not specified'}
 - Lyrical Theme: ${lyricalTheme || 'Not specified'}
+- Narrative Dynamic: ${narrativeDynamic || 'Not specified'}
 - Vocal Style: ${vocalStyle || 'Not specified'}
+- Drum Style: ${drumStyle || 'Not specified'}
+- Snare Sound: ${snareType || 'Not specified'}
+- Special Instrument Feature: ${specialInstrument || 'Not specified'}
 ---
 `;
 

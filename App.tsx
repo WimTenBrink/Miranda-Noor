@@ -1,9 +1,5 @@
 
 
-
-
-
-
 import React, { useState, useEffect, useCallback } from 'react';
 import JSZip from 'jszip';
 import saveAs from 'file-saver';
@@ -35,7 +31,7 @@ import { CollectionPage } from './pages/CollectionPage';
 import { KaraokePage } from './pages/KaraokePage';
 
 import { useLog } from './hooks/useLog';
-import { generateReportIntroduction } from './services/geminiService';
+import { generateReportIntroduction, translateLyricsToEnglish } from './services/geminiService';
 
 
 type ModalType = 'console' | 'tos' | 'about' | 'manual' | 'musicStyles' | 'report' | 'settings' | null;
@@ -45,7 +41,7 @@ const App: React.FC = () => {
     const [activeModal, setActiveModal] = useState<ModalType>(null);
     const [currentPage, setCurrentPage] = useState<Page>('topic');
     const [theme, setTheme] = useState<Theme>('dark');
-    const { state, isLoading, setIsLoading, reset, styleData, isStyleDataLoading } = useGenerationContext();
+    const { state, isLoading, setIsLoading, reset, styleData, qualityGroups, isStyleDataLoading, setReportIntroduction, setReportLyricsSnapshot, setTranslatedLyrics } = useGenerationContext();
     const { apiKey } = useSettings();
     const log = useLog();
 
@@ -115,21 +111,61 @@ const App: React.FC = () => {
             return;
         }
 
-        setIsLoading(true, 'Preparing your download...');
+        setIsLoading(true, 'Preparing your collection...');
 
         try {
-            const [introduction, aboutText] = await Promise.all([
-                 apiKey ? generateReportIntroduction(apiKey, {
+            const generateIntro = async (): Promise<string> => {
+                if (!apiKey) return "Introduction could not be generated as no API key is set.";
+                try {
+                    const introText = await generateReportIntroduction(apiKey, {
                         title: state.title,
                         expandedTopic: state.expandedTopic || state.topic,
                         lyrics: state.lyrics,
                         singers: state.singers
-                    }, log).catch(introError => {
-                        log({ level: LogLevel.WARN, source: 'App', header: 'Failed to generate introduction for ZIP', details: { error: introError.message } });
-                        return "Introduction could not be generated due to an API error.";
-                    }) : Promise.resolve("Introduction could not be generated as no API key is set."),
-                 fetch('/Noor-Brink.md').then(res => res.ok ? res.text() : '').catch(() => '')
+                    }, log);
+                    setReportIntroduction(introText);
+                    return introText;
+                } catch (introError: any) {
+                    log({ level: LogLevel.WARN, source: 'App', header: 'Failed to generate introduction for ZIP', details: { error: introError.message } });
+                    return "Introduction could not be generated due to an API error.";
+                }
+            };
+
+            const generateTranslation = async (): Promise<string> => {
+                if (!apiKey) return "";
+                try {
+                    const translation = await translateLyricsToEnglish(apiKey, state.lyrics, log);
+                    setTranslatedLyrics(translation);
+                    return translation;
+                } catch (err: any) {
+                    log({ level: LogLevel.WARN, source: 'App', header: 'Failed to generate translation for ZIP', details: { error: err.message } });
+                    return "Translation could not be generated due to an API error.";
+                }
+            };
+            
+            const lyricsChanged = state.lyrics !== state.reportLyricsSnapshot;
+            const needsIntroGeneration = !state.reportIntroduction || lyricsChanged;
+
+            const isBilingual = state.language.toLowerCase() !== state.language2.toLowerCase();
+            const primaryIsEnglish = state.language.toLowerCase() === 'english';
+            const secondaryIsEnglish = state.language2.toLowerCase() === 'english';
+            const songHasNonEnglish = !primaryIsEnglish || (isBilingual && !secondaryIsEnglish);
+            
+            const needsTranslationGeneration = songHasNonEnglish && (!state.translatedLyrics || lyricsChanged);
+
+            const introductionPromise = needsIntroGeneration ? generateIntro() : Promise.resolve(state.reportIntroduction);
+            const translationPromise = needsTranslationGeneration ? generateTranslation() : Promise.resolve(state.translatedLyrics);
+            const aboutTextPromise = fetch('/Noor-Brink.md').then(res => res.ok ? res.text() : '').catch(() => '');
+
+            const [introduction, translatedLyrics, aboutText] = await Promise.all([
+                introductionPromise,
+                translationPromise,
+                aboutTextPromise,
             ]);
+
+            if (needsIntroGeneration || needsTranslationGeneration) {
+                setReportLyricsSnapshot(state.lyrics);
+            }
             
             const currentYear = new Date().getFullYear();
             const processedAboutText = aboutText.replace(/{year}/g, currentYear.toString());
@@ -145,10 +181,45 @@ const App: React.FC = () => {
 
             const generateReportMarkdownForZip = (): string => {
                 const styleInfo = state.style ? styleData[state.style] : null;
+
+                const allQualitiesList = qualityGroups.flatMap(g => g.qualities.map(q => ({...q, groupKey: g.key, groupName: g.groupName})));
+                const selectedQualitiesDescriptions = Object.entries(state)
+                    .map(([key, value]) => {
+                        if (!value) return null;
+                        const quality = allQualitiesList.find(q => q.groupKey === key && q.name === value);
+                        if (quality) {
+                            return `- **${quality.groupName}: ${quality.name}** - *${quality.description}*`;
+                        }
+                        return null;
+                    })
+                    .filter(Boolean)
+                    .join('\n');
+                
                 const instrumentDescriptions = state.instruments.map(instName => {
                     const instrument = styleInfo?.instruments.find(i => i.name === instName);
                     return `- **${instName}:** ${instrument?.description || 'No description available.'}`;
                 }).join('\n');
+
+                const hasTranslation = songHasNonEnglish && translatedLyrics;
+                let chapterCount = 5;
+
+                const translationChapter = hasTranslation ? `
+---
+
+## Chapter ${chapterCount++}: English Translation
+**Original Language(s):** ${isBilingual ? `${state.language}, ${state.language2}` : state.language}
+### Translated Lyrics
+\`\`\`
+${translatedLyrics}
+\`\`\`
+` : '';
+
+                const aboutChapter = `
+---
+
+## Chapter ${chapterCount}: About the Artists
+${processedAboutText}
+`;
                 
                 return `
 # Song Report: ${state.title}
@@ -159,7 +230,10 @@ ${introduction}
 ---
 
 ## Chapter 2: Musical Blueprint
-**Style:** ${state.style || 'N/A'}
+**Style: ${state.style || 'N/A'}**
+${styleInfo ? `> *${styleInfo.description}*\n` : ''}
+### Chosen Qualities
+${selectedQualitiesDescriptions || 'No specific qualities selected.'}
 ### Instruments
 ${instrumentDescriptions || 'No instruments selected.'}
 
@@ -177,11 +251,8 @@ ${state.lyrics || 'No lyrics generated.'}
 ## Chapter 4: The Karaoke Session
 ### Karaoke Lyrics
 ${plainLyrics}
-
----
-
-## Chapter 5: About the Artists
-${processedAboutText}
+${translationChapter}
+${aboutChapter}
                 `.trim().replace(/^\s+/gm, '');
             };
 
@@ -196,6 +267,7 @@ ${processedAboutText}
                     .replace(/^### (.*$)/gim, '<h3>$1</h3>')
                     .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
                     .replace(/\*(.*?)\*/gim, '<em>$1</em>')
+                    .replace(/^> \*(.*)\*/gim, '<blockquote><em>$1</em></blockquote>')
                     .replace(/^---$/gim, '<hr style="margin-top: 2rem; margin-bottom: 2rem; border-top: 1px solid #d1d5db;" />')
                     .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
                     .replace(/```([\s\S]*?)```/g, (match, content) => `<pre style="background-color: #f3f4f6; padding: 1rem; border-radius: 0.375rem; white-space: pre-wrap; font-family: monospace; font-size: 0.875rem; color: #4b5563; overflow-x: auto;">${content.trim()}</pre>`);
@@ -207,7 +279,7 @@ ${processedAboutText}
                 html = html.split('\n\n').map(p => {
                     const trimmed = p.trim();
                     if (!trimmed) return '';
-                    if (trimmed.startsWith('<h') || trimmed.startsWith('<ul>') || trimmed.startsWith('<hr') || trimmed.startsWith('<div') || trimmed.startsWith('<pre')) {
+                    if (trimmed.startsWith('<h') || trimmed.startsWith('<ul>') || trimmed.startsWith('<hr') || trimmed.startsWith('<div') || trimmed.startsWith('<pre') || trimmed.startsWith('<blockquote>')) {
                         return trimmed;
                     }
                     return `<p style="line-height: 1.6;">${trimmed.replace(/\n/g, '<br/>')}</p>`;
@@ -219,7 +291,7 @@ ${processedAboutText}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Song Report: ${state.title}</title>
-    <style> body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; color: #1f2937; background-color: #f9fafb; } main { max-width: 800px; margin: auto; padding: 2rem; } h1, h2, h3 { color: #111827; } </style>
+    <style> body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; color: #1f2937; background-color: #f9fafb; } main { max-width: 800px; margin: auto; padding: 2rem; } h1, h2, h3 { color: #111827; } blockquote { border-left: 4px solid #d1d5db; padding-left: 1rem; margin-left: 0; font-style: italic; color: #4b5563; } </style>
 </head>
 <body>
     <main>
@@ -265,8 +337,8 @@ ${processedAboutText}
         }
     };
 
-    const showDownloadButton = currentPage === 'collection' && isCollectionReady;
-    const showReportButton = currentPage === 'collection' && isCollectionReady;
+    const showDownloadButton = (currentPage === 'collection' || currentPage === 'karaoke') && isCollectionReady;
+    const showReportButton = (currentPage === 'collection' || currentPage === 'karaoke') && isCollectionReady;
 
     return (
         <div className="h-screen flex flex-col bg-[var(--bg-primary)] text-[var(--text-primary)]">

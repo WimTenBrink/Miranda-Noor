@@ -1,5 +1,7 @@
 
 
+
+
 import React, { useEffect, useState } from 'react';
 import { Page } from '../types';
 import { useGenerationContext } from '../context/GenerationContext';
@@ -88,6 +90,10 @@ export const LyricsPage: React.FC<LyricsPageProps> = ({ setPage }) => {
                 instrumentation: state.instrumentation,
                 vocalStyle: state.vocalStyle,
                 lyricalTheme: state.lyricalTheme,
+                drumStyle: state.drumStyle,
+                snareType: state.snareType,
+                specialInstrument: state.specialInstrument,
+                narrativeDynamic: state.narrativeDynamic,
             }, log);
             
             if (mode === 'all' || mode === 'title') {
@@ -111,7 +117,7 @@ export const LyricsPage: React.FC<LyricsPageProps> = ({ setPage }) => {
         if (state.topic && !state.lyrics && !isLoading && state.style && apiKey && state.singers.length > 0) {
             performGeneration('all');
         }
-    }, [state.topic, state.lyrics, isLoading, state.style, apiKey, state.language, state.language2, state.singers, state.mood, state.genre, state.pace, state.instrumentation, state.vocalStyle, state.lyricalTheme]);
+    }, [state.topic, state.lyrics, isLoading, state.style, apiKey, state.language, state.language2, state.singers, state.mood, state.genre, state.pace, state.instrumentation, state.vocalStyle, state.lyricalTheme, state.drumStyle, state.snareType, state.specialInstrument, state.narrativeDynamic]);
 
     const copyToClipboard = (text: string, setter: React.Dispatch<React.SetStateAction<boolean>>) => {
         navigator.clipboard.writeText(text);

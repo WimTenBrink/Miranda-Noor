@@ -2,6 +2,7 @@
 
 
 
+
 import React, { useState } from 'react';
 import { Page } from '../types';
 import { useGenerationContext } from '../context/GenerationContext';
@@ -17,7 +18,7 @@ interface QualitiesPageProps {
 }
 
 export const QualitiesPage: React.FC<QualitiesPageProps> = ({ setPage }) => {
-    const { state, setStyle, setMood, setGenre, setPace, setInstrumentation, setVocalStyle, setLyricalTheme, setExpandedTopic, isLoading, setIsLoading, styleData, qualityGroups, isQualitiesDataLoading } = useGenerationContext();
+    const { state, setStyle, setMood, setGenre, setPace, setInstrumentation, setVocalStyle, setLyricalTheme, setDrumStyle, setSnareType, setSpecialInstrument, setNarrativeDynamic, setExpandedTopic, isLoading, setIsLoading, styleData, qualityGroups, isQualitiesDataLoading } = useGenerationContext();
     const { apiKey } = useSettings();
     const log = useLog();
     const [error, setError] = useState('');
@@ -29,6 +30,10 @@ export const QualitiesPage: React.FC<QualitiesPageProps> = ({ setPage }) => {
         instrumentation: setInstrumentation,
         vocalStyle: setVocalStyle,
         lyricalTheme: setLyricalTheme,
+        drumStyle: setDrumStyle,
+        snareType: setSnareType,
+        specialInstrument: setSpecialInstrument,
+        narrativeDynamic: setNarrativeDynamic,
     };
     
     const handleExpand = async () => {
@@ -51,6 +56,10 @@ export const QualitiesPage: React.FC<QualitiesPageProps> = ({ setPage }) => {
                  instrumentation: state.instrumentation,
                  vocalStyle: state.vocalStyle,
                  lyricalTheme: state.lyricalTheme,
+                 drumStyle: state.drumStyle,
+                 snareType: state.snareType,
+                 specialInstrument: state.specialInstrument,
+                 narrativeDynamic: state.narrativeDynamic,
             }, log);
             setExpandedTopic(expanded);
         } catch (err: any) {
@@ -80,6 +89,10 @@ export const QualitiesPage: React.FC<QualitiesPageProps> = ({ setPage }) => {
                      instrumentation: state.instrumentation,
                      vocalStyle: state.vocalStyle,
                      lyricalTheme: state.lyricalTheme,
+                     drumStyle: state.drumStyle,
+                     snareType: state.snareType,
+                     specialInstrument: state.specialInstrument,
+                     narrativeDynamic: state.narrativeDynamic,
                 }, log);
                 if (suggested) {
                     setStyle(suggested);

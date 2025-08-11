@@ -110,6 +110,25 @@
     ]
   },
   {
+    "groupName": "Narrative Dynamic",
+    "key": "narrativeDynamic",
+    "description": "Define the relationship or dynamic between the singers. This has a major impact on lyrical point-of-view and subtext. Choose 'Solo Narrative' for single singers.",
+    "qualities": [
+      {"name": "Romantic Couple", "description": "Deeply in love, partnership. Lyrics will be intimate and emotional."},
+      {"name": "New Romance", "description": "The excitement, uncertainty, and passion of a blossoming relationship."},
+      {"name": "Unrequited Love", "description": "One-sided love, longing, and yearning from one character's perspective."},
+      {"name": "Heartbreak / Breakup", "description": "The sorrow, anger, or reflection after a relationship ends. Can be one-sided or a duet of conflicting feelings."},
+      {"name": "Playful Friendship", "description": "Lighthearted, fun, and energetic chemistry between close friends."},
+      {"name": "Supportive Friendship", "description": "Themes of loyalty, trust, and being there for one another through thick and thin."},
+      {"name": "Found Family", "description": "A bond between unrelated people that is as strong as family. Themes of acceptance and belonging."},
+      {"name": "Rivalry", "description": "Competitive, tense, and challenging dynamics. Can be playful or serious."},
+      {"name": "Mentor & Mentee", "description": "A dynamic of guidance, teaching, and growth between two characters."},
+      {"name": "Familial Bond", "description": "Themes of family ties, could be parent-child, siblings, etc. with love, conflict, or history."},
+      {"name": "Solo Narrative (Introspective)", "description": "For a single singer. Lyrics will be personal, reflective, and focused on an internal journey."},
+      {"name": "Solo Narrative (Observational)", "description": "For a single singer. Lyrics will tell a story about the world, other people, or events."}
+    ]
+  },
+  {
     "groupName": "Genre & Style",
     "key": "genre",
     "description": "Provide a broad genre to guide the AI's understanding. This complements the specific style chosen later.",
@@ -193,6 +212,52 @@
       {"name": "Thick", "description": "A sound with many layers of instruments or voices."},
       {"name": "Thin", "description": "A sound with very few layers, often sparse and simple."},
       {"name": "Woodwind", "description": "Music dominated by woodwind instruments like flutes, clarinets, and oboes."}
+    ]
+  },
+  {
+    "groupName": "Drum Styles",
+    "key": "drumStyle",
+    "description": "Select a specific rhythmic style for the drums.",
+    "qualities": [
+      {"name": "Boom Bap", "description": "A classic hip-hop rhythm with a hard-hitting kick and snare (kick, snare, kick-kick, snare)."},
+      {"name": "Four-on-the-floor", "description": "A steady, driving beat with the kick drum on every beat (1, 2, 3, 4). Common in dance, house, and disco."},
+      {"name": "Breakbeat", "description": "A syncopated, non-straight drum pattern, often sampled from funk records."},
+      {"name": "Blast Beat", "description": "An extremely fast tempo drum pattern common in extreme metal, alternating between kick and snare."},
+      {"name": "One-drop", "description": "A reggae rhythm where the kick and snare accent the third beat of the bar."},
+      {"name": "Dembow", "description": "The characteristic rhythm of reggaeton (kick, snare, kick, snare-kick)."},
+      {"name": "Half-time", "description": "A rhythm where the backbeat (snare/clap) is on beat 3 of a 4/4 bar, making the groove feel slower. Common in dubstep and trap."},
+      {"name": "Shuffle", "description": "A rhythm based on triplets, giving it a swinging, bouncy feel. Common in blues and jazz."}
+    ]
+  },
+  {
+    "groupName": "Snare Sound",
+    "key": "snareType",
+    "description": "Choose the specific character of the snare drum or backbeat.",
+    "qualities": [
+      {"name": "Acoustic Snare", "description": "The natural sound of a standard snare drum, with a crisp, sharp crack."},
+      {"name": "Brush Snare", "description": "A softer, sustained 'swish' sound created by using wire brushes instead of sticks. Common in jazz."},
+      {"name": "Rimshot", "description": "A loud, sharp, cracking sound produced by hitting the rim and the head of the snare simultaneously."},
+      {"name": "Cross-stick", "description": "A quiet, clicking 'tock' sound made by laying the stick across the snare and striking the rim."},
+      {"name": "808 Snare", "description": "A classic electronic snare sound from the Roland TR-808, known for its sharp, snappy character."},
+      {"name": "909 Snare", "description": "A punchy, powerful electronic snare from the Roland TR-909, often with adjustable 'snap' and 'tone'."},
+      {"name": "Gated Reverb Snare", "description": "An iconic 80s sound: a loud snare with a large reverb that is abruptly cut off."},
+      {"name": "Hand Clap", "description": "Using the sound of a hand clap, often layered, as the backbeat instead of a snare drum."}
+    ]
+  },
+  {
+    "groupName": "Special & Ancient Instruments",
+    "key": "specialInstrument",
+    "description": "Add the unique character of a special, ancient, or unconventional instrument to the song's texture.",
+    "qualities": [
+      {"name": "Bagpipes", "description": "A wind instrument with a powerful, droning sound, traditionally associated with Scotland."},
+      {"name": "Crwth", "description": "A bowed lyre from Wales, with melody and drone strings, creating a raw, ancient sound."},
+      {"name": "Didgeridoo", "description": "An Australian Aboriginal wind instrument that produces a deep, resonant drone."},
+      {"name": "Duduk", "description": "An ancient Armenian double-reed woodwind instrument with a mournful, haunting sound."},
+      {"name": "Hurdy-gurdy", "description": "A stringed instrument that produces sound by a hand-crank-turned, rosined wheel rubbing against the strings."},
+      {"name": "Jew's Harp", "description": "A small instrument played in the mouth, creating a twanging, hypnotic sound."},
+      {"name": "Ocarina", "description": "A small, ancient wind instrument, typically made of ceramic or clay, with a soft, hollow tone."},
+      {"name": "Sitar", "description": "A large, long-necked Indian stringed instrument with a distinctive, shimmering tone."},
+      {"name": "Theremin", "description": "An electronic instrument controlled without physical contact, producing an eerie, gliding sound."}
     ]
   }
 ]

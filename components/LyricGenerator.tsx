@@ -43,6 +43,10 @@ export const LyricGenerator: React.FC = () => {
                 instrumentation: state.instrumentation,
                 vocalStyle: state.vocalStyle,
                 lyricalTheme: state.lyricalTheme,
+                drumStyle: state.drumStyle,
+                snareType: state.snareType,
+                specialInstrument: state.specialInstrument,
+                narrativeDynamic: state.narrativeDynamic,
             }, log);
             setLyrics(`Title: ${result.title}\n\n${result.lyrics}`);
             log({ level: LogLevel.INFO, source: 'App', header: 'Lyrics generated successfully', details: { prompt } });

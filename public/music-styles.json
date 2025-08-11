@@ -1255,6 +1255,381 @@
         }
     },
     {
+        "name": "Opera Fusion",
+        "description": "A genre-bending category that combines the dramatic, powerful vocals of opera with the instrumentation and conventions of other modern styles.",
+        "styles": {
+            "Opera Rock": {
+                "description": "Combines the powerful, belted vocals and grand arrangements of rock music with the trained, dramatic flair of operatic singing. Think Queen's 'Bohemian Rhapsody'.",
+                "instruments": [
+                    { "name": "Operatic Female Vocals", "description": "A fusion of rock belting and classical operatic technique.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Distorted Guitar Riffs", "description": "The powerful, driving force of hard rock.", "default": true },
+                    { "name": "Epic Drums", "description": "Large, powerful, and dramatic drum sound.", "default": true },
+                    { "name": "Symphony Orchestra", "description": "Adds a layer of cinematic grandeur.", "default": true },
+                    { "name": "Choir", "description": "Provides epic backing harmonies." }
+                ]
+            },
+            "Opera Punk": {
+                "description": "An aggressive, high-energy fusion of raw punk rock and dramatic opera. Fast tempos, simple power chords, and sneering vocals clash with soaring arias.",
+                "instruments": [
+                    { "name": "Operatic/Sneering Vocals", "description": "Vocals that switch between raw punk energy and dramatic soprano lines.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Fast Power Chords", "description": "Simple, distorted, and aggressive guitar playing.", "default": true },
+                    { "name": "Fast & Loud Drums", "description": "High-speed, aggressive punk drumming.", "default": true },
+                    { "name": "Driving Bassline", "description": "A simple but fast and melodic bassline.", "default": true },
+                    { "name": "Distorted Violin", "description": "A classical instrument played with punk aggression." }
+                ]
+            },
+            "Opera Rap": {
+                "description": "Blends the rhythmic, lyrical complexity of hip-hop with the melodic, dramatic hooks of opera. Verses are rapped over trap or boom-bap beats, with powerful operatic choruses.",
+                "instruments": [
+                    { "name": "Operatic Vocals (Hooks)", "description": "Soaring, dramatic choruses sung in an operatic style.", "default": true },
+                    { "name": "Female Rapper (Verses)", "description": "Rhythmic, intricate verses.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "808 Sub Bass", "description": "The deep, booming bass of modern hip-hop.", "default": true },
+                    { "name": "Trap Hi-Hats", "description": "Skittering, complex hi-hat patterns.", "default": true },
+                    { "name": "Sampled Orchestra Hits", "description": "Iconic stabs of orchestral sound used for punctuation." }
+                ]
+            },
+            "Gothic Opera Metal": {
+                "description": "A dark, dramatic, and heavy fusion. Combines the gloom of goth rock, the power of heavy metal, and the grandeur of opera, often with a melancholic and romantic tone.",
+                "instruments": [
+                    { "name": "Operatic Soprano", "description": "A soaring, classically trained female voice.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Heavy Distorted Guitar", "description": "The powerful, riff-based backbone of heavy metal.", "default": true },
+                    { "name": "Double Bass Drums", "description": "Fast, powerful, and relentless drumming.", "default": true },
+                    { "name": "Pipe Organ", "description": "Adds a classic gothic, church-like horror feel.", "default": true },
+                    { "name": "Symphonic Choir", "description": "An epic choir adding to the dramatic atmosphere." }
+                ]
+            },
+            "Opera Pop": {
+                "description": "A fusion of accessible pop structures and catchy melodies with the powerful, dramatic vocals of opera. High drama meets high gloss production.",
+                "instruments": [
+                    { "name": "Operatic Vocals", "description": "The power and drama of opera combined with pop sensibilities.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Four-on-the-floor Beat", "description": "The driving, danceable beat of pop music.", "default": true },
+                    { "name": "Synthesizer Hook", "description": "A catchy, memorable synth melody.", "default": true },
+                    { "name": "Synth Bass", "description": "A clean, powerful electronic bassline." }
+                ]
+            },
+            "Opera Dubstep": {
+                "description": "A genre defined by contrasts: the ethereal, sustained notes of operatic vocals meet the heavy, syncopated, and bass-heavy world of dubstep, creating a dramatic build-and-drop structure.",
+                "instruments": [
+                    { "name": "Ethereal Operatic Vocals", "description": "Soaring, reverb-heavy vocals used in the build-up sections.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Wobble Bass", "description": "The heavy, oscillating bass sound that defines the dubstep 'drop'.", "default": true },
+                    { "name": "Half-time Drum Beat", "description": "A slow, heavy groove that emphasizes the bass.", "default": true },
+                    { "name": "Sampled/Chopped Aria", "description": "Snippets of operatic vocals used as a rhythmic or melodic element in the drop." }
+                ]
+            },
+            "Opera Country": {
+                "description": "A strange but compelling fusion of the rustic, storytelling tradition of country music with the high-drama of opera. Lyrical tales of love and loss backed by steel guitars and soaring arias.",
+                "instruments": [
+                    { "name": "Operatic Vocals", "description": "Powerful, dramatic vocals delivering country-themed lyrics.", "default": true },
+                    { "name": "Country Twang Vocals", "description": "Used for harmony or call-and-response.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Pedal Steel Guitar", "description": "The iconic 'crying' sound of country music.", "default": true },
+                    { "name": "Acoustic Guitar", "description": "Provides the rhythmic, folksy backbone.", "default": true },
+                    { "name": "Fiddle", "description": "Plays mournful melodies and solos." }
+                ]
+            },
+            "Opera Jazz": {
+                "description": "A sophisticated blend of the improvisational, harmonically complex world of jazz with the structured drama of opera. Features scat singing alongside arias over a swinging rhythm section.",
+                "instruments": [
+                    { "name": "Operatic Vocals", "description": "Dramatic arias and powerful vocal lines.", "default": true },
+                    { "name": "Scat Singing", "description": "Improvised vocal solos using nonsense syllables.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Walking Double Bass", "description": "The classic, swinging pulse of jazz.", "default": true },
+                    { "name": "Jazz Piano", "description": "Plays complex, sophisticated chord voicings.", "default": true },
+                    { "name": "Drums with Brushes", "description": "A subtle, swinging rhythm." }
+                ]
+            },
+            "Opera Folk": {
+                "description": "Combines the narrative, acoustic-based tradition of folk music with the powerful vocal performance of opera, creating epic ballads and dramatic tales.",
+                "instruments": [
+                    { "name": "Operatic Vocals", "description": "Delivering a folk story with the power of an opera singer.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Acoustic Guitar", "description": "The simple, strummed heart of the song.", "default": true },
+                    { "name": "Fiddle", "description": "Adds a rustic, melodic layer.", "default": true },
+                    { "name": "Bodhrán", "description": "A simple frame drum providing a hypnotic rhythm." }
+                ]
+            },
+            "Opera Ambient": {
+                "description": "An atmospheric and ethereal style. Soaring, wordless operatic vocals float over deep, evolving synthesizer pads and soundscapes, creating a vast and heavenly texture.",
+                "instruments": [
+                    { "name": "Wordless Operatic Vocals", "description": "Used as a texture, like a human synthesizer.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Synth Pads", "description": "Long, evolving chords that create atmosphere.", "default": true },
+                    { "name": "Drones", "description": "A constant, low-frequency hum that grounds the track.", "default": true },
+                    { "name": "Reverb-drenched Piano", "description": "Adds sparse, delicate melodic touches." }
+                ]
+            },
+            "Cyber-Opera": {
+                "description": "A futuristic, dystopian fusion of opera and industrial/EBM music. Features glitched, auto-tuned operatic vocals over harsh synthesizers and mechanical, distorted drum beats.",
+                "instruments": [
+                    { "name": "Glitched/Autotuned Opera Vocals", "description": "A beautiful voice processed and distorted to sound inhuman.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Harsh Synthesizers", "description": "Abrasive, noisy, and dissonant synth textures.", "default": true },
+                    { "name": "Distorted Drum Machine", "description": "Aggressive, heavy, and mechanical beats.", "default": true },
+                    { "name": "Industrial Percussion", "description": "The sounds of metal, machinery, and static." }
+                ]
+            }
+        }
+    },
+    {
+        "name": "Fantasy & Roleplaying",
+        "description": "Music inspired by the rich worlds of Dungeons & Dragons and other fantasy settings. Each style is crafted to evoke the culture, sound, and feeling of a specific fantasy race.",
+        "styles": {
+            "Elven": {
+                "description": "Graceful, ancient, and magical music. Features ethereal vocals, delicate strings, and woodwinds, creating a sense of timeless beauty and connection to nature.",
+                "instruments": [
+                    { "name": "Ethereal Vocals", "description": "Light, airy, and beautiful singing, often in an ancient or fictional language.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Harp", "description": "The quintessential instrument of elven courts, playing flowing arpeggios.", "default": true },
+                    { "name": "Flute", "description": "Carries light, agile, and beautiful melodies.", "default": true },
+                    { "name": "Celesta", "description": "Adds a sparkling, magical, bell-like quality.", "default": true },
+                    { "name": "Soft String Swells", "description": "Gentle, sustained notes from violins and cellos." }
+                ]
+            },
+            "Dwarven": {
+                "description": "Sturdy, rhythmic, and resonant music from deep within the mountains. Features deep chanted vocals, heavy drums, and the sound of hammers on anvils.",
+                "instruments": [
+                    { "name": "Deep Chanted Vocals", "description": "A choir of deep voices singing in harmony, often recounting tales of glory or craft.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Heavy Drums (like hammers)", "description": "A powerful, steady beat that evokes the rhythm of a forge.", "default": true },
+                    { "name": "War Horns", "description": "Deep, resonant horns that echo through stone halls.", "default": true },
+                    { "name": "Metallic Percussion", "description": "The actual sound of hammers striking anvils, used rhythmically.", "default": true },
+                    { "name": "Low Brass Section", "description": "Trombones and tubas providing a heavy, foundational sound." }
+                ]
+            },
+            "Orcish": {
+                "description": "Primal, aggressive, and powerful war music. Built on the sounds of guttural war chants, massive war drums, and intimidating horns.",
+                "instruments": [
+                    { "name": "Guttural War Chants", "description": "Aggressive, rhythmic shouting from a war band.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "War Drums (Taiko)", "description": "Huge, booming drums beaten with great force.", "default": true },
+                    { "name": "Intimidating War Horns", "description": "Loud, raw horns used to signal battle.", "default": true },
+                    { "name": "Heavy Guitar Riffs", "description": "A modern take, using low-tuned, distorted guitars to add power.", "default": false }
+                ]
+            },
+            "Halfling": {
+                "description": "Simple, rustic, and joyful music perfect for a countryside festival. Features cheerful vocals and light, acoustic folk instruments.",
+                "instruments": [
+                    { "name": "Cheerful Vocals", "description": "Simple, happy songs about food, drink, and home.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Ukulele", "description": "A small, cheerful stringed instrument.", "default": true },
+                    { "name": "Mandolin", "description": "Adds a bright, folksy texture.", "default": true },
+                    { "name": "Tin Whistle", "description": "Plays simple, catchy melodies.", "default": true },
+                    { "name": "Acoustic Guitar", "description": "Provides the basic chord structure." }
+                ]
+            },
+            "Giant": {
+                "description": "Slow, immense, and resonant music. Features deep, booming vocals and massive, slow-paced instruments to convey a sense of incredible scale.",
+                "instruments": [
+                    { "name": "Deep, Booming Vocals", "description": "Very slow, low-pitched singing or chanting.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Massive Drums (Timpani)", "description": "Huge drums played slowly and deliberately.", "default": true },
+                    { "name": "Low Brass (Tuba)", "description": "The lowest, most powerful brass instruments.", "default": true },
+                    { "name": "Low Synth Drone", "description": "A subsonic hum that adds to the sense of weight and scale.", "default": true }
+                ]
+            },
+            "Minotaur": {
+                "description": "Music that is both powerful and labyrinthine. Features aggressive chants, horn melodies that twist and turn, and a heavy, unstoppable rhythm.",
+                "instruments": [
+                    { "name": "Aggressive Chants", "description": "Forceful, guttural chants that echo with primal rage.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Cretan Lyra", "description": "A Greek pear-shaped bowed instrument, hinting at the mythic origins.", "default": true },
+                    { "name": "Heavy Stomping Rhythm", "description": "A powerful, intimidating beat that sounds like heavy hooves on stone.", "default": true },
+                    { "name": "Maze-like Horn Melodies", "description": "French Horns playing twisting, turning melodies that seem to get lost.", "default": true }
+                ]
+            },
+            "Gnomish": {
+                "description": "Inventive, whimsical, and intricate music. Full of the sounds of clockwork, tiny bells, and playful woodwinds, reflecting a love for tinkering and illusion.",
+                "instruments": [
+                    { "name": "Quirky/Playful Vocals", "description": "Fast-paced, clever lyrics sung with a twinkle in the eye.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Glockenspiel", "description": "A small, bell-like instrument for intricate melodies.", "default": true },
+                    { "name": "Music Box", "description": "Adds a delicate, mechanical, and magical quality.", "default": true },
+                    { "name": "Clockwork Percussion", "description": "The sounds of ticking, whirring, and clicking used as rhythm.", "default": true },
+                    { "name": "Piccolo and Bassoon", "description": "The highest and a low, comical woodwind for contrast." }
+                ]
+            },
+            "Goblin": {
+                "description": "Manic, greedy, and chaotic music. Built from makeshift percussion, detuned and squeaky instruments, and shrill, excited vocals.",
+                "instruments": [
+                    { "name": "Shrill, Chaotic Vocals", "description": "Excited, high-pitched, and often overlapping group vocals.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Makeshift Percussion", "description": "The sound of pots, pans, and junk being hit for rhythm.", "default": true },
+                    { "name": "Detuned Banjo", "description": "A banjo that is slightly out of tune, creating a clumsy, chaotic sound.", "default": true },
+                    { "name": "Squeaky Strings", "description": "A violin playing high, screechy, and unsettling notes." }
+                ]
+            },
+            "Tiefling": {
+                "description": "Dark, melancholic, and mysterious music reflecting an infernal heritage. Features somber strings, gothic keyboards, and brooding, introspective vocals.",
+                "instruments": [
+                    { "name": "Dark, Melancholic Vocals", "description": "Singing that is both beautiful and sad, hinting at a tragic history.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Viola/Cello", "description": "The dark, rich tones of lower string instruments.", "default": true },
+                    { "name": "Harpsichord", "description": "Adds a baroque, gothic, and slightly sinister quality.", "default": true },
+                    { "name": "Ominous Choir", "description": "A distant, menacing choir singing in a low register.", "default": true }
+                ]
+            },
+            "Dragonborn": {
+                "description": "Majestic, proud, and powerful music. Features epic choirs, booming drums, and fanfare brass to evoke a sense of draconic power and honor.",
+                "instruments": [
+                    { "name": "Majestic Chants", "description": "Proud, powerful singing in a draconic-sounding language.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Epic Choir", "description": "A full choir providing a massive, powerful backdrop.", "default": true },
+                    { "name": "Booming War Drums", "description": "A slow, powerful, and intimidating rhythm.", "default": true },
+                    { "name": "Fanfare Trumpets", "description": "Announces the presence of draconic royalty or power.", "default": true }
+                ]
+            },
+            "Merfolk/Siren": {
+                "description": "Aquatic, enchanting, and mysterious music from beneath the waves. Features ethereal, reverb-heavy vocals and crystalline, shimmering instruments.",
+                "instruments": [
+                    { "name": "Ethereal Underwater Vocals", "description": "Beautiful, wordless singing drenched in reverb and echo.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Glass Harmonica", "description": "Produces a pure, celestial, and watery singing tone.", "default": true },
+                    { "name": "Harp", "description": "Adds a flowing, magical quality.", "default": true },
+                    { "name": "Chimes", "description": "Creates a sparkling, shimmering texture like light on water." }
+                ]
+            },
+            "Centaur": {
+                "description": "Wild, free, and rhythmic music with a connection to nature. Dominated by a galloping percussive rhythm and rustic, melodic wind instruments.",
+                "instruments": [
+                    { "name": "Strong, Melodic Vocals", "description": "Singing that speaks of the wind, plains, and forests.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Galloping Percussion", "description": "Djembe and congas playing a fast, horse-like rhythm.", "default": true },
+                    { "name": "Pan Flute", "description": "A rustic wind instrument with a breathy, natural sound.", "default": true },
+                    { "name": "Acoustic Guitar", "description": "Provides a simple, rhythmic chordal backing.", "default": true }
+                ]
+            },
+            "Fairy/Pixie": {
+                "description": "Tiny, magical, and mischievous music. Very high-pitched, sparkling, and light, featuring delicate bells and giggling vocal textures.",
+                "instruments": [
+                    { "name": "High-pitched, Giggling Vocals", "description": "Wordless, playful vocalizations.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Celesta", "description": "The primary melodic instrument, with a sparkling, magical tone.", "default": true },
+                    { "name": "Chimes", "description": "Adds a sense of delicate magic and sparkle.", "default": true },
+                    { "name": "Pizzicato Strings", "description": "Plucked violins creating a light, bouncy texture.", "default": true }
+                ]
+            },
+            "Lizardfolk": {
+                "description": "Primal, reptilian, and tribal music. Features guttural, hissing vocals and a rhythm section made of wood, bone, and stretched hides.",
+                "instruments": [
+                    { "name": "Hissing/Guttural Vocals", "description": "A mix of sung chants and reptilian hisses.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Tribal Log Drums", "description": "Wooden drums that provide a deep, resonant, and primal beat.", "default": true },
+                    { "name": "Bone Flute", "description": "A simple flute with an airy, primitive sound.", "default": true },
+                    { "name": "Didgeridoo Drone", "description": "A constant, low-pitched hum that grounds the track.", "default": true }
+                ]
+            },
+            "Tabaxi (Catfolk)": {
+                "description": "Graceful, curious, and sly music with a nimble feel. Blends smooth vocals with light, agile percussion and jazzy stringed instruments.",
+                "instruments": [
+                    { "name": "Agile, Smooth Vocals", "description": "Singing that is both playful and sleek.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Light Percussion (Bongos)", "description": "Adds a nimble, rhythmic, and playful quality.", "default": true },
+                    { "name": "Acoustic Guitar", "description": "Plays fast, intricate, and melodic lines.", "default": true },
+                    { "name": "Kalimba", "description": "A thumb piano with a delicate, plucking sound.", "default": true }
+                ]
+            },
+            "Aasimar (Celestial)": {
+                "description": "Divine, holy, and radiant music that evokes the heavens. Features angelic choirs, grand pipe organs, and soaring string arrangements.",
+                "instruments": [
+                    { "name": "Angelic Choir", "description": "A beautiful, perfect choir singing in celestial harmony.", "default": true },
+                    { "name": "Soprano (Miranda)", "description": "Higher harmony or lead vocal part for Miranda.", "default": true },
+                    { "name": "Alto (Annelies)", "description": "Lower harmony or lead vocal part for Annelies.", "default": true },
+                    { "name": "Pipe Organ", "description": "The grand, majestic sound of a cathedral organ.", "default": true },
+                    { "name": "Harp", "description": "Adds a flowing, heavenly texture.", "default": true },
+                    { "name": "Orchestral Strings", "description": "Soaring, beautiful melodies played by a full string section.", "default": true }
+                ]
+            }
+        }
+    },
+    {
+        "name": "Strange & Eclectic",
+        "description": "A collection of styles for the musically adventurous, combining instruments and genres in unusual, unexpected, and evocative ways.",
+        "styles": {
+            "Highland Cathedral": {
+                "description": "A powerful and majestic fusion of Scottish tradition and sacred music. The soaring call of the bagpipes meets the grand, resonant chords of a pipe organ.",
+                "instruments": [
+                    { "name": "Great Highland Bagpipes", "description": "The powerful, iconic bagpipes of Scotland playing a bold melody.", "default": true },
+                    { "name": "Pipe Organ", "description": "The grand, majestic sound of a cathedral organ providing harmony.", "default": true },
+                    { "name": "Epic Drums", "description": "Large, booming percussion adding a cinematic, martial feel.", "default": true },
+                    { "name": "Choir", "description": "Adds a layer of human, spiritual grandeur to the sound.", "default": true }
+                ]
+            },
+            "Bardic Synthesizer": {
+                "description": "Ancient folk traditions meet 1980s retro-futurism. The raw, rustic sound of a bowed lyre is paired with warm analog synthesizers and a driving electronic beat.",
+                "instruments": [
+                    { "name": "Crwth/Tagelharpa", "description": "A bowed lyre with a raw, ancient sound playing the main melody.", "default": true },
+                    { "name": "Analog Synthesizer", "description": "Provides warm, vintage basslines and atmospheric pads.", "default": true },
+                    { "name": "Drum Machine", "description": "A classic, punchy 80s electronic drum beat.", "default": true },
+                    { "name": "Chanted Vocals", "description": "Storytelling vocals with a bardic, historical feel.", "default": true }
+                ]
+            },
+            "Jungle Tek": {
+                "description": "A fusion of organic and electronic. The complex, layered rhythms of organic, tribal percussion are laid over a hard, driving four-on-the-floor techno beat.",
+                "instruments": [
+                    { "name": "Synthesizer", "description": "Plays hypnotic, repetitive melodic or rhythmic patterns.", "default": true },
+                    { "name": "Bongos and Congas", "description": "Provide a fast, complex, and organic top layer of percussion.", "default": true },
+                    { "name": "Tribal Chants", "description": "Rhythmic vocalizations that add a human, primal element.", "default": true },
+                    { "name": "Driving Techno Beat", "description": "A hard, 4/4 kick drum that provides relentless energy.", "default": true }
+                ]
+            },
+            "Desert Dub": {
+                "description": "The sounds of the Silk Road meet the sound systems of Jamaica. Middle-eastern stringed instruments play hypnotic melodies over a deep, heavy, echo-laden dub bassline and rhythm.",
+                "instruments": [
+                    { "name": "Oud/Sitar", "description": "A middle-eastern or Indian stringed instrument playing a hypnotic melody.", "default": true },
+                    { "name": "Heavy Dub Bassline", "description": "A deep, powerful, and rhythmically simple bassline.", "default": true },
+                    { "name": "Echoing Drum Machine", "description": "A simple beat with heavy use of delay and reverb effects.", "default": true },
+                    { "name": "Melodica", "description": "A breathy keyboard instrument often used in classic dub music.", "default": true }
+                ]
+            },
+            "Tundra Scape": {
+                "description": "A cold, vast, and primal soundscape from the frozen north. Features the deep tones of throat singing and didgeridoo over the sharp, cracking sounds of ice.",
+                "instruments": [
+                    { "name": "Throat Singing", "description": "A low, resonant, and powerful vocal technique.", "default": true },
+                    { "name": "Ice Percussion", "description": "Samples of cracking, shifting, and breaking ice used as rhythmic elements.", "default": true },
+                    { "name": "Low Synth Drone", "description": "A very low, constant hum that evokes a vast, empty landscape.", "default": true },
+                    { "name": "Didgeridoo", "description": "Adds another layer of deep, primal, and resonant drone.", "default": true }
+                ]
+            },
+            "Steampunk Orchestra": {
+                "description": "A mechanical, Victorian-era orchestra powered by steam and clockwork. The sound is a mix of classical elegance and industrial grit.",
+                "instruments": [
+                    { "name": "Clockwork Percussion", "description": "The sounds of ticking, whirring, and gears used as the rhythm section.", "default": true },
+                    { "name": "Harpsichord", "description": "Provides a baroque, intricate, and slightly mechanical feel.", "default": true },
+                    { "name": "Brass Section", "description": "A powerful, slightly tarnished-sounding brass ensemble.", "default": true },
+                    { "name": "Distorted Electric Cello", "description": "A classical instrument played with a gritty, industrial edge.", "default": true }
+                ]
+            }
+        }
+    },
+    {
         "name": "World Pop",
         "description": "A category for contemporary pop music from around the globe that has achieved international recognition. These styles often fuse local musical traditions with global pop production.",
         "styles": {

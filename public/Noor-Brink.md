@@ -18,4 +18,17 @@ Our work is a continuous, shared exploration of the ideas, struggles, and joys t
 This is our corner of the world, shared with love and creativity.
 
 ---
+
+## The Broader Ensemble
+
+While Miranda and Annelies form the core of Noor, the band's sound is often enriched by the contributions of their close friends, who serve as background singers and collaborators:
+
+*   **Fannie de Jong:** A vibrant and playful presence, Fannie provides harmonies that add a bright, effervescent quality to the music.
+*   **Emma Vermeer:** With her steady and warm vocals, Emma brings a grounding depth to the group's sound, completing their rich vocal tapestry.
+
+## A Note of Thanks
+
+This application was brought to life through the dedicated efforts of **Team Katje**. We are immensely grateful for their creativity, technical skill, and passion in building this tool for us and for the wider creative community.
+
+---
 *Copyright © {year} Miranda Noor & Annelies Brink. All Rights Reserved.*
