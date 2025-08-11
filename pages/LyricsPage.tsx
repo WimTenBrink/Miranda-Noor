@@ -85,7 +85,9 @@ export const LyricsPage: React.FC<LyricsPageProps> = ({ setPage }) => {
                 mood: state.mood,
                 genre: state.genre,
                 pace: state.pace,
-                instrumentation: state.instrumentation
+                instrumentation: state.instrumentation,
+                vocalStyle: state.vocalStyle,
+                lyricalTheme: state.lyricalTheme,
             }, log);
             
             if (mode === 'all' || mode === 'title') {
@@ -109,7 +111,7 @@ export const LyricsPage: React.FC<LyricsPageProps> = ({ setPage }) => {
         if (state.topic && !state.lyrics && !isLoading && state.style && apiKey && state.singers.length > 0) {
             performGeneration('all');
         }
-    }, [state.topic, state.lyrics, isLoading, state.style, apiKey, state.language, state.language2, state.singers, state.mood, state.genre, state.pace, state.instrumentation]);
+    }, [state.topic, state.lyrics, isLoading, state.style, apiKey, state.language, state.language2, state.singers, state.mood, state.genre, state.pace, state.instrumentation, state.vocalStyle, state.lyricalTheme]);
 
     const copyToClipboard = (text: string, setter: React.Dispatch<React.SetStateAction<boolean>>) => {
         navigator.clipboard.writeText(text);

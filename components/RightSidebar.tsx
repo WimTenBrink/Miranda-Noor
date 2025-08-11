@@ -1,13 +1,15 @@
+
+
 import React from 'react';
 import { useGenerationContext } from '../context/GenerationContext';
-import { Page } from '../types';
+import { Page, Quality } from '../types';
 
 interface RightSidebarProps {
   currentPage: Page;
 }
 
 export const RightSidebar: React.FC<RightSidebarProps> = ({ currentPage }) => {
-    const { state, styleData } = useGenerationContext();
+    const { state, styleData, qualityGroups } = useGenerationContext();
     const selectedImageUrl = state.selectedCoverImageIndex !== null ? state.coverImageUrls[state.selectedCoverImageIndex] : null;
     const selectedStyleInfo = state.style ? styleData[state.style] : null;
 
@@ -21,7 +23,17 @@ export const RightSidebar: React.FC<RightSidebarProps> = ({ currentPage }) => {
         )
     }
 
-    const hasQualities = !!state.mood || !!state.genre || !!state.pace || !!state.instrumentation;
+    const allQualities = qualityGroups.flatMap(g =>
+        g.qualities.map(q => ({ groupName: g.groupName, key: g.key, ...q }))
+    );
+
+    const selectedQualities = Object.entries(state)
+        .map(([key, value]) => {
+            if (!value) return undefined;
+            return allQualities.find(q => q.key === key && q.name === value);
+        })
+        .filter((q): q is (typeof allQualities)[number] => q != null);
+
 
     return (
         <aside className="w-[25vw] max-w-xs bg-[var(--bg-secondary)] p-6 flex-shrink-0 border-l border-[var(--border-primary)] overflow-y-auto">
@@ -51,12 +63,14 @@ export const RightSidebar: React.FC<RightSidebarProps> = ({ currentPage }) => {
                     <p>{state.language}{state.language.toLowerCase() !== state.language2.toLowerCase() ? ` & ${state.language2}` : ''}</p>
                 </InfoBlock>
 
-                <InfoBlock title="Qualities" condition={hasQualities}>
-                    <ul className="flex flex-wrap gap-2 text-xs">
-                        {state.mood && <li className="bg-[var(--bg-inset)] px-2 py-1 rounded">Mood: {state.mood}</li>}
-                        {state.genre && <li className="bg-[var(--bg-inset)] px-2 py-1 rounded">Genre: {state.genre}</li>}
-                        {state.pace && <li className="bg-[var(--bg-inset)] px-2 py-1 rounded">Pace: {state.pace}</li>}
-                        {state.instrumentation && <li className="bg-[var(--bg-inset)] px-2 py-1 rounded">Texture: {state.instrumentation}</li>}
+                <InfoBlock title="Qualities" condition={selectedQualities.length > 0}>
+                     <ul className="space-y-3">
+                        {selectedQualities.map(q => (
+                            <li key={q.name}>
+                                <div className="font-semibold text-[var(--text-primary)]">{q.groupName}: {q.name}</div>
+                                <p className="text-xs text-[var(--text-muted)] mt-0.5">{q.description}</p>
+                            </li>
+                        ))}
                     </ul>
                 </InfoBlock>
 

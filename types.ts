@@ -1,4 +1,5 @@
 
+
 export interface Singer {
   name: string;
   voice: string;
@@ -28,6 +29,8 @@ export interface GenerationState {
   genre: string | null;
   pace: string | null;
   instrumentation: string | null;
+  vocalStyle: string | null;
+  lyricalTheme: string | null;
   instruments: string[];
   singers: Singer[];
   title: string;
@@ -72,11 +75,16 @@ export type LanguageGroup = {
     languages: Language[];
 };
 
+export type Quality = {
+    name: string;
+    description: string;
+};
+
 export type QualityGroup = {
   groupName: string;
   description: string;
-  key: keyof Pick<GenerationState, 'mood' | 'genre' | 'pace' | 'instrumentation'>;
-  qualities: string[];
+  key: keyof Pick<GenerationState, 'mood' | 'genre' | 'pace' | 'instrumentation' | 'vocalStyle' | 'lyricalTheme'>;
+  qualities: Quality[];
 };
 
 export type MusicStyle = string;

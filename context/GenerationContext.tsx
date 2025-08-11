@@ -2,6 +2,7 @@
 
 
 
+
 import React, { createContext, useState, useContext, ReactNode, Dispatch, SetStateAction, useEffect } from 'react';
 import { GenerationState, MusicStyle, StyleGroup, MusicStyleDefinition, LanguageGroup, Singer, QualityGroup } from '../types';
 
@@ -17,6 +18,8 @@ interface GenerationContextType {
   setGenre: (genre: string | null) => void;
   setPace: (pace: string | null) => void;
   setInstrumentation: (instrumentation: string | null) => void;
+  setVocalStyle: (vocalStyle: string | null) => void;
+  setLyricalTheme: (lyricalTheme: string | null) => void;
   setInstruments: (instruments: string[]) => void;
   setSingers: (singers: Singer[]) => void;
   setTitle: (title: string) => void;
@@ -58,6 +61,8 @@ const initialState: GenerationState = {
   genre: null,
   pace: null,
   instrumentation: null,
+  vocalStyle: null,
+  lyricalTheme: null,
   instruments: [],
   singers: [ALL_SINGERS[0], ALL_SINGERS[1]],
   title: '',
@@ -155,6 +160,8 @@ export const GenerationProvider: React.FC<{ children: ReactNode }> = ({ children
   const setGenre = (genre: string | null) => setState(s => ({ ...s, genre }));
   const setPace = (pace: string | null) => setState(s => ({ ...s, pace }));
   const setInstrumentation = (instrumentation: string | null) => setState(s => ({ ...s, instrumentation }));
+  const setVocalStyle = (vocalStyle: string | null) => setState(s => ({ ...s, vocalStyle }));
+  const setLyricalTheme = (lyricalTheme: string | null) => setState(s => ({ ...s, lyricalTheme }));
   const setInstruments = (instruments: string[]) => setState(s => ({ ...s, instruments }));
   const setSingers = (singers: Singer[]) => setState(s => ({ ...s, singers }));
   const setTitle = (title: string) => setState(s => ({ ...s, title }));
@@ -190,6 +197,8 @@ export const GenerationProvider: React.FC<{ children: ReactNode }> = ({ children
     setGenre,
     setPace,
     setInstrumentation,
+    setVocalStyle,
+    setLyricalTheme,
     setInstruments,
     setSingers,
     setTitle,

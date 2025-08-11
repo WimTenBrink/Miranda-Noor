@@ -41,6 +41,8 @@ export const LyricGenerator: React.FC = () => {
                 genre: state.genre,
                 pace: state.pace,
                 instrumentation: state.instrumentation,
+                vocalStyle: state.vocalStyle,
+                lyricalTheme: state.lyricalTheme,
             }, log);
             setLyrics(`Title: ${result.title}\n\n${result.lyrics}`);
             log({ level: LogLevel.INFO, source: 'App', header: 'Lyrics generated successfully', details: { prompt } });

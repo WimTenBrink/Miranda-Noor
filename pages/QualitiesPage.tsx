@@ -1,5 +1,7 @@
 
 
+
+
 import React, { useState } from 'react';
 import { Page } from '../types';
 import { useGenerationContext } from '../context/GenerationContext';
@@ -14,37 +16,19 @@ interface QualitiesPageProps {
   setPage: (page: Page) => void;
 }
 
-const DropdownSelector: React.FC<{
-  label: string;
-  options: string[];
-  value: string | null;
-  onChange: (value: string | null) => void;
-}> = ({ label, options, value, onChange }) => (
-    <div>
-        <label className="block text-sm font-medium text-[var(--text-muted)] mb-1">{label}</label>
-        <select
-            value={value || ''}
-            onChange={(e) => onChange(e.target.value || null)}
-            className="w-full px-3 py-2 bg-[var(--bg-secondary)] border border-[var(--border-secondary)] rounded-md text-[var(--text-primary)] focus:ring-2 focus:ring-[var(--accent-primary)] focus:border-[var(--accent-primary)]"
-        >
-            <option value="">Select...</option>
-            {options.map(opt => <option key={opt} value={opt}>{opt}</option>)}
-        </select>
-    </div>
-);
-
-
 export const QualitiesPage: React.FC<QualitiesPageProps> = ({ setPage }) => {
-    const { state, setStyle, setMood, setGenre, setPace, setInstrumentation, setExpandedTopic, isLoading, setIsLoading, styleData, qualityGroups, isQualitiesDataLoading } = useGenerationContext();
+    const { state, setStyle, setMood, setGenre, setPace, setInstrumentation, setVocalStyle, setLyricalTheme, setExpandedTopic, isLoading, setIsLoading, styleData, qualityGroups, isQualitiesDataLoading } = useGenerationContext();
     const { apiKey } = useSettings();
     const log = useLog();
     const [error, setError] = useState('');
 
-    const qualitySetters = {
+    const qualitySetters: { [key: string]: (value: string | null) => void } = {
         mood: setMood,
         genre: setGenre,
         pace: setPace,
         instrumentation: setInstrumentation,
+        vocalStyle: setVocalStyle,
+        lyricalTheme: setLyricalTheme,
     };
     
     const handleExpand = async () => {
@@ -64,7 +48,9 @@ export const QualitiesPage: React.FC<QualitiesPageProps> = ({ setPage }) => {
                  mood: state.mood, 
                  genre: state.genre, 
                  pace: state.pace, 
-                 instrumentation: state.instrumentation 
+                 instrumentation: state.instrumentation,
+                 vocalStyle: state.vocalStyle,
+                 lyricalTheme: state.lyricalTheme,
             }, log);
             setExpandedTopic(expanded);
         } catch (err: any) {
@@ -91,7 +77,9 @@ export const QualitiesPage: React.FC<QualitiesPageProps> = ({ setPage }) => {
                      mood: state.mood, 
                      genre: state.genre, 
                      pace: state.pace, 
-                     instrumentation: state.instrumentation 
+                     instrumentation: state.instrumentation,
+                     vocalStyle: state.vocalStyle,
+                     lyricalTheme: state.lyricalTheme,
                 }, log);
                 if (suggested) {
                     setStyle(suggested);
@@ -112,29 +100,49 @@ export const QualitiesPage: React.FC<QualitiesPageProps> = ({ setPage }) => {
             <div className="flex-grow overflow-y-auto pr-4 space-y-6">
                 <div>
                     <h1 className="text-3xl font-bold text-[var(--text-primary)]">Fine-Tune the Feeling</h1>
-                    <p className="mt-2 text-[var(--text-muted)]">Select any optional qualities to guide the AI. These will influence the topic expansion, lyrical tone, and musical style suggestion.</p>
+                    <p className="mt-2 text-[var(--text-muted)]">Select any optional qualities to guide the AI. These will influence the topic expansion, lyrical tone, and musical style suggestion. Hover over an option to see its description.</p>
                 </div>
 
-                 <div className="p-4 bg-[var(--bg-secondary)] rounded-md border border-[var(--border-primary)]">
+                 <div className="space-y-8">
                     {isQualitiesDataLoading ? (
-                        <div className="text-center text-[var(--text-muted)] p-8">Loading...</div>
+                        <div className="text-center text-[var(--text-muted)] p-8">Loading qualities...</div>
                     ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {qualityGroups.map(group => (
-                                <Tooltip key={group.key} text={group.description}>
-                                    <DropdownSelector
-                                        label={group.groupName}
-                                        options={group.qualities}
-                                        value={state[group.key]}
-                                        onChange={qualitySetters[group.key]}
-                                    />
-                                </Tooltip>
-                            ))}
-                        </div>
+                        qualityGroups.map(group => {
+                            const setter = qualitySetters[group.key];
+                            return (
+                                <div key={group.key}>
+                                    <h2 className="text-xl font-semibold text-[var(--text-primary)]">{group.groupName}</h2>
+                                    <p className="text-sm text-[var(--text-muted)] mb-3">{group.description}</p>
+                                    <div className="flex flex-wrap gap-2">
+                                        {group.qualities.map(quality => {
+                                            const isSelected = state[group.key] === quality.name;
+                                            return (
+                                                <Tooltip key={quality.name} text={quality.description}>
+                                                    <button
+                                                        onClick={() => {
+                                                            if (setter) {
+                                                                setter(isSelected ? null : quality.name);
+                                                            }
+                                                        }}
+                                                        className={`px-3 py-1.5 text-sm rounded-md transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[var(--bg-inset)] ${
+                                                            isSelected
+                                                                ? 'bg-[var(--accent-primary)] text-[var(--text-on-accent)] font-bold shadow-lg ring-2 ring-[var(--accent-secondary)]'
+                                                                : 'bg-[var(--bg-tertiary)] text-[var(--text-secondary)] hover:bg-[var(--border-secondary)]'
+                                                        }`}
+                                                    >
+                                                        {quality.name}
+                                                    </button>
+                                                </Tooltip>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            );
+                        })
                     )}
                 </div>
 
-                <div className="flex items-center gap-4 pt-2">
+                <div className="flex items-center gap-4 pt-4 border-t border-[var(--border-primary)]">
                     <button
                         onClick={handleExpand}
                         disabled={isLoading || !state.topic || !apiKey}
@@ -145,11 +153,11 @@ export const QualitiesPage: React.FC<QualitiesPageProps> = ({ setPage }) => {
                     <p className="text-sm text-[var(--text-muted)]">Let AI enrich your initial topic using the qualities you've selected.</p>
                 </div>
                 
-                {error && <p className="text-[var(--color-red)]">{error}</p>}
+                {error && <p className="text-[var(--color-red)] bg-red-500/10 p-3 rounded-md">{error}</p>}
                 
                 {state.expandedTopic && (
                     <div>
-                        <h3 className="text-lg font-semibold text-[var(--text-primary)] mt-4">Expanded Story</h3>
+                        <h3 className="text-lg font-semibold text-[var(--text-primary)] mt-2">Expanded Story</h3>
                         <textarea
                             readOnly
                             value={state.expandedTopic}

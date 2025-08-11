@@ -4,6 +4,8 @@
 
 
 
+
+
 import { GoogleGenAI, GenerateContentResponse, Type } from "@google/genai";
 import { LogEntry, LogLevel, MusicStyle, Singer } from '../types';
 import { getCharacterDescriptions } from './characterService';
@@ -15,6 +17,8 @@ interface SelectorOptions {
     genre: string | null;
     pace: string | null;
     instrumentation: string | null;
+    vocalStyle: string | null;
+    lyricalTheme: string | null;
 }
 
 const getAi = (apiKey: string) => {
@@ -24,7 +28,7 @@ const getAi = (apiKey: string) => {
     return new GoogleGenAI({ apiKey });
 };
 
-export const expandTopic = async (apiKey: string, topic: string, singers: Singer[], { mood, genre, pace, instrumentation }: SelectorOptions, log: LogFn): Promise<string> => {
+export const expandTopic = async (apiKey: string, topic: string, singers: Singer[], { mood, genre, pace, instrumentation, vocalStyle, lyricalTheme }: SelectorOptions, log: LogFn): Promise<string> => {
     const ai = getAi(apiKey);
     
     const singerNames = singers.map(s => s.name).join(', ');
@@ -46,6 +50,8 @@ When expanding the topic, subtly weave in the following user-selected qualities 
 - Genre/Style context: ${genre || 'Not specified'}
 - Pace/Dynamics: ${pace || 'Not specified'}
 - Texture: ${instrumentation || 'Not specified'}
+- Lyrical Theme: ${lyricalTheme || 'Not specified'}
+- Vocal Style: ${vocalStyle || 'Not specified'}
 
 Focus on imagery, emotion, and potential narrative arcs. Do not write lyrics, just the underlying story and mood.
 
@@ -68,7 +74,7 @@ User topic: "${topic}"`;
     }
 };
 
-export const generateTitleAndLyrics = async (apiKey: string, { topic, style, instruments, language, language2, singers, mood, genre, pace, instrumentation }: { topic: string, style: MusicStyle, instruments: string[], language: string, language2: string, singers: Singer[], mood: string | null, genre: string | null, pace: string | null, instrumentation: string | null }, log: LogFn): Promise<{ title: string, lyrics: string }> => {
+export const generateTitleAndLyrics = async (apiKey: string, { topic, style, instruments, language, language2, singers, mood, genre, pace, instrumentation, vocalStyle, lyricalTheme }: { topic: string, style: MusicStyle, instruments: string[], language: string, language2: string, singers: Singer[], mood: string | null, genre: string | null, pace: string | null, instrumentation: string | null, vocalStyle: string | null, lyricalTheme: string | null }, log: LogFn): Promise<{ title: string, lyrics: string }> => {
     const ai = getAi(apiKey);
 
     const isBilingual = language.toLowerCase() !== language2.toLowerCase();
@@ -155,6 +161,8 @@ For full choir parts, use the primary language, ${language}.`;
     - Genre Context: ${genre || 'Not specified'}
     - Pace: ${pace || 'Not specified'}
     - Texture: ${instrumentation || 'Not specified'}
+    - Lyrical Theme: ${lyricalTheme || 'Not specified'}
+    - Vocal Style: ${vocalStyle || 'Not specified'}
     These should influence the lyrical tone, the structure, and the performance directions you provide in brackets.
 
     Your task is to generate a suitable song title and the full song lyrics. To ensure the song fits within typical generation limits (around 2-3 minutes including instrumentals), please create a concise song structure.
@@ -427,7 +435,7 @@ Output only the final prompt as a single line of text. Do not include any other 
     }
 };
 
-export const suggestStyle = async (apiKey: string, topic: string, allStyles: string[], { mood, genre, pace, instrumentation }: SelectorOptions, log: LogFn): Promise<MusicStyle | null> => {
+export const suggestStyle = async (apiKey: string, topic: string, allStyles: string[], { mood, genre, pace, instrumentation, vocalStyle, lyricalTheme }: SelectorOptions, log: LogFn): Promise<MusicStyle | null> => {
     const ai = getAi(apiKey);
     const prompt = `From the following list of music styles, which one best fits the song described below?
 Your answer must be ONLY the style name, exactly as it appears in the list. Do not add any other words, punctuation, or explanations.
@@ -442,6 +450,8 @@ Description of the Song:
 - Intended Genre: ${genre || 'Not specified'}
 - Pace/Dynamics: ${pace || 'Not specified'}
 - Texture/Instrumentation: ${instrumentation || 'Not specified'}
+- Lyrical Theme: ${lyricalTheme || 'Not specified'}
+- Vocal Style: ${vocalStyle || 'Not specified'}
 ---
 `;
 
