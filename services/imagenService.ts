@@ -1,3 +1,4 @@
+
 import { GoogleGenAI } from "@google/genai";
 import { LogEntry, LogLevel } from '../types';
 
@@ -9,6 +10,7 @@ export const generateImage = async (
     if (!apiKey) {
         throw new Error("API Key is required.");
     }
+    // Explicitly use the provided user API key for the client
     const ai = new GoogleGenAI({ apiKey });
     
     const requestPayload = {

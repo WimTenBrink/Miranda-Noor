@@ -7,38 +7,42 @@ This application is deployed on a public server. To avoid incurring costs on the
 
 ---
 
-The TOS dialog needs to be 90vw and 90vh. The Markdown file needs to be rendered to html. The CSS for all Markdown styling needs to be part of the index.html file, not a separate CSS file.
+### Full Feature Checklist
 
-All dialogs need to be 90vw and 90vh. 
+**Core Workflow (9 Pages):**
+1.  **Topic Page:** User enters a topic string and selects singers from a fixed list (Miranda, Annelies, Fannie, Emma).
+2.  **Language Page:** User selects a primary language. If more than one singer is chosen, a second language can be selected for bilingual output.
+3.  **Qualities Page:** User selects optional Mood, Genre, Pace, and Texture from dropdowns.
+    - **AI Feature #1 (Expand Topic):** A button uses Gemini to create a rich, detailed paragraph from the user's topic and selected qualities.
+    - **AI Feature #2 (Suggest Style):** The "Next" button uses Gemini to analyze the topic/qualities and suggest a suitable music style for the next page.
+4.  **Style Page:** User selects a music style from a list defined in `music-styles.json`. The AI's suggestion is pre-selected.
+5.  **Instruments Page:** User selects instruments via checkboxes, based on the chosen style. Common instruments are pre-selected by default. A "Copy" button formats the style and instruments for Suno.
+6.  **Lyrics Page:** Automatically generates content on first load if lyrics are missing.
+    - **AI Feature #3 (Generate Lyrics):** Uses Gemini to generate a song title and formatted lyrics based on all previous user input (topic, singers, languages, style, instruments, etc.).
+    - Features "Redo" buttons for regenerating title or lyrics independently.
+    - Features "Copy" buttons for title, formatted lyrics, and plain lyrics.
+7.  **Collection Page:** A central hub displaying all generated assets. The "View Report" and "Download All" buttons appear in the header on this page.
+8.  **Karaoke Page:** A simplified, large-font, read-only view of the lyrics for sing-alongs.
+9.  **Cover Image Page:** The final creative step.
+    - **AI Feature #4 (Generate Image Prompt):** Gemini creates a detailed prompt for an image based on the song's theme and singers.
+    - **AI Feature #5 (Generate Image):** Imagen uses the generated prompt to create cover art.
+    - Automatically generates 2 images on first load. Users can generate more, select a favorite for the collection, view the prompt, and download individual images. A skip option is available.
 
-The "Save key" button needs to close the dialog and the API Key settings page needs to have a "Cancel" button.. 
+**Dialogs & Modals:**
+- **Settings:** For API Key input.
+- **Console:** A log viewer for debugging Gemini and Imagen API calls. Allows filtering and saving logs.
+- **ToS:** Renders `tos.md`.
+- **About:** Renders markdown files about the creators with a tabbed interface.
+- **Manual:** Renders `manual.md`.
+- **Music Styles Explorer:** A detailed browser for all music styles and instruments from the JSON file.
+    - **AI Feature #6 (Generate Instrument Image):** Allows generating an image of a selected instrument.
+- **Report:** Displays a formatted HTML report of the final collection.
+- **Language:** A searchable dialog for selecting from a large list of languages.
 
-Put all given instructions in the public folder in a file "instructions.txt". This file needs to be remembered when I add new functionality.
+**Sidebars & Layout:**
+- **Left Sidebar:** Primary navigation for the 9-step workflow.
+- **Right Sidebar:** A contextual summary pane showing the current state of the song being created (topic, singers, style, etc.).
 
-The area between the header and footer needs to be divided into three sections. A left sidebar at 25vw, a right sidebar at 25vw and the main center. The right sidebar is to provide all kinds of information. The left sidebar is for the menu option. Each option will have it's own main page. 
-
-The main page will be disabled if there's no API key.
-
-Menu options would be "Topic", "Style", "Instruments", "Lyrics" and "Cover image".
-
-In Topic, the user provides the topic that the song will be about. An "Expand" button on that page will allow the AI to rewrite it into a topic of 500 words, so the user can just provide keywords. A "Next" button moves to the Style page.
-
-The Style page allows the user to select a specific music style. This could be Pop, classic, rock, metal, Celtic, Viking and whatever else. Each style will have a specific set of instruments. A Previous button goes back to Topic and a Next button to Instruments.
-
-The Instruments page shows all the musical instruments that will match the selected style. Each instrument is a checkbox. The most generic instruments are selected by default. Each instrument can have a short description as a hover text in a separate panel. A "Copy" button copies the style name plus all the selected instruments as a single CSV linne to the clipboard. This is only the names, nothing else. No more than 80 tokens! Previous goes to Style, Next goes to Lyrics.
-
-The Lyrics page will generate the lyrics that would fit best with the selected topic, the style and the selected instruments. Keep in mind that the song will be sung by two women! Add support for the Suno specifications for the inclusion of tempo, sound effects and whatever else. For example:
-* [Spoken word] makes part of the song spoken words.
-* *gunshots* generates sound effects as the asterix surrounds the effect name.
-* [Flute solo intro], [Increase intensity], [Crescendo], [Starts out quietly], [Whispering vocals], [Screaming vocals] and other [] bracket texts add structure to the song.
-
-The lyrics page will also generate a title.
-
-On the lyrics page, a Copy button next to the title will copy the title to the clipboard. A "Redo" button generates a new title. A copy button will also be with the lyrics, copying the lyrics (without title!) to the clipboads. A "Redo" button will rewrite the lyrics. Previous will go back to Instruments and Next will go to "Cover Image".
-
-If there are no lyrics and/or title, generate them when the user gets to the lyrics page. (Even if there's no topic.)
-
-The "Cover Image" page will generate a cover image for the song using Imagen. This must be a photo-realistic image of the young women performing the song. Make it themed so it matches the topic. Use the AI to generate a good prompt, then use this prompt with Imagen.
-
-The purpose is to generate instructions for Suno, meaning that I need the style/instruments in the clipboard to paste to Suno. Same for the title and the lyrics.
-Never modify the Markdown files in the /public folder unless they are explicitly mentioned by name in the prompt.
+**Data & Export:**
+- **State Persistence:** The entire application state is saved to the browser's local storage to persist across sessions.
+- **ZIP Export:** The "Download All" button on the Collection page creates a `.zip` file containing: `title.txt`, `lyrics.txt`, `style_and_instruments.txt`, `report.md`, `report.html`, and all generated cover art images as `.png` files.

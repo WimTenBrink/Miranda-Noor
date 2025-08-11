@@ -1,4 +1,8 @@
 
+export interface Singer {
+  name: string;
+  voice: string;
+}
 
 export enum LogLevel {
   INFO = 'INFO',
@@ -20,16 +24,24 @@ export interface GenerationState {
   topic: string;
   expandedTopic: string;
   style: MusicStyle | null;
+  mood: string | null;
+  genre: string | null;
+  pace: string | null;
+  instrumentation: string | null;
   instruments: string[];
+  singers: Singer[];
   title: string;
   lyrics: string;
+  language: string;
+  language2: string;
   coverImagePrompts: string[];
   coverImageUrls: string[];
   selectedCoverImageIndex: number | null;
   thinkingMessage: string;
+  imageGenerationSkipped: boolean;
 }
 
-export type Page = 'topic' | 'style' | 'instruments' | 'lyrics' | 'cover' | 'collection';
+export type Page = 'topic' | 'language' | 'qualities' | 'style' | 'instruments' | 'lyrics' | 'cover' | 'collection' | 'karaoke';
 
 // --- New Data Structure ---
 
@@ -48,6 +60,23 @@ export type StyleGroup = {
     name: string;
     description: string;
     styles: Record<string, MusicStyleDefinition>;
+};
+
+export type Language = {
+    name: string;
+    code: string;
+};
+
+export type LanguageGroup = {
+    groupName: string;
+    languages: Language[];
+};
+
+export type QualityGroup = {
+  groupName: string;
+  description: string;
+  key: keyof Pick<GenerationState, 'mood' | 'genre' | 'pace' | 'instrumentation'>;
+  qualities: string[];
 };
 
 export type MusicStyle = string;

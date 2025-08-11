@@ -1,4 +1,5 @@
 
+
 import React, { useEffect, useState } from 'react';
 import { Page } from '../types';
 import { useGenerationContext } from '../context/GenerationContext';
@@ -15,12 +16,18 @@ interface CoverImagePageProps {
 }
 
 export const CoverImagePage: React.FC<CoverImagePageProps> = ({ setPage }) => {
-    const { state, addCoverImagePrompt, addCoverImageUrl, setCoverImagePrompts, setCoverImageUrls, setSelectedCoverImageIndex, isLoading, setIsLoading } = useGenerationContext();
+    const { state, addCoverImagePrompt, addCoverImageUrl, setCoverImagePrompts, setCoverImageUrls, setSelectedCoverImageIndex, setImageGenerationSkipped, isLoading, setIsLoading } = useGenerationContext();
     const { apiKey } = useSettings();
     const log = useLog();
     const [error, setError] = useState('');
     const [isPromptModalOpen, setIsPromptModalOpen] = useState(false);
     
+    useEffect(() => {
+        if (!state.lyrics) {
+            setPage('lyrics');
+        }
+    }, [state.lyrics, setPage]);
+
     // Core function to generate a single image and its prompt.
     const generateOneImage = async (): Promise<{ prompt: string, url: string }> => {
         if (!apiKey) {
@@ -31,11 +38,12 @@ export const CoverImagePage: React.FC<CoverImagePageProps> = ({ setPage }) => {
             level: LogLevel.INFO,
             source: 'App',
             header: 'Generating new image prompt',
-            details: { topic: state.expandedTopic || state.topic, style: state.style }
+            details: { topic: state.expandedTopic || state.topic, style: state.style, singers: state.singers }
         });
         const imagePrompt = await generateImagePrompt(apiKey, {
             topic: state.expandedTopic || state.topic,
-            style: state.style
+            style: state.style,
+            singers: state.singers,
         }, log);
 
         log({
@@ -57,6 +65,7 @@ export const CoverImagePage: React.FC<CoverImagePageProps> = ({ setPage }) => {
 
         setIsLoading(true, count > 1 ? `Generating ${count} image concepts...` : 'Generating new cover art...');
         setError('');
+        setImageGenerationSkipped(false); // User is actively generating, so un-skip.
 
         try {
             if (count > 1) {
@@ -79,22 +88,31 @@ export const CoverImagePage: React.FC<CoverImagePageProps> = ({ setPage }) => {
             }
         } catch (err: any) {
             const errorMessage = err.message || 'An unknown error occurred.';
-            setError(`Failed to generate cover art: ${errorMessage}`);
+            if (errorMessage.toLowerCase().includes('quota exceeded')) {
+                setError('You have reached your daily image generation quota. You can continue to the Collection page without a cover image.');
+                setImageGenerationSkipped(true);
+            } else {
+                setError(`Failed to generate cover art: ${errorMessage}`);
+            }
         } finally {
             setIsLoading(false);
         }
     };
 
     useEffect(() => {
-        // Auto-generate two images in parallel if no images exist
-        if (state.coverImageUrls.length === 0 && !isLoading && apiKey) {
+        // Auto-generate two images in parallel if no images exist and not skipped, and we have lyrics to work with
+        if (state.lyrics && state.coverImageUrls.length === 0 && !isLoading && apiKey && !state.imageGenerationSkipped) {
             handleGenerate(2);
         }
-    }, [state.coverImageUrls.length, isLoading, apiKey]);
+    }, [state.lyrics, state.coverImageUrls.length, isLoading, apiKey, state.imageGenerationSkipped]);
     
     const getFilename = (index: number) => {
         return `${(state.title || `song-cover-${index + 1}`).replace(/[^a-z0-9]/gi, '_').toLowerCase()}.png`;
     }
+    
+    const handleSkip = () => {
+        setImageGenerationSkipped(true);
+    };
 
     const selectedPrompt = state.selectedCoverImageIndex !== null ? state.coverImagePrompts[state.selectedCoverImageIndex] : '';
 
@@ -102,7 +120,7 @@ export const CoverImagePage: React.FC<CoverImagePageProps> = ({ setPage }) => {
         <div className="h-full flex flex-col">
             <div className="flex-grow overflow-y-auto pr-4">
                 <h1 className="text-3xl font-bold text-[var(--text-primary)]">Album Art</h1>
-                <p className="mt-2 text-[var(--text-muted)]">A picture is worth a thousand words. Generate multiple covers and select your favorite.</p>
+                <p className="mt-2 text-[var(--text-muted)]">A picture is worth a thousand words. Generate multiple covers and select your favorite, or skip this step.</p>
 
                 <div className="mt-6 flex flex-col items-center">
                     
@@ -115,12 +133,19 @@ export const CoverImagePage: React.FC<CoverImagePageProps> = ({ setPage }) => {
                             >
                                 Generate New Cover Art
                             </button>
-                            <button
+                             <button
                                 onClick={() => setIsPromptModalOpen(true)}
                                 disabled={state.selectedCoverImageIndex === null}
-                                className="px-6 py-2 bg-[var(--bg-tertiary)] text-[var(--text-primary)] font-semibold rounded-md hover:opacity-80 disabled:bg-[var(--bg-tertiary)] disabled:text-[var(--text-muted)] disabled:cursor-not-allowed transition-opacity"
+                                className="px-4 py-2 bg-[var(--bg-tertiary)] text-[var(--text-primary)] font-semibold rounded-md hover:opacity-80 disabled:bg-[var(--bg-tertiary)] disabled:text-[var(--text-muted)] disabled:cursor-not-allowed transition-opacity"
                             >
                                 View Prompt
+                            </button>
+                            <button
+                                onClick={handleSkip}
+                                disabled={isLoading}
+                                className="px-4 py-2 text-[var(--text-muted)] underline hover:text-[var(--text-primary)] transition-colors"
+                            >
+                                Skip for Now
                             </button>
                         </div>
                     )}
@@ -161,9 +186,7 @@ export const CoverImagePage: React.FC<CoverImagePageProps> = ({ setPage }) => {
 
             <div className="flex-shrink-0">
                 <NavigationButtons
-                    onPrev={() => setPage('lyrics')}
-                    onNext={() => setPage('collection')}
-                    nextDisabled={state.selectedCoverImageIndex === null}
+                    onPrev={() => setPage('karaoke')}
                 />
             </div>
 

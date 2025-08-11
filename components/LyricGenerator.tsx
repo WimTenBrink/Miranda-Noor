@@ -3,6 +3,7 @@ import { generateTitleAndLyrics } from '../services/geminiService';
 import { useLog } from '../hooks/useLog';
 import { LogLevel } from '../types';
 import { useSettings } from '../context/SettingsContext';
+import { useGenerationContext } from '../context/GenerationContext';
 
 export const LyricGenerator: React.FC = () => {
     const [prompt, setPrompt] = useState('');
@@ -11,6 +12,7 @@ export const LyricGenerator: React.FC = () => {
     const [error, setError] = useState('');
     const log = useLog();
     const { apiKey } = useSettings();
+    const { state } = useGenerationContext();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -31,7 +33,14 @@ export const LyricGenerator: React.FC = () => {
             const result = await generateTitleAndLyrics(apiKey, {
                 topic: prompt,
                 style: 'Pop',
-                instruments: ['Synthesizer', 'Drum Machine']
+                instruments: ['Synthesizer', 'Drum Machine'],
+                language: state.language,
+                language2: state.language2,
+                singers: state.singers,
+                mood: state.mood,
+                genre: state.genre,
+                pace: state.pace,
+                instrumentation: state.instrumentation,
             }, log);
             setLyrics(`Title: ${result.title}\n\n${result.lyrics}`);
             log({ level: LogLevel.INFO, source: 'App', header: 'Lyrics generated successfully', details: { prompt } });
