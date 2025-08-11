@@ -1,14 +1,11 @@
 
 
-
-
-
-import React, { useState } from 'react';
+import React from 'react';
 import { Page } from '../types';
 import { useGenerationContext } from '../context/GenerationContext';
 import { useSettings } from '../context/SettingsContext';
 import { useLog } from '../hooks/useLog';
-import { suggestStyle, expandTopic } from '../services/geminiService';
+import { suggestStyle } from '../services/geminiService';
 import { LogLevel } from '../types';
 import { NavigationButtons } from '../components/common/NavigationButtons';
 import { Tooltip } from '../components/common/Tooltip';
@@ -18,10 +15,9 @@ interface QualitiesPageProps {
 }
 
 export const QualitiesPage: React.FC<QualitiesPageProps> = ({ setPage }) => {
-    const { state, setStyle, setMood, setGenre, setPace, setInstrumentation, setVocalStyle, setLyricalTheme, setDrumStyle, setSnareType, setSpecialInstrument, setNarrativeDynamic, setExpandedTopic, isLoading, setIsLoading, styleData, qualityGroups, isQualitiesDataLoading } = useGenerationContext();
+    const { state, setStyle, setMood, setGenre, setPace, setInstrumentation, setVocalStyle, setLyricalTheme, setDrumStyle, setSnareType, setSpecialInstrument, setNarrativeDynamic, isLoading, setIsLoading, styleData, qualityGroups, isQualitiesDataLoading } = useGenerationContext();
     const { apiKey } = useSettings();
     const log = useLog();
-    const [error, setError] = useState('');
 
     const qualitySetters: { [key: string]: (value: string | null) => void } = {
         mood: setMood,
@@ -34,41 +30,6 @@ export const QualitiesPage: React.FC<QualitiesPageProps> = ({ setPage }) => {
         snareType: setSnareType,
         specialInstrument: setSpecialInstrument,
         narrativeDynamic: setNarrativeDynamic,
-    };
-    
-    const handleExpand = async () => {
-        if (!apiKey) {
-            setError('Please set your API Key in the settings before generating content.');
-            return;
-        }
-        if (!state.topic) {
-            setError('Please go back and enter a topic first.');
-            return;
-        }
-
-        setIsLoading(true, 'Expanding with AI...');
-        setError('');
-        try {
-            const expanded = await expandTopic(apiKey, state.topic, state.singers, {
-                 mood: state.mood, 
-                 genre: state.genre, 
-                 pace: state.pace, 
-                 instrumentation: state.instrumentation,
-                 vocalStyle: state.vocalStyle,
-                 lyricalTheme: state.lyricalTheme,
-                 drumStyle: state.drumStyle,
-                 snareType: state.snareType,
-                 specialInstrument: state.specialInstrument,
-                 narrativeDynamic: state.narrativeDynamic,
-            }, log);
-            setExpandedTopic(expanded);
-        } catch (err: any) {
-            const errorMessage = err.message || 'An unknown error occurred.';
-            setError(`Failed to expand topic: ${errorMessage}`);
-            log({ level: LogLevel.ERROR, source: 'App', header: 'Topic expansion failed', details: { error: errorMessage } });
-        } finally {
-            setIsLoading(false);
-        }
     };
 
     const handleNext = async () => {
@@ -83,6 +44,8 @@ export const QualitiesPage: React.FC<QualitiesPageProps> = ({ setPage }) => {
         if (allStyles.length > 0) {
             try {
                 const suggested = await suggestStyle(apiKey, state.expandedTopic || state.topic, allStyles, {
+                     language: state.language,
+                     language2: state.language2,
                      mood: state.mood, 
                      genre: state.genre, 
                      pace: state.pace, 
@@ -113,7 +76,7 @@ export const QualitiesPage: React.FC<QualitiesPageProps> = ({ setPage }) => {
             <div className="flex-grow overflow-y-auto pr-4 space-y-6">
                 <div>
                     <h1 className="text-3xl font-bold text-[var(--text-primary)]">Fine-Tune the Feeling</h1>
-                    <p className="mt-2 text-[var(--text-muted)]">Select any optional qualities to guide the AI. These will influence the topic expansion, lyrical tone, and musical style suggestion. Hover over an option to see its description.</p>
+                    <p className="mt-2 text-[var(--text-muted)]">Select any optional qualities to guide the AI. These will influence the lyrical tone and musical style suggestion. Hover over an option to see its description.</p>
                 </div>
 
                  <div className="space-y-8">
@@ -154,31 +117,6 @@ export const QualitiesPage: React.FC<QualitiesPageProps> = ({ setPage }) => {
                         })
                     )}
                 </div>
-
-                <div className="flex items-center gap-4 pt-4 border-t border-[var(--border-primary)]">
-                    <button
-                        onClick={handleExpand}
-                        disabled={isLoading || !state.topic || !apiKey}
-                        className="px-4 py-2 bg-[var(--accent-primary)]/80 text-[var(--accent-subtle-text)] font-semibold rounded-md hover:bg-[var(--accent-primary)] disabled:bg-[var(--bg-tertiary)] disabled:text-[var(--text-muted)] disabled:cursor-not-allowed transition-colors"
-                    >
-                        {isLoading ? 'Expanding...' : 'Expand Topic with Qualities'}
-                    </button>
-                    <p className="text-sm text-[var(--text-muted)]">Let AI enrich your initial topic using the qualities you've selected.</p>
-                </div>
-                
-                {error && <p className="text-[var(--color-red)] bg-red-500/10 p-3 rounded-md">{error}</p>}
-                
-                {state.expandedTopic && (
-                    <div>
-                        <h3 className="text-lg font-semibold text-[var(--text-primary)] mt-2">Expanded Story</h3>
-                        <textarea
-                            readOnly
-                            value={state.expandedTopic}
-                            rows={8}
-                            className="mt-2 w-full p-4 bg-[var(--bg-secondary)] rounded-md whitespace-pre-wrap font-sans text-[var(--text-secondary)] border border-transparent"
-                        />
-                    </div>
-                )}
             </div>
 
             <div className="flex-shrink-0">

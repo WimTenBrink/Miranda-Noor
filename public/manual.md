@@ -9,6 +9,7 @@ The application is designed as a step-by-step process. You can navigate through 
 ### Step 1: Topic
 This is the foundation of your song.
 - **What to do:** Enter a theme, a few keywords, a story idea, or a feeling. You must also select the singers for your project from the provided list.
+- **Expand Topic:** Click the **"Expand Topic with AI"** button to let the AI elaborate on your initial idea into a rich, descriptive paragraph. This provides a stronger foundation for lyrics and art.
 
 ### Step 2: Language
 Choose the language(s) for the lyrics.
@@ -16,9 +17,8 @@ Choose the language(s) for the lyrics.
 
 ### Step 3: Qualities
 Fine-tune the mood and tone of your song.
-- **What to do:** Select optional qualities like mood, genre, pace, or texture from the dropdowns. These will help guide the AI in later steps.
-- **Expand Topic:** Click the **"Expand Topic with Qualities"** button to let the AI elaborate on your initial idea into a rich, descriptive paragraph. This provides a stronger foundation for lyrics and art.
-- **Next Step:** When you click "Next", the AI will analyze your topic and qualities to suggest a suitable musical style on the next page.
+- **What to do:** Select any optional qualities to guide the AI. These will influence the lyrical tone and musical style suggestion.
+- **Next Step:** When you click "Next", the AI will analyze your topic, selected languages, and qualities to suggest a suitable musical style on the next page.
 
 ### Step 4: Style
 Choose the musical genre for your song.

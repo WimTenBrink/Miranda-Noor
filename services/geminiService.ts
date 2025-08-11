@@ -26,7 +26,7 @@ const getAi = (apiKey: string) => {
     return new GoogleGenAI({ apiKey });
 };
 
-export const expandTopic = async (apiKey: string, topic: string, singers: Singer[], { mood, genre, pace, instrumentation, vocalStyle, lyricalTheme, drumStyle, snareType, specialInstrument, narrativeDynamic }: SelectorOptions, log: LogFn): Promise<string> => {
+export const expandTopic = async (apiKey: string, topic: string, singers: Singer[], log: LogFn): Promise<string> => {
     const ai = getAi(apiKey);
     
     const singerNames = singers.map(s => s.name).join(', ');
@@ -41,21 +41,9 @@ export const expandTopic = async (apiKey: string, topic: string, singers: Singer
 
     const prompt = `You are a creative muse. Your goal is to expand a user's song idea into a rich, descriptive paragraph of about 300-500 words. This will be used as the basis for a song.
     
-The song will be performed by ${performerDescription} This context should influence the narrative; for example, a solo might be more introspective, while a duet or choir song could explore themes of interaction, harmony, or contrasting viewpoints. If the user's topic mentions any names, you must incorporate them into the narrative you create.
+The song will be performed by ${performerDescription}. This context should influence the narrative; for example, a solo might be more introspective, while a duet or choir song could explore themes of interaction, harmony, or contrasting viewpoints. If the user's topic mentions any names, you must incorporate them into the narrative you create.
 
-When expanding the topic, subtly weave in the following user-selected qualities if they are provided. They should inform the tone and feeling of the story:
-- Mood/Emotion: ${mood || 'Not specified'}
-- Genre/Style context: ${genre || 'Not specified'}
-- Pace/Dynamics: ${pace || 'Not specified'}
-- Texture: ${instrumentation || 'Not specified'}
-- Lyrical Theme: ${lyricalTheme || 'Not specified'}
-- Narrative Dynamic: ${narrativeDynamic || 'Not specified'}
-- Vocal Style: ${vocalStyle || 'Not specified'}
-- Drum Style: ${drumStyle || 'Not specified'}
-- Snare Sound: ${snareType || 'Not specified'}
-- Special Instrument Feature: ${specialInstrument || 'Not specified'}
-
-Focus on imagery, emotion, and potential narrative arcs. Do not write lyrics, just the underlying story and mood.
+Focus on imagery, emotion, and potential narrative arcs. Do not write lyrics, just the underlying story and mood. Do not mention specific instruments or musical styles.
 
 User topic: "${topic}"`;
     
@@ -476,8 +464,27 @@ Output only the final prompt as a single line of text. Do not include any other 
     }
 };
 
-export const suggestStyle = async (apiKey: string, topic: string, allStyles: string[], { mood, genre, pace, instrumentation, vocalStyle, lyricalTheme, drumStyle, snareType, specialInstrument, narrativeDynamic }: SelectorOptions, log: LogFn): Promise<MusicStyle | null> => {
+export const suggestStyle = async (apiKey: string, topic: string, allStyles: string[], {
+    language,
+    language2,
+    mood,
+    genre,
+    pace,
+    instrumentation,
+    vocalStyle,
+    lyricalTheme,
+    drumStyle,
+    snareType,
+    specialInstrument,
+    narrativeDynamic
+}: {
+    language: string;
+    language2: string;
+} & SelectorOptions, log: LogFn): Promise<MusicStyle | null> => {
     const ai = getAi(apiKey);
+    const isBilingual = language.toLowerCase() !== language2.toLowerCase();
+    const languageInfo = isBilingual ? `Languages: ${language} and ${language2}` : `Language: ${language}`;
+
     const prompt = `From the following list of music styles, which one best fits the song described below?
 Your answer must be ONLY the style name, exactly as it appears in the list. Do not add any other words, punctuation, or explanations.
 
@@ -487,6 +494,7 @@ ${allStyles.join(', ')}
 ---
 Description of the Song:
 - Song Topic: "${topic}"
+- ${languageInfo}
 - Mood/Emotion: ${mood || 'Not specified'}
 - Intended Genre: ${genre || 'Not specified'}
 - Pace/Dynamics: ${pace || 'Not specified'}
